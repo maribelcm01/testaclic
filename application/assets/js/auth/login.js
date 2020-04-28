@@ -4,11 +4,13 @@
 		$("#usuario > div").html("")
 		$("#contrasena > div").html("")
 		$.ajax({
-			url:"validate",
+			url:"login/validate",
 			type: "POST",
 			data: $(this).serialize(),
 			success: function(err){
-				//console.log(err)
+				var json = JSON.parse(err);
+				//console.log(err);
+				window.location.replace(json.url);
 			},
 			statusCode: {
 				400: function(xhr){

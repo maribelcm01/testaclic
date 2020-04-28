@@ -3,12 +3,15 @@ class Testalia extends CI_Controller{
 		
 	public function __construct(){
         parent::__construct();
-		$this->load->helper(array('getmenu',));
+		$this->load->library(array('session',));
 	}
 
 	public function index(){
-		$data['menu'] = main_menu();
-		$this->load->view('inicio',$data);
+		if ($this->session->userdata('is_logged')) {
+			$this->load->view('inicio');		
+		}else{
+			show_404();
+		}
 	}
 }
 ?>
