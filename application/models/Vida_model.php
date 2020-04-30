@@ -9,6 +9,10 @@ class Vida_model extends CI_Model{
 	}
 
 	public function reactivos(){
+		//$consulta = $this->db->query("SELECT * FROM reactivo"); 
+		//$resultado = $consulta->result();
+		//return $resultado;
+
 		$query = $this->db->get('reactivo');
         return $query->result();
 	}
