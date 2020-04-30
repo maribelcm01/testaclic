@@ -16,7 +16,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
   	<ul>
-			<?php foreach ($menu as $item): ?>
+			   <?php foreach ($menu as $item): ?>
 				 <li><a href="<?= $item['url'] ?>"><?= $item['title'] ?></a></li>
 	   		<?php endforeach ?>
 	 </ul>

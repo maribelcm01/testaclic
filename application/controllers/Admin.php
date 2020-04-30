@@ -1,5 +1,5 @@
 <?php 
-class Testalia extends CI_Controller{
+class Admin extends CI_Controller{
 		
 	public function __construct(){
         parent::__construct();
@@ -9,8 +9,11 @@ class Testalia extends CI_Controller{
 
 	public function index(){
 		$data['menu'] = main_menu();
-		$this->load->view('index',$data);		
-		
+		if ($this->session->userdata('is_logged')) {
+			$this->load->view('indexAdmin',$data);		
+		}else{
+			show_404();
+		}
 	}
 }
-?>
+ ?>
