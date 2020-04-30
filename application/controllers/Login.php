@@ -41,7 +41,6 @@ class Login extends CI_Controller {
 				'is_logged' => TRUE,
 			);
 			$this->session->set_userdata($data);
-			$this->session->set_flashdata('msg','Bienvenido a Testalia '.$data['nombre']);
 			echo json_encode(array("url" => base_url('testalia')));
 		}
 	}
