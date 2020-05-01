@@ -4,9 +4,9 @@
                 <h3>Id: <?php echo $encuesta->idEncuesta ?> </h3>  
                 <div>
                     
-                    <a type="button" href="/vida/agregar_candidato/<?php echo  $encuesta->idEncuesta ?>" class="btn btn-large btn-block btn-primary">
+                    <a type="button" href="<?=base_url("/vida/agregar_candidato")?>/<?php echo  $encuesta->idEncuesta ?>" class="btn btn-large btn-block btn-primary">
                     <span class="fa fa-save" aria-hidden="true"></span>Agregar Candidato</a>
-                    <a type="button" href="/vida" class="btn btn-large btn-block btn-success">
+                    <a type="button" href="<?=base_url("/vida")?>" class="btn btn-large btn-block btn-success">
                     <span class="fa fa-back" aria-hidden="true"></span>Ver aplicaciones</a>
                     
                 </div>
@@ -43,7 +43,7 @@
                                     <td><?php echo $candidato->codigo ?></td>
                                     <?php if($candidato->estado === "P"): ?>
                                         <td>
-                                            <a href="/vida/continuar_encuesta/<?php echo  $candidato->idEncuesta ?>/<?php echo  $candidato->idCandidato ?>/1">Continuar Aplicativo</a>
+                                            <a href="<?=base_url("/vida/continuar_encuesta/")?><?php echo  $candidato->idEncuesta ?>/<?php echo  $candidato->idCandidato ?>/1">Continuar Aplicativo</a>
                                             <div class="progress">
                                                 <div class="progress-bar " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                                             </div>

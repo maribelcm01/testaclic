@@ -85,7 +85,7 @@ class Vida extends CI_Controller{
 		$candidato_id = $this->input->post('candidato');
         $encuesta_id = $this->input->post('encuesta');
         $this->Vida_model->registrar_candidato_en_aplicacion($candidato_id,$encuesta_id);
-        redirect('/vida/ver_candidatos/'.$encuesta_id);
+        redirect(base_url('/vida/ver_candidatos/').$encuesta_id);
 	}
 	/*mostrarle la pregunta en la que esta por contestar*/
 	public function continuar_encuesta ($encuesta_id,$candidato_id,$num_pregunta){
@@ -95,7 +95,7 @@ class Vida extends CI_Controller{
 		$estoy_en_pregunta = $en_pregunta[0]->num_pregunta_estado;
 		
 		if($num_pregunta != $estoy_en_pregunta) {
-			redirect('/vida/continuar_encuesta/'.$encuesta_id.'/'.$candidato_id.'/'.$estoy_en_pregunta);
+			redirect(base_url('/vida/continuar_encuesta/').$encuesta_id.'/'.$candidato_id.'/'.$estoy_en_pregunta);
 		}else{
 			$data = array();
 			//$data['candidato'] = $this->Vida_model->candidato_info($candidato_id);
@@ -118,9 +118,9 @@ class Vida extends CI_Controller{
 		$finalizado  = $result[0];
 		$nueva_pregunta = $result[1];
 		if($finalizado == 1){
-			redirect('/vida/ver_candidatos/'.$encuesta_id);
+			redirect(base_url('/vida/ver_candidatos/').$encuesta_id);
 		}else{
-			redirect('/vida/continuar_encuesta/'.$encuesta_id.'/'.$candidato_id.'/'.$nueva_pregunta);
+			redirect(base_url('/vida/continuar_encuesta/').$encuesta_id.'/'.$candidato_id.'/'.$nueva_pregunta);
 		}
 		//redirect('/vida/ver_candidatos/'.$id);
 	}
