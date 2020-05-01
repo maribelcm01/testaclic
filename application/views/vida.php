@@ -13,12 +13,14 @@
 			<header class="codrops-header">
 				<h1>Testalia</h1>	
 				<h3>Cuestionario Vida</h3>
+				<p>Bienvenido: </p>
+				<p>Selecciona la opción que más te identifique</p><br><br>
 			</header>
 			<section>
 				<form action="<?=base_url("vida/insertarAplicacionDetalle");?>" method="post" id="" class="">
 					<div class="container col-sm-6 center-block">
 							
-                    			<div class="form-group">
+                    			<div class="form-group content">
                     				<h3><?php echo $reactivo ?></h3>
                     			</div>
                     			<input class="form-control" type="" name="idAplicacion" value="<?php echo $idAplicacion ?>" style='display: none'>
