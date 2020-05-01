@@ -41,7 +41,7 @@ class Login extends CI_Controller {
 				'is_logged' => TRUE,
 			);
 			$this->session->set_userdata($data);
-			echo json_encode(array("url" => base_url('admin')));
+			echo json_encode(array("url" => base_url('dashboard')));
 		}
 	}
 

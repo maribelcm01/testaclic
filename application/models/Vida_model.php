@@ -8,19 +8,48 @@ class Vida_model extends CI_Model{
 		$this->load->database();
 	}
 
-	public function reactivos(){
-		//$consulta = $this->db->query("SELECT * FROM reactivo"); 
-		//$resultado = $consulta->result();
-		//return $resultado;
-
-		$query = $this->db->get('reactivo');
-        return $query->result();
+	public function verId(){
+		$res = $this->db->select_min('idReactivo')->
+				get('reactivo')->
+				result_array();
+		$id = $res[0]['idReactivo'];
+        return $id;
 	}
 
-	public function get_candidato_by_code(){
-		//SELECT candidato.nombre FROM candidato,aplicacion WHERE candidato.idCandidato = aplicacion.idCandidato and aplicacion.codigo='Ds46sx1'
-		$query = $this->db->get_where('aplicacion', array('codigo' => $codigo));
-        return $query->row();
+	public function reactivo($id){
+		$q = $this->db->
+				where(array('idReactivo'=>$id))->
+				get('reactivo')->
+				result_array();
+		return $q;
 	}
+
+	public function mostraridAplicacionM($codigo){
+		$q = $this->db->select('idAplicacion')->
+				where(array('codigo'=>$codigo))->
+				get('aplicacion')->
+				result_array();
+
+		//query("SELECT idAplicacion FROM aplicacion WHERE codigo = $codigo");
+		return $q;
+	}
+
+	public function mostrarLimite(){
+		$l = $this->db->select_max('idReactivo')->
+				get('reactivo')->
+				result_array();
+		$id = $l[0]['idReactivo'];
+        return $id;
+	}
+
+	public function registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor){
+       	$consulta=$this->db->query("INSERT INTO aplicaciondetalle VALUES(NULL,$idAplicacion,$idReactivo,$valor);");
+       	if($consulta==true){
+        	return true;
+      	}else{
+        	return false;
+    	}			
+    }
+	
 }
  ?>

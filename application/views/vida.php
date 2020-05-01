@@ -15,31 +15,21 @@
 				<h3>Cuestionario Vida</h3>
 			</header>
 			<section>
-				<form id="" class="">
-					<div class="">
-						<table>
-							<?php if($reactivo): ?>
-                    		<?php foreach($reactivo as $reactivo): ?>
-							<thead>
-								<tr>
-									<th><?=$reactivo->indice?>: <?php echo $reactivo->reactivo ?></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										
-										<button class="btn btn-dark" type="submit">Casi Nunca</button>
-										<button class="btn btn-warning" type="submit">Con Frecuencia</button>
-										<button class="btn btn-dark" type="submit">Casi Siempre</button>
-									</td>
-								</tr>
-							</tbody>
-							<?php endforeach; ?>
-							<?php endif ?>
-						</table>						
+				<form action="<?=base_url("vida/insertarAplicacionDetalle");?>" method="post" id="" class="">
+					<div class="container col-sm-6 center-block">
+							
+                    			<div class="form-group">
+                    				<h3><?php echo $reactivo ?></h3>
+                    			</div>
+                    			<input class="form-control" type="" name="idAplicacion" value="<?php echo $idAplicacion ?>" style='display: none'>
+                    			<input class="form-control" type="" name="idReactivo" value="<?php echo $idReactivo?>" style='display: none'>
+                    			<button class="btn btn-dark" type="submit" name='valor' value='0'>Casi Nunca</button>
+								<button class="btn btn-warning" type="submit" name='valor' value='1'>Con Frecuencia</button>
+								<button class="btn btn-dark" type="submit" name='valor' value='2'>Casi Siempre</button>
+							
+							
 					</div>
-				</form><!-- /simform -->
+				</form>
 			</section>			
 		</div>
 	</body>

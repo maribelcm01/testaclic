@@ -1,5 +1,5 @@
 <?php 
-class Admin extends CI_Controller{
+class Dashboard extends CI_Controller{
 		
 	public function __construct(){
         parent::__construct();
@@ -10,7 +10,7 @@ class Admin extends CI_Controller{
 	public function index(){
 		$data['menu'] = main_menu();
 		if ($this->session->userdata('is_logged')) {
-			$this->load->view('indexAdmin',$data);		
+			$this->load->view('dashboard',$data);		
 		}else{
 			show_404();
 		}

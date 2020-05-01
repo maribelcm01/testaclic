@@ -1,0 +1,308 @@
+/*-------------------------
+	Simple reset
+--------------------------*/
+
+
+*{
+	margin:0;
+	padding:0;
+}
+
+
+/*-------------------------
+	General Styles
+--------------------------*/
+
+
+body{
+    padding: 65px 0 0;
+	font:14px/1.3 'Segoe UI',Arial, sans-serif;
+	
+	background-image: linear-gradient(left , #DBDBDB 0%, #F3F3F3 50%, #DBDBDB 100%);
+	background-image: -o-linear-gradient(left , #DBDBDB 0%, #F3F3F3 50%, #DBDBDB 100%);
+	background-image: -moz-linear-gradient(left , #DBDBDB 0%, #F3F3F3 50%, #DBDBDB 100%);
+	background-image: -webkit-linear-gradient(left , #DBDBDB 0%, #F3F3F3 50%, #DBDBDB 100%);
+	background-image: -ms-linear-gradient(left , #DBDBDB 0%, #F3F3F3 50%, #DBDBDB 100%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		right top,
+		color-stop(0, #DBDBDB),
+		color-stop(0.5, #F3F3F3),
+		color-stop(1, #DBDBDB)
+	);
+}
+
+a, a:visited {
+	text-decoration:none;
+	outline:none;
+	color:#54a6de;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+section, header, footer{
+	display: block;
+}
+
+
+/*----------------------------
+		Blackboard
+-----------------------------*/
+
+
+#blackboard{
+	position:relative;
+	width:482px;
+	margin:0 auto;
+}
+
+#blackboard h1{
+	background:url('../img/blackboard.jpg') no-repeat;
+	height:166px;
+	font:45px 'Rancho',sans-serif;
+	color:#fff;
+	text-align:center;
+	padding: 50px 20px 0;
+}
+
+#blackboard:after{
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 50%;
+	bottom: -12px;
+	box-shadow: 0 0 2px #555;
+	content: "";
+	height: 4px;
+	left: 50%;
+	margin-left: -245px;
+	opacity: 0.4;
+	position: absolute;
+	width: 490px;
+	z-index: -1;
+}
+
+
+/*----------------------------
+		Arrows & Buttons
+-----------------------------*/
+
+
+a.arrow{
+	width:33px;
+	height:36px;
+	background:url('../img/arrows.jpg') no-repeat;
+	border-radius:8px;
+	text-decoration:none !important;
+	text-indent:-999px;
+	overflow:hidden;
+	position:absolute;
+	top:50%;
+	margin-top:-16px;
+	left:-90px;
+}
+
+a.arrow.left:hover{
+	background-position:0 -36px;
+}
+
+a.arrow.right{
+	left:auto;
+	right:-90px;
+	background-position:-33px 0;
+}
+
+a.arrow.right:hover{
+	background-position:-33px -36px;
+}
+
+a.addAnswer{
+	text-decoration:none !important;
+	display:block;
+	margin:60px auto;
+	width:350px;
+	padding:10px 0;
+	text-align:center;
+	background-color:#f2ecc5;
+	border-radius:8px;
+	border:1px solid #dfd9b2;
+	color:#8d823b;
+	font-size:13px;
+	box-shadow:0 1px 1px #ddd;
+}
+
+
+/*----------------------------
+		Answers
+-----------------------------*/
+
+
+#answers{
+	width:400px;
+	margin:0 auto;
+	list-style:none;
+}
+
+#answers li{
+	position:relative;
+	min-height:50px;
+	margin:0 0 68px 85px;
+	background-color:rgba(255,255,255,0.6);
+	border-radius:8px;
+	box-shadow: 0 1px 2px #ddd;
+	padding:8px 12px 12px;
+}
+
+#answers li p{
+	overflow:hidden;
+	word-wrap: break-word;
+}
+
+#answers li:after{
+	content:'';
+	width:400px;
+	height:1px;
+	background-color:#ddd;
+	border-bottom:1px solid #eee;
+	position:absolute;
+	bottom:-35px;
+	left:-85px;
+}
+
+#answers li:last-child{
+	margin-bottom:150px;
+}
+
+#answers li:last-child:after{
+	display:none;
+}
+
+#answers .avatar{
+	width:70px;
+	height:70px;
+	border-radius:8px;
+	position:absolute;
+	top:0;
+	left:-85px;
+	background-position:center center;
+	box-shadow: 0 1px 2px #ddd;
+}
+
+#answers p{
+	padding-top:5px;
+}
+
+#answers .meta i{
+	font-style:normal;
+	font-size:11px;
+	color:#ccc;
+}
+
+
+/*----------------------------
+		The Form
+-----------------------------*/
+
+
+form{
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 8px;
+	display: block;
+	margin: 50px auto 80px;
+	padding: 30px 40px;
+	width: 320px;
+}
+
+label{
+	color: #777777;
+	display: block;
+	font-size: 12px;
+	padding: 0 0 2px;
+}
+
+textarea,
+input[type=text]{
+	display: block;
+	font: inherit;
+	padding: 2px 4px;
+	width: 230px;
+	margin-bottom: 8px;
+}
+
+textarea{
+	height: 100px;
+	resize: vertical;
+	width: 300px;
+}
+
+form p{
+	font-size: 11px;
+	padding: 2px;
+}
+
+.errorMessages{
+	color:#440707;
+	background-color: #DC4143;
+	margin-top: 20px;
+	padding: 4px 8px;
+	border:1px solid #C92020;
+}
+
+input[type=submit]{
+	padding:4px;
+}
+
+
+/*----------------------------
+	The Footer
+-----------------------------*/
+
+
+footer{
+	background-color: #111111;
+	bottom: 0;
+	box-shadow: 0 -1px 2px #111111;
+	height: 45px;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 100000;
+}
+
+footer h2{
+	color: #EEEEEE;
+	font-size: 14px;
+	font-weight: normal;
+	left: 50%;
+	margin-left: -400px;
+	padding: 13px 0 0;
+	position: absolute;
+	width: 540px;
+}
+
+footer h2 i{
+	font-style:normal;
+	color:#888;
+}
+
+footer a.tzine,a.tzine:visited{
+	color: #999999;
+	font-size: 12px;
+	left: 50%;
+	margin: 16px 0 0 110px;
+	position: absolute;
+	text-decoration: none;
+	top: 0;
+}
+
+footer a i{
+	color:#ccc;
+	font-style: normal;
+}
+
+footer a i b{
+	color:#c92020;
+	font-weight: normal;
+}
