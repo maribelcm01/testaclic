@@ -4,13 +4,18 @@ if (!defined('BASEPATH'))  exit('No direct script access allowed');
 class Reactivo extends CI_Controller {
    	public function __construct() {
       	parent::__construct();
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation','session'));
         $this->load->model('reactivo_model');
+        $this->load->helper(array('getmenu'));
 
    	}
    
    	public function index() {
         $data = array();
+
+        $data['menu'] = main_menu();
+        $this->load->view('layout/navbar',$data);
+        
       	$this->load->model('reactivo_model');
       	$data['reactivo'] = $this->reactivo_model->obtener_todos();
       	      	

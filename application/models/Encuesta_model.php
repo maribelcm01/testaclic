@@ -33,8 +33,8 @@ class Encuesta_model extends CI_Model {
    	}
 
    	public function obtener_todos(){
-      	$this->db->select('encuesta.nombre');
-      	$this->db->from('encuesta, reactivo');
+      	$this->db->select('*');
+      	$this->db->from('encuesta');
       	//$this->db->order_by('prioridad, titulo', 'asc');
       	$consulta = $this->db->get();
       	$resultado = $consulta->result();
