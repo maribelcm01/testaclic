@@ -9,7 +9,7 @@
                 </div>
                 <div class="form-group">
                     <label> Teléfono </label>
-                    <input class="form-control" type="" name="telefono" required="required" value="<?php echo $telefono; ?>">
+                    <input class="form-control" type="text" name="telefono" required="required" value="<?php echo $telefono; ?>">
                 </div>
                 <div class="form-group">
                    <label> Correo </label>

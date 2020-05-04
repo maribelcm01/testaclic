@@ -6,7 +6,7 @@
     <div class="form-group">
        <input type="hidden" name="encuesta" class="form-control" id="name" value="<?php echo $encuesta ?>">
     </div>
-    <?php if($candidatos): ?>
+    <?php if($encuesta): ?>
     <select name="candidato" id="input" class="form-control" required="required">
         
             <?php foreach($candidatos as $candidato): ?>
@@ -21,7 +21,7 @@
     </div>
     <?php else: ?>
         <h2>No hay candidatos disponibles para este aplicativo 
-        <a type="button" href="/candidato/guardar" class="btn btn-sm btn-primary">Agregar nuevo candidato</a>
+        <a type="button" href="<?=base_url('encuestado/guardar')?>" class="btn btn-sm btn-primary">Agregar nuevo candidato</a>
         </h2>
     <?php endif; ?>
     
