@@ -18,7 +18,7 @@ class Encuestado extends CI_Controller {
       	$this->load->view('encuestado/footer');
    	}
 
-   	public function ver($id){
+   	/*public function ver($id){
       	$data = array();
       	$this->load->model('encuestado_model');
       	$encuestado = $this->encuestado->obtener_por_id($id);
@@ -27,7 +27,7 @@ class Encuestado extends CI_Controller {
       	$this->load->view('encuestado/header');
       	$this->load->view('encuestado/ver', $data);
       	$this->load->view('encuestado/footer');
-   	}
+   	}*/
 
    	public function guardar($id=null){
       	$data = array(); 

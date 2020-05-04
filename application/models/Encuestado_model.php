@@ -35,7 +35,7 @@ class Encuestado_model extends CI_Model {
    	}
 
    	public function obtener_todos(){
-      	$this->db->select('idEncuestado, nombre, telefono, email');
+      	$this->db->select('*');
       	$this->db->from('encuestado');
       	//$this->db->order_by('prioridad, titulo', 'asc');
       	$consulta = $this->db->get();
