@@ -6,24 +6,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                <?php foreach ($menu as $item): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $item['url'] ?>"><?= $item['title'] ?></a>
-                    </li>
-                <?php endforeach ?>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?=base_url('');?>"> <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Usuario: <?php echo $this->session->nombre?></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=base_url('login/logout')?>">Cerrar Sesión</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="navbar-nav">
+            <?php foreach ($menu as $item): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $item['url'] ?>"><?= $item['title'] ?></a>
+                </li>
+            <?php endforeach ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?=base_url('');?>"> <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Usuario: <?php echo $this->session->nombre?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url('login/logout')?>">Cerrar Sesión</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

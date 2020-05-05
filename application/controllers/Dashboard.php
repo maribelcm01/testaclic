@@ -9,12 +9,13 @@ class Dashboard extends CI_Controller{
 
 	public function index(){
 		$data['menu'] = main_menu();
-		//if ($this->session->userdata('is_logged')) {
-			$this->load->view('dashboard',$data);
+		
+		if ($this->session->userdata('is_logged')) {
         	$this->load->view('layout/navbar',$data);	
-		//}else{
-			//show_404();
-		//}
+			$this->load->view('dashboard',$data);
+		}else{
+			redirect(base_url('login'));
+		}
 	}
 }
  ?>

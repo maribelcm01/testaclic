@@ -6,8 +6,25 @@
 	<title>Login</title>
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				   	<ul class="navbar-nav">
+				    	<li class="nav-item">
+				    		<a class="navbar-brand" href="<?=base_url('testalia') ?>"> Testalia </a>
+				    	</li>
+				    	<li class="nav-item">
+				    		<a class="nav-link active" href="<?=base_url('login') ?>">Iniciar Sesión</a>
+				    	</li>
+				    </ul>
+	  			</div>
+	  		</div>
+		</div>
+	</nav>
+
 	<?= validation_errors() ?>
-	<div class="container" style="margin-top:4em">
+	<div class="container">
 		<div class="row justify-content-lg-center align-items-lg-center">
 			<div class="col-lg-6 alogn-self-center">
 				<h1>Login</h1>

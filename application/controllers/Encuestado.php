@@ -5,6 +5,8 @@ class Encuestado extends CI_Controller {
    	public function __construct() {
       	parent::__construct();
         $this->load->library(array('form_validation','session'));
+        $this->load->helper(array('auth/login_rules'));
+        $this->load->model('Auth');
         $this->load->helper(array('getmenu'));
    	}
    
@@ -12,14 +14,18 @@ class Encuestado extends CI_Controller {
         $data = array();
 
         $data['menu'] = main_menu();
-        $this->load->view('layout/navbar',$data);
       	
         $this->load->model('encuestado_model');
       	$data['encuestado'] = $this->encuestado_model->obtener_todos();
-      	      	
-      	$this->load->view('encuestado/header');
-      	$this->load->view('encuestado/index', $data);
-      	$this->load->view('encuestado/footer');
+      	
+        if ($this->session->userdata('is_logged')) {
+            $this->load->view('encuestado/header');
+            $this->load->view('layout/navbar',$data);
+            $this->load->view('encuestado/index', $data);
+            $this->load->view('encuestado/footer');
+        }else{
+            redirect(base_url('login'));
+        }      	
    	}
 
    	/*public function ver($id){
