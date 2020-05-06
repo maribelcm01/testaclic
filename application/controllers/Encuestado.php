@@ -22,7 +22,7 @@ class Encuestado extends CI_Controller {
             $this->load->view('encuestado/header');
             $this->load->view('layout/navbar',$data);
             $this->load->view('encuestado/index', $data);
-            $this->load->view('encuestado/footer');
+            $this->load->view('layout/footer');
         }else{
             redirect(base_url('login'));
         }      	

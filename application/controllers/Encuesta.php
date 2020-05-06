@@ -22,7 +22,7 @@ class Encuesta extends CI_Controller {
             $this->load->view('encuesta/header');
             $this->load->view('layout/navbar',$data);
             $this->load->view('encuesta/index', $data);
-            $this->load->view('encuesta/footer');    
+            $this->load->view('layout/footer');    
         }else{
             redirect(base_url('login'));
         }

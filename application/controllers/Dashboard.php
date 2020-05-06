@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller{
 		if ($this->session->userdata('is_logged')) {
         	$this->load->view('layout/navbar',$data);	
 			$this->load->view('dashboard',$data);
+        	$this->load->view('layout/footer',$data);	
 		}else{
 			redirect(base_url('login'));
 		}
