@@ -7,12 +7,12 @@ function main_menu(){
 			'url' => base_url(),
 		),*/
 		array(
-			'title' => 'Encuestados',
-			'url' => base_url('encuestado'),
-		),
-		array(
 			'title' => 'Encuestas',
 			'url' => base_url('encuesta'),
+		),
+		array(
+			'title' => 'Encuestados',
+			'url' => base_url('encuestado'),
 		),
 		array(
 			'title' => 'Reactivos',
