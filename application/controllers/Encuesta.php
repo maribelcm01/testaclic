@@ -52,7 +52,7 @@ class Encuesta extends CI_Controller {
       	}
       	$this->load->view('encuesta/header');
       	$this->load->view('encuesta/guardar', $data);
-      	$this->load->view('encuesta/footer');
+      	$this->load->view('layout/footer');
    	}
 
 

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+<div class="container mt40">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7c7e80;">
         <a class="navbar-brand" href="<?=base_url('dashboard');?>">Testalia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -15,13 +15,15 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="<?=base_url('');?>"> <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Usuario: <?php echo $this->session->nombre?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('login/logout')?>">Cerrar Sesión</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Usuario: <?php echo $this->session->nombre?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="<?=base_url('login/logout')?>">Cerrar Sesión</a>    
+                    </div>
                 </li>
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

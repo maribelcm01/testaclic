@@ -61,7 +61,7 @@ class Reactivo extends CI_Controller {
 
       	$this->load->view('reactivo/header');
       	$this->load->view('reactivo/guardar', $data);
-      	$this->load->view('reactivo/footer');
+      	$this->load->view('layout/footer');
    	}
 
 

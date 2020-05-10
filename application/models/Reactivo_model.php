@@ -44,7 +44,7 @@ class Reactivo_model extends CI_Model {
       	return $resultado;
    	}
 
-      public function obtenerIdEncuesta(){
+    public function obtenerIdEncuesta(){
       //buscamos los candidatos que no estan aplicando en esa encuesta
          $this->db->select('*');
          $this->db->from('encuesta');

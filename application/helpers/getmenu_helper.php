@@ -7,16 +7,20 @@ function main_menu(){
 			'url' => base_url(),
 		),*/
 		array(
-			'title' => 'Encuestado',
+			'title' => 'Encuestados',
 			'url' => base_url('encuestado'),
 		),
 		array(
-			'title' => 'Encuesta',
+			'title' => 'Encuestas',
 			'url' => base_url('encuesta'),
 		),
 		array(
 			'title' => 'Reactivos',
 			'url' => base_url('reactivo'),
+		),
+		array(
+			'title' => 'Aplicaciones',
+			'url' => base_url('aplicacion'),
 		),
 	);
 }

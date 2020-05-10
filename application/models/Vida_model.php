@@ -1,7 +1,4 @@
 <?php 
-/**
- * 
- */
 class Vida_model extends CI_Model{
 	
 	function __construct(){

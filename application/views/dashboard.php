@@ -13,5 +13,10 @@
 	<div class="container">
 		<h1>Bienvenido a la interfaz de administrador</h1>	
 	</div>
+	<style>
+        .mt40{
+         	margin-top: 40px;
+    	}
+    </style>
 </body>
 </html>

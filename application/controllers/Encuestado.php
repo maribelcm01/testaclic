@@ -56,7 +56,7 @@ class Encuestado extends CI_Controller {
       	}
       	$this->load->view('encuestado/header');
       	$this->load->view('encuestado/guardar', $data);
-      	$this->load->view('encuestado/footer');
+      	$this->load->view('layout/footer');
    	}
 
 

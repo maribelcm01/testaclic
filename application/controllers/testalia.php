@@ -9,8 +9,9 @@ class Testalia extends CI_Controller{
 
 	public function index(){
 		$data['menu'] = main_menu();
+		$this->load->view('header');
 		$this->load->view('index',$data);		
-		
+		$this->load->view('footer');
 	}
 }
 ?>
