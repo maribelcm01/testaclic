@@ -5,30 +5,32 @@ class Vida_model extends CI_Model{
 		$this->load->database();
 	}
 
+	public function mostraridAplicacion($codigo){
+		$q = $this->db->select('aplicacion.codigo,encuestado.nombre')->
+				where(array('codigo'=>$codigo))->
+				get('aplicacion,encuestado')->
+				row();
+		return $q;
+	}
+
+	public function reactivo($codigo){
+		$q = $this->db->select('encuestado.nombre,reactivo.idReactivo,reactivo.reactivo,aplicacion.idAplicacion,aplicacion.codigo')->
+				where(array('reactivo.idReactivo = aplicacion.pregunta and aplicacion.codigo =' => $codigo))->
+				get('reactivo,aplicacion,encuestado')->
+				row();
+		return $q;
+	}
+
+
+
+
+
 	public function verId(){
 		$res = $this->db->select_min('idReactivo')->
 				get('reactivo')->
 				result_array();
 		$id = $res[0]['idReactivo'];
         return $id;
-	}
-
-	public function reactivo($id){
-		$q = $this->db->
-				where(array('idReactivo'=>$id))->
-				get('reactivo')->
-				result_array();
-		return $q;
-	}
-
-	public function mostraridAplicacionM($codigo){
-		$q = $this->db->select('idAplicacion')->
-				where(array('codigo'=>$codigo))->
-				get('aplicacion')->
-				result_array();
-
-		//query("SELECT idAplicacion FROM aplicacion WHERE codigo = $codigo");
-		return $q;
 	}
 
 	public function mostrarLimite(){

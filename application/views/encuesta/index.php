@@ -3,13 +3,13 @@
 		<div class="col-4">
             <h2>Lista de Encuestas</h2>
         </div>
-        <div class="col-4">
+        <div class="col-3">
 			<a class="btn btn-success" href="<?php echo base_url() ?>encuesta/guardar"> Crear nuevo Registro </a>
 		</div>
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-6">
+		<div class="col-4">
 		<?php if (count($encuesta)): ?>
 			<table class="table table-bordered">
 			    <thead>
@@ -23,7 +23,7 @@
 		          	<tr>
 		             	<td> <?php echo $item->nombre ?> </td>
 		             	<td> 
-		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>candidato/ver/<?php echo $item->idCandidato ?>"> Ver </a>-->
+		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuesta/ver/<?php echo $item->idEncuesta ?>"> Ver </a>-->
 		                	<a class="btn btn-primary" href="<?php echo base_url() ?>encuesta/guardar/<?php echo $item->idEncuesta ?>"> Editar </a>
 		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuesta/eliminar/<?php echo $item->idEncuesta ?>"> Eliminar </a> 
 		             	</td>

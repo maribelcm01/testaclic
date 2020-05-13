@@ -31,12 +31,12 @@ class Encuestado extends CI_Controller {
    	/*public function ver($id){
       	$data = array();
       	$this->load->model('encuestado_model');
-      	$encuestado = $this->encuestado->obtener_por_id($id);
+      	$encuestado = $this->encuestado_model->obtener_por_id($id);
       	$data['encuestado'] = $encuestado;
 
       	$this->load->view('encuestado/header');
       	$this->load->view('encuestado/ver', $data);
-      	$this->load->view('encuestado/footer');
+      	$this->load->view('layout/footer');
    	}*/
 
    	public function guardar($id=null){

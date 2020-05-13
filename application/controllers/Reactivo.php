@@ -31,12 +31,12 @@ class Reactivo extends CI_Controller {
    	/*public function ver($id){
       	$data = array();
       	$this->load->model('reactivo_model');
-      	$reactivo = $this->reactivo->obtener_por_id($id);
+      	$reactivo = $this->reactivo_model->obtener_por_id($id);
       	$data['reactivo'] = $reactivo;
 
       	$this->load->view('reactivo/header');
       	$this->load->view('reactivo/ver', $data);
-      	$this->load->view('reactivo/footer');
+      	$this->load->view('layout/footer');
    	}*/
 
    	public function guardar($id=null){

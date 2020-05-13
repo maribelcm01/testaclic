@@ -6,19 +6,42 @@ class Vida extends CI_Controller{
 	}
 
 	public function index(){
-		/*$id = $this->Vida_model->verId();
+		$this->load->view('vida/header');
+		$this->load->view('vida/validar');
+		$this->load->view('layout/footer');
+	}
 
-		//print_r($id);
-
-		$this->mostrar($id);*/
-		$idReactivo = 1;
-		$data = array();
-		$data['result'] = $this->Vida_model->encuestas();
-		//$data['candidato'] = $this->Vida_model->get_candidato_by_code();
-		$this->load->view('layout/header');
+	public function validar(){
+		$codigo = $this->input->post('codigo');
+		$this->load->model('vida_model');
+		$s = $this->vida_model->mostraridAplicacion($codigo);
+		$data = array(
+			
+			'nombre' => $s->nombre,
+			'codigo' => $s->codigo
+		);
+		
+		$this->load->view('vida/header');
 		$this->load->view('vida/index',$data);
 		$this->load->view('layout/footer');
 	}
+
+	public function cuestionario($codigo){
+		$this->load->model('vida_model');
+		$s = $this->vida_model->reactivo($codigo);
+		$data = array(
+			'idReactivo' => $s->idReactivo,
+			'reactivo' => $s->reactivo,
+			'idAplicacion' => $s->idAplicacion,
+			'nombre' => $s->nombre,
+			'codigo' => $s->codigo
+		);
+		$this->load->view('vida/header');
+		$this->load->view('vida/test_vida',$data);
+	}
+
+
+
 
 	public function mostrar($id = -1){
 		$q = $this->Vida_model->reactivo($id);
@@ -59,6 +82,8 @@ class Vida extends CI_Controller{
 			
 		}
 	}
+	
+
 	//mahrko
 	/*vista candidatos*/
 	public function ver_candidatos($id){

@@ -30,7 +30,7 @@ class Aplicacion extends CI_Controller{
        /*public function ver($id){
       	$data = array();
       	$this->load->model('aplicacion_model');
-      	$aplicacion = $this->aplicacion->obtener_por_id($id);
+      	$aplicacion = $this->aplicacion_model->obtener_por_id($id);
       	$data['aplicacion'] = $aplicacion;
 
       	$this->load->view('aplicacion/header');

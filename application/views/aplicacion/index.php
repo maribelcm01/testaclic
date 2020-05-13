@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-12">
+		<div class="col-11">
 		<?php if (count($aplicacion)): ?>
 			<table class="table table-bordered">
 			    <thead>
