@@ -1,6 +1,7 @@
 <div class="container" style="text-align:center; margin-top: 40px;">
     <p class="text-primary" style="font-size: 30px;">Encuesta vida</p>
-    <p>Ingresa el código de evaluación que recibiste:</p>   
+    <p>Ingresa el código de evaluación que recibiste:</p>
+    <p><?php echo $mensaje?></p>  
     <div class="row justify-content-center">
         <form action="<?=base_url('vida/validar')?>" method="post">
             <div class="form-group">
