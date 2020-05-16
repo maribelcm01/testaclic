@@ -2,21 +2,21 @@
     <h5>Test de <?=$nombre?></h5><br><br>
 	<h2><?php echo $reactivo ?></h2><br>
 	<p class="text-body" style="font-size: 20px;">Yo me comporto así:</p><br><br>
-	<form action="<?=base_url('vida/encuesta')?>/<?=$codigo?>/<?=$idReactivo?>" method="post">
+	<form action="<?=base_url('vida/encuesta')?>/<?=$codigo?>" method="post">
 		<div class="row justify-content-center">
 			<div class="col-2">
-				<button class="btn btn-warning" type="submit" name="valor" value="0">Casi Nunca</button>
+				<button class="btn btn-warning" required="required" type="submit" name="valor" value="0">Casi Nunca</button>
 			</div>
 			<div class="col-2">
-				<button class="btn btn-warning" type="submit" name="valor" value="1">Con Frecuencia</button>
+				<button class="btn btn-warning" required="required" type="submit" name="valor" value="1">Con Frecuencia</button>
 			</div>
 			<div class="col-2">
-				<button class="btn btn-warning" type="submit" name="valor" value="2">Casi Siempre</button>               
+				<button class="btn btn-warning" required="required" type="submit" name="valor" value="2">Casi Siempre</button>               
 			</div>
 		</div>
 	</form><br><br><br>
 	<h4><?=$pregunta?> / <?=$limite?></h4>
-	<?php $style = ($pregunta * 100) / $limite?>
+	<?php $style = round(($pregunta * 100) / $limite)?>
 	<div class="progress" style="height:30px">
 	<div class="progress-bar bg-success" style="width:<?=$style?>%;"><?=$style?>%</div>
          
