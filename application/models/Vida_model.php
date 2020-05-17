@@ -24,7 +24,7 @@
 		
 		public function obtenerDatos($codigo){
 			$d = $this->db->select('encuestado.nombre, aplicacion.codigo')->
-					where(array('aplicacion.codigo =' => $codigo))->
+					where(array('encuestado.idEncuestado = aplicacion.idEncuestado AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, encuestado')->
 					row();
 			return $d;
@@ -92,8 +92,9 @@
 
 		
 		public function verDatos($codigo,$idReactivo){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo ,aplicacion.codigo')->
-					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
+			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo ,reactivo.indice, aplicacion.codigo')->
+					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
+					aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
 					get('reactivo,aplicacion,encuestado')->
 					row();
 			return $q;
@@ -101,8 +102,10 @@
 
 
 		public function verDatosBack($codigo,$idReactivo,$back,$idEncuesta){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo,aplicaciondetalle.valor ,aplicacion.codigo')->
-			where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $back, 'aplicaciondetalle.idReactivo =' => $back))->
+			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo, reactivo.indice,aplicaciondetalle.valor ,aplicacion.codigo')->
+			where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
+					aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND aplicaciondetalle.idReactivo = reactivo.idReactivo AND
+					aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $back, 'aplicaciondetalle.idReactivo =' => $idReactivo))->
 					get('reactivo,aplicacion,encuestado,aplicaciondetalle')->
 					row();
 			return $q;

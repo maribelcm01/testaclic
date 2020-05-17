@@ -5,13 +5,13 @@
 	<form action="<?=base_url('vida/encuestapost')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post" id="form-encuesta">
 		<div class="row justify-content-center">
 			<div class="col-2">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 0) ? 'btn-primary' : 'btn-warning' ?>" required type="submit" name="valor" value="0">Casi Nunca</button>
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 0) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="0">Casi Nunca</button>
 			</div>
 			<div class="col-2">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 1) ? 'btn-primary' : 'btn-warning' ?>" required type="submit" name="valor" value="1">Con Frecuencia</button>
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 1) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="1">Con Frecuencia</button>
 			</div>
 			<div class="col-2">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-primary' : 'btn-warning' ?>" required type="submit" name="valor" value="2">Casi Siempre</button>               
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="2">Casi Siempre</button>               
 			</div>
 		</div>
 	</form><br><br><br>
@@ -25,9 +25,9 @@
 	</div>
 
 	<h4><?=$pregunta?> / <?=$limite?></h4>
-	<?php $style = round(($pregunta * 100) / $limite)?>
+	<?php $style = round(($progreso * 100) / $limite)?>
 	<div class="progress" style="height:30px">
-	<div class="progress-bar bg-success" style="width:<?=$style?>%;"><?=$style?>%</div>
+	<div class="progress-bar bg-dark" style="width:<?=$style?>%;"><?=$style?>%</div>
          
 </div>
 		

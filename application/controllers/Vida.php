@@ -48,7 +48,8 @@
 			$this->load->model('vida_model');
 			$limite = $this->vida_model->verLimite($codigo);
 			$pregunta = $this->vida_model->verPregunta($codigo);
-			
+			$progreso = $this->vida_model->verPregunta($codigo);
+
 			$valor = $this->input->post('valor');
 			$idAplicacion = $this->vida_model->verIdAplicacion($codigo);
 			$idReactivo = $this->vida_model->verIdReactivo($codigo,$pregunta);
@@ -62,12 +63,13 @@
 			
 			if(isset($_GET['back'])){
 				if($_GET['back'] == $pregunta){ 
-					redirect(base_url() . 'vida/encuesta/'.$codigo);
+					redirect(base_url('vida/encuesta/'.$codigo));
 				}
+				$idReactivo = $this->vida_model->verIdReactivo($codigo,$_GET['back']);
 				$s = $this->vida_model->verDatosBack($codigo,$idReactivo,$_GET['back'],$idEncuesta);
 				$valor_reactivo = $s->valor;
 				$control_siguiente=false;
-				$pregunta = $s->idReactivo;
+				$pregunta = $s->indice;
 				
 				//print_r($s->reactivo);exit;
 			}else{
@@ -82,13 +84,14 @@
 				'codigo' => $s->codigo,
 				'limite' => $limite,
 				'pregunta' => $pregunta,
+				'progreso' => $progreso,
 				'valor_reactivo' => $valor_reactivo,
 				'menor' => $first_last[0]['indice'],
 				'mayor' => $first_last[1]['indice'],
 				'control_siguiente' => $control_siguiente
 			);
 
-			print_r($data);
+			//print_r($data);
 			if($finalizado != "Finalizado"){
 				if($pregunta <= $limite){
 					$this->load->view('vida/header');
@@ -96,7 +99,9 @@
 					$this->load->view('layout/footer');
 				}
 			}else{
-				redirect(base_url() . 'vida/gracias/'.$codigo);
+				$this->load->view('vida/header');
+				$this->load->view('vida/agradecimiento',$data);
+				$this->load->view('layout/footer');
 			}
 		}
 		public function encuestapost($codigo){
@@ -112,7 +117,8 @@
 			//evaluar si es la ultima pregunta
 			//evaluar si es una actualización de pregunta
 			if(isset($_GET['back'])){
-				$this->vida_model->registrarAplicacionDetalle($idAplicacion,$_GET['back'],$valor);
+				$idReactivo = $this->vida_model->verIdReactivo($codigo,$_GET['back']);
+				$this->vida_model->registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor);
 			}else{
 				$this->vida_model->registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor);
 			}
@@ -123,15 +129,17 @@
 			if($total_de_preguntas_reactivo == $pregunta){
 				//encuesta finalizada manda a gracias
 				$this->vida_model->estadoFecha($idAplicacion);
-				redirect(base_url() . 'vida/gracias/'.$codigo);
+				$this->load->view('vida/header');
+				$this->load->view('vida/agradecimiento',$data);
+				$this->load->view('layout/footer');
 			}else{
 				if(isset($_GET['back'])){//es una actualizacion
 					$pregunta = $_GET['back'];
-					redirect(base_url() . 'vida/encuesta/'.$codigo);
+					redirect(base_url('vida/encuesta/'.$codigo));
 				}else{
 					$pregunta = $pregunta+1;
 					$this->vida_model->ultimaRegistrada($pregunta,$idAplicacion,$idEcuesta);
-					redirect(base_url() . 'vida/encuesta/'.$codigo);
+					redirect(base_url('vida/encuesta/'.$codigo));
 				}
 				
 

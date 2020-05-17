@@ -3,7 +3,7 @@
 		<div class="col-6">
             <h2>Lista de Aplicación de Encuestas</h2>
         </div>
-        <div class="col-2">
+        <div class="col-3">
 			<a class="btn btn-success" href="<?php echo base_url() ?>aplicacion/guardar"> Crear nuevo Registro </a>
 		</div>
 	</div>
