@@ -3,8 +3,8 @@
 		<div class="col-4">
             <h2>Lista de Reactivos</h2>
         </div>
-        <div class="col-4">
-			<a class="btn btn-success" href="<?php echo base_url() ?>reactivo/guardar"> Crear nuevo Registro </a>
+        <div class="col-2">
+			<a class="btn btn-success" href="<?php echo base_url() ?>reactivo/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
@@ -30,8 +30,8 @@
 		             	<td> <?php echo $item->indice; ?> </td>
 		             	<td> 
 		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>reactivo/ver/<?php echo $item->idReactivo ?>"> Ver </a>-->
-		                	<a class="btn btn-primary" href="<?php echo base_url() ?>reactivo/guardar/<?php echo $item->idReactivo ?>"> Editar </a>
-		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>reactivo/eliminar/<?php echo $item->idReactivo ?>"> Eliminar </a> 
+		                	<a class="btn btn-primary" href="<?php echo base_url() ?>reactivo/guardar/<?php echo $item->idReactivo ?>"><i class="fas fa-edit"></i>Editar </a>
+		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>reactivo/eliminar/<?php echo $item->idReactivo ?>"><i class="fas fa-times-circle"></i>Borrar </a> 
 		             	</td>
 		          	</tr>
 		       		<?php endforeach; ?>

@@ -1,35 +1,46 @@
 <div class="container" style="text-align: center; background-color:#b5dffb; margin-top: 40px; padding: 30px; size: 720px;">
-    <h5>Test de <?=$nombre?></h5><br><br>
-	<h2><?php echo $reactivo ?></h2><br>
-	<p class="text-body" style="font-size: 20px;">Yo me comporto así:</p><br><br>
+    <h4>Test de <?=$nombre?></h4><br><br>
+	<h2>
+		<?php echo $reactivo ?>
+		<?php if($comentario != null):?> 
+			<sup>
+				<i data-toggle="mensaje" title="<?=$comentario?>" class="far fa-question-circle"></i>
+			</sup>
+		<?php endif;?>
+	</h2><br>
+	<p style="font-size: 20px;">Yo me comporto así:</p><br><br>
 	<form action="<?=base_url('vida/encuestapost')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post" id="form-encuesta">
 		<div class="row justify-content-center">
-			<div class="col-2">
+			<div class="col-3">
 				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 0) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="0">Casi Nunca</button>
 			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 1) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="1">Con Frecuencia</button>
 			</div>
-			<div class="col-2">
+			<div class="col-3">
 				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="2">Casi Siempre</button>               
 			</div>
 		</div>
 	</form><br><br><br>
 	<div class="row">
 		<?php if($menor != $pregunta):?> 
-			<div class="col"><input type="button" name="back" value=" < Anterior" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"></div>
+			<div class="col"><button name="back" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i> Anterior</button></div>
 		<?php endif; ?>
 		<?php if($mayor != $pregunta && $control_siguiente == false):?>
-			<div class="col"><input type="submit" name="next" value=" Siguiente > " class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta+1)?>'"></div>
+			<div class="col"><button name="next" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta+1)?>'">Siguiente <i class="fas fa-angle-double-right"></i></button></div>
 		<?php endif; ?>
 	</div>
 
-	<h4><?=$pregunta?> / <?=$limite?></h4>
-	<?php $style = round(($progreso * 100) / $limite)?>
+	<h4><?=$pregunta?> / <?=$mayor?></h4>
+	<?php $style = round((($progreso-1) * 100) / $mayor)?>
 	<div class="progress" style="height:30px">
-	<div class="progress-bar bg-dark" style="width:<?=$style?>%;"><?=$style?>%</div>
-         
+	<div class="progress-bar bg-dark" style="width:<?=$style?>%;"><?=$style?>%</div>  
 </div>
-		
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="mensaje"]').tooltip(); 
+    });
+</script>		
 
 	

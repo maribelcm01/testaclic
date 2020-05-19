@@ -8,6 +8,7 @@
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="<?=base_url('application/assets/fonts/css/all.css')?>"> <!--load all styles -->
 	<style>
         .mt40{
          	margin-top: 40px;
@@ -17,7 +18,8 @@
 <body>
 	<div class="container mt40">
 		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7c7e80;">
-			<a class="navbar-brand" href="<?=base_url('') ?>"> Testalia</a>
+		<span class="glyphicon glyphicon-print"></span>
+			<a class="navbar-brand" href="<?=base_url('') ?>"><i class="fas fa-home"></i> Testalia</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>

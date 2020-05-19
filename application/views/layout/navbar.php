@@ -1,6 +1,6 @@
 <div class="container mt40">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7c7e80;">
-        <a class="navbar-brand" href="<?=base_url('dashboard');?>">Testalia</a>
+        <a class="navbar-brand" href="<?=base_url('dashboard');?>"><i class="fas fa-home"></i> Testalia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,10 +17,10 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Usuario: <?php echo $this->session->nombre?>
+                    <i class="fas fa-user"></i> Usuario <?php echo $this->session->nombre?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="<?=base_url('login/logout')?>">Cerrar Sesión</a>    
+                        <a class="dropdown-item" href="<?=base_url('login/logout')?>"><i class="fas fa-arrow-left"></i> Cerrar Sesión</a>    
                     </div>
                 </li>
             </ul>

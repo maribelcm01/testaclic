@@ -38,7 +38,7 @@
         }
   
          public function obtener_todos(){
-            $this->db->select('encuesta.nombre as nomEncuesta, encuestado.nombre as nomEncuestado, aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idEncuestado, aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion, aplicacion.estado, aplicacion.pregunta');
+            $this->db->select('encuesta.nombre as nomEncuesta, encuestado.nombre as nomEncuestado, aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idEncuestado, aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion, aplicacion.estado');
             $this->db->from('encuesta,encuestado,aplicacion');
             $this->db->where('aplicacion.idEncuesta = encuesta.idEncuesta AND encuestado.idEncuestado = aplicacion.idEncuestado');  
 

@@ -8,8 +8,8 @@
                    <input class="form-control" type="text" name="nombre" required="required" value="<?php echo $nombre ?>"/>
                 </div>
                 <div class="form-group">
-                   <input type="submit" class="btn btn-success" value="Guardar" />
-                   <a class="btn btn-danger" href="<?php echo base_url() ?>encuesta"> Cancelar </a>
+                   <button type="submit" class="btn btn-success" value="Guardar"><i class="fas fa-save"></i> Guardar</button>
+                   <a class="btn btn-danger" href="<?php echo base_url() ?>encuesta"><i class="fas fa-times-circle"></i> Cancelar </a>
                 </div>
             </form>
         </div>

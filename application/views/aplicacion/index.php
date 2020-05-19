@@ -3,8 +3,8 @@
 		<div class="col-6">
             <h2>Lista de Aplicación de Encuestas</h2>
         </div>
-        <div class="col-3">
-			<a class="btn btn-success" href="<?php echo base_url() ?>aplicacion/guardar"> Crear nuevo Registro </a>
+        <div class="col-2">
+			<a class="btn btn-success" href="<?php echo base_url() ?>aplicacion/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
@@ -17,10 +17,9 @@
 						<th>Encuesta</th>
 						<th>Encuestado</th>
 						<th>Codigo</th>
-						<th>Finalizado</th>
 						<th>Creado</th>
 						<th>Estado</th>
-						<th>Final</th>
+						<th>Finalizado</th>
 			          	<td colspan="2">Action</td>
 			       	</tr>
 			    </thead>
@@ -30,14 +29,13 @@
 						<td> <?php echo $item->nomEncuesta ?> </td>
 						<td> <?php echo $item->nomEncuestado ?> </td>
 		             	<td> <?php echo $item->codigo ?> </td>
-						<td> <?php echo $item->fechaConclusion ?> </td>
 						<td> <?php echo $item->fechaCreacion ?> </td>
 						<td> <?php echo $item->estado ?> </td>
-						<td> <?php echo $item->pregunta ?> </td>
+						<td> <?php echo $item->fechaConclusion ?> </td>
 		             	<td> 
 		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>aplicacion/ver/<?php echo $item->idAplicacion ?>"> Ver </a>-->
-		                	<a class="btn btn-primary" href="<?php echo base_url() ?>aplicacion/guardar/<?php echo $item->idAplicacion ?>"> Editar </a>
-		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>aplicacion/eliminar/<?php echo $item->idAplicacion ?>"> Eliminar </a> 
+		                	<a class="btn btn-primary" href="<?php echo base_url() ?>aplicacion/guardar/<?php echo $item->idAplicacion ?>"><i class="fas fa-edit"></i>Editar</a>
+		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>aplicacion/eliminar/<?php echo $item->idAplicacion ?>"><i class="fas fa-times-circle"></i>Borrar</a> 
 		             	</td>
 		          	</tr>
 		       	<?php endforeach; ?>

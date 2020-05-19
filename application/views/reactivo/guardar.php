@@ -24,8 +24,8 @@
                    <input class="form-control" type="text" name="indice" required="required" value="<?php echo $indice; ?>" />
                 </div>
                 <div class="form-group">
-                   <input type="submit" class="btn btn-success" value="Guardar" />
-                   <a class="btn btn-danger" href="<?php echo base_url() ?>reactivo"> Cancelar </a>
+                   <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                   <a class="btn btn-danger" href="<?php echo base_url() ?>reactivo"><i class="fas fa-times-circle"></i> Cancelar </a>
                 </div>
             </form>
         </div>

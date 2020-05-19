@@ -3,8 +3,8 @@
 		<div class="col-4">
             <h2>Lista de Encuestados</h2>
         </div>
-        <div class="col-4">
-			<a class="btn btn-success" href="<?php echo base_url() ?>encuestado/guardar"> Crear nuevo Registro </a>
+        <div class="col-2">
+			<a class="btn btn-success" href="<?php echo base_url() ?>encuestado/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
@@ -28,8 +28,8 @@
 		             	<td> <?php echo $item->email ?> </td>
 		             	<td> 
 		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuestado/ver/<?php echo $item->idEncuestado ?>"> Ver </a>-->
-		                	<a class="btn btn-primary" href="<?php echo base_url() ?>encuestado/guardar/<?php echo $item->idEncuestado ?>"> Editar </a>
-		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuestado/eliminar/<?php echo $item->idEncuestado ?>"> Eliminar </a> 
+		                	<a class="btn btn-primary" href="<?php echo base_url() ?>encuestado/guardar/<?php echo $item->idEncuestado ?>"><i class="fas fa-edit"></i>Editar </a>
+		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuestado/eliminar/<?php echo $item->idEncuestado ?>"><i class="fas fa-times-circle"></i>Borrar </a> 
 		             	</td>
 		          	</tr>
 		       		<?php endforeach; ?>

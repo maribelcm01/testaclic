@@ -37,6 +37,7 @@
 		public function obtener_todos(){
 			$this->db->select('encuesta.nombre, reactivo.idReactivo, reactivo.idEncuesta, reactivo.reactivo, reactivo.comentario, reactivo.indice');
 			$this->db->from('encuesta,reactivo');
+			$this->db->where('encuesta.idEncuesta = reactivo.idEncuesta');
 			//$this->db->order_by('prioridad, titulo', 'asc');
 			$consulta = $this->db->get();
 			$resultado = $consulta->result();

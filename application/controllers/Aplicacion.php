@@ -45,13 +45,11 @@ class Aplicacion extends CI_Controller{
             $aplicacion = $this->aplicacion_model->obtener_por_id($id); 
             $data['idAplicacion'] = $aplicacion->idAplicacion;
             $data['idEncuesta'] = $aplicacion->idEncuesta;
-            $data['idEncuestado'] = $aplicacion->idEncuestado;
-            
+            $data['idEncuestado'] = $aplicacion->idEncuestado; 
         }else{
             $data['idAplicacion'] = null;
             $data['idEncuesta'] = null;
             $data['idEncuestado'] = null;
-            
         }
 
         $data['encuesta'] = $this->aplicacion_model->obtenerIdEncuesta();
@@ -67,8 +65,6 @@ class Aplicacion extends CI_Controller{
         if($this->input->post()){
             $idEncuesta = $this->input->post('idEncuesta');
             $idEncuestado = $this->input->post('idEncuestado');
-
-
             $config = array(
                 array(
                     'field' => 'idEncuesta',
