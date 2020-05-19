@@ -69,6 +69,15 @@
 			return $idEncuesta;
 		}
 
+		public function verNombreEncuesta($idEncuesta){
+			$p = $this->db->select('encuesta.nombre')->
+					where('aplicacion.idEncuesta = encuesta.idEncuesta AND aplicacion.idEncuesta = '.$idEncuesta)->
+					get('aplicacion,encuesta')->
+					result_array();
+			$nombreEncuesta = $p[0]['nombre'];
+			return $nombreEncuesta;
+		}
+
 		public function verIdReactivo($codigo,$pregunta){
 			$p = $this->db->select('reactivo.idReactivo')->
 					where(array('reactivo.idEncuesta = encuesta.idEncuesta AND
@@ -130,6 +139,20 @@
 			 );
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
+		}
+
+		public function obtenerCluster($a,$b,$idAplicacion){
+			$p = $this->db->select_sum('aplicaciondetalle.valor')->
+					where('reactivo.idReactivo = aplicaciondetalle.idReactivo AND
+						aplicaciondetalle.idAplicacion = '.$idAplicacion.' AND reactivo.indice BETWEEN '.$a.' AND '.$b)->
+					get('aplicaciondetalle,reactivo')->
+					result_array();
+			$suma = $p[0]['valor'];
+			return $suma;
+		}
+
+		public function insertarVida($idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12){
+			$this->db->query("INSERT INTO vida VALUES(NULL,$idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12);");
 		}
 
 		/*public function busca_pregunta_control($codigo){

@@ -56,6 +56,8 @@
 			$this->load->model('vida_model');
 			$limite = $this->vida_model->verLimite($codigo);
 			$pregunta = $this->vida_model->verPregunta($codigo);
+
+			//variable barra de progreso
 			$progreso = $this->vida_model->verPregunta($codigo);
 
 			$valor = $this->input->post('valor');
@@ -106,6 +108,7 @@
 					$this->load->view('layout/footer');
 				}
 			}else{
+				
 				$this->load->view('vida/header');
 				$this->load->view('vida/agradecimiento',$data);
 				$this->load->view('layout/footer');
@@ -120,7 +123,8 @@
 			$idAplicacion = $this->vida_model->verIdAplicacion($codigo);
 			$idReactivo = $this->vida_model->verIdReactivo($codigo,$pregunta);
 			$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
-
+			$nombreEncuesta = $this->vida_model->verNombreEncuesta($idEncuesta);
+			
 			//proceso de guardar
 			//evaluar si es la ultima pregunta
 			//evaluar si es una actualización de pregunta
@@ -133,10 +137,15 @@
 			//$total_de_preguntas_reactivo= $this->vida_model->total_de_preguntas_reactivo($idEncuesta);
 			if($limite == $pregunta){
 				//encuesta finalizada manda a gracias
+				
+				//print_r($nombreEncuesta);
+				if($nombreEncuesta == 'Vida'){
+					$this->vida($idAplicacion);
+				}
 				$this->vida_model->estadoFecha($idAplicacion);
-
 				$s = $this->vida_model->obtenerDatos($codigo);
 				//print_r($s);exit;
+
 				$data = array('nombre' => $s->nombre);
 
 				$this->load->view('vida/header');
@@ -152,6 +161,84 @@
 					redirect(base_url('vida/encuesta/'.$codigo));
 				}
 			}
+		}
+
+		public function vida($idAplicacion){
+			$this->load->model('vida_model');
+			$A1 = $this->vida_model->obtenerCluster(1,5,$idAplicacion);
+			$B1 = $this->vida_model->obtenerCluster(31,35,$idAplicacion);
+			$C1 = $this->vida_model->obtenerCluster(61,65,$idAplicacion);
+			$D1 = $this->vida_model->obtenerCluster(91,95,$idAplicacion);
+			$R1 = $A1 + $B1 +$C1 + $D1;
+			
+			$E1 = $this->vida_model->obtenerCluster(121,125,$idAplicacion);
+			$F1 = $this->vida_model->obtenerCluster(151,155,$idAplicacion);
+			$G1 = $this->vida_model->obtenerCluster(181,185,$idAplicacion);
+			$H1 = $this->vida_model->obtenerCluster(211,215,$idAplicacion);
+			$R2 = $E1 + $F1 +$G1 + $H1;
+
+			$A2 = $this->vida_model->obtenerCluster(6,10,$idAplicacion);
+			$B2 = $this->vida_model->obtenerCluster(36,40,$idAplicacion);
+			$C2 = $this->vida_model->obtenerCluster(66,70,$idAplicacion);
+			$D2 = $this->vida_model->obtenerCluster(96,100,$idAplicacion);
+			$R3 = $A2 + $B2 +$C2 + $D2;
+
+			$E2 = $this->vida_model->obtenerCluster(126,130,$idAplicacion);
+			$F2 = $this->vida_model->obtenerCluster(156,160,$idAplicacion);
+			$G2 = $this->vida_model->obtenerCluster(186,190,$idAplicacion);
+			$H2 = $this->vida_model->obtenerCluster(216,220,$idAplicacion);
+			$R4 = $E2 + $F2 +$G2 + $H2;
+
+			$A3 = $this->vida_model->obtenerCluster(11,15,$idAplicacion);
+			$B3 = $this->vida_model->obtenerCluster(41,45,$idAplicacion);
+			$C3 = $this->vida_model->obtenerCluster(71,75,$idAplicacion);
+			$D3 = $this->vida_model->obtenerCluster(101,105,$idAplicacion);
+			$R5 = $A3 + $B3 +$C3 + $D3;
+
+			$E3 = $this->vida_model->obtenerCluster(131,135,$idAplicacion);
+			$F3 = $this->vida_model->obtenerCluster(161,165,$idAplicacion);
+			$G3 = $this->vida_model->obtenerCluster(191,195,$idAplicacion);
+			$H3 = $this->vida_model->obtenerCluster(221,225,$idAplicacion);
+			$R6 = $E3 + $F3 +$G3 + $H3;
+
+			$A4 = $this->vida_model->obtenerCluster(16,20,$idAplicacion);
+			$B4 = $this->vida_model->obtenerCluster(46,50,$idAplicacion);
+			$C4 = $this->vida_model->obtenerCluster(76,80,$idAplicacion);
+			$D4 = $this->vida_model->obtenerCluster(106,110,$idAplicacion);
+			$R7 = $A4 + $B4 +$C4 + $D4;
+
+			$E4 = $this->vida_model->obtenerCluster(136,140,$idAplicacion);
+			$F4 = $this->vida_model->obtenerCluster(166,170,$idAplicacion);
+			$G4 = $this->vida_model->obtenerCluster(196,200,$idAplicacion);
+			$H4 = $this->vida_model->obtenerCluster(226,230,$idAplicacion);
+			$R8 = $E4 + $F4 +$G4 + $H4;
+
+			$A5 = $this->vida_model->obtenerCluster(21,25,$idAplicacion);
+			$B5 = $this->vida_model->obtenerCluster(51,55,$idAplicacion);
+			$C5 = $this->vida_model->obtenerCluster(81,85,$idAplicacion);
+			$D5 = $this->vida_model->obtenerCluster(111,115,$idAplicacion);
+			$R9 = $A5 + $B5 +$C5 + $D5;
+
+			$E5 = $this->vida_model->obtenerCluster(141,145,$idAplicacion);
+			$F5 = $this->vida_model->obtenerCluster(171,175,$idAplicacion);
+			$G5 = $this->vida_model->obtenerCluster(201,205,$idAplicacion);
+			$H5 = $this->vida_model->obtenerCluster(231,235,$idAplicacion);
+			$R10 = $E5 + $F5 +$G5 + $H5;
+
+			$A6	= $this->vida_model->obtenerCluster(26,30,$idAplicacion);
+			$B6 = $this->vida_model->obtenerCluster(56,60,$idAplicacion);
+			$C6 = $this->vida_model->obtenerCluster(86,90,$idAplicacion);
+			$D6 = $this->vida_model->obtenerCluster(116,120,$idAplicacion);
+			$R11 = $A6 + $B6 +$C6 + $D6;
+
+			$E6 = $this->vida_model->obtenerCluster(146,150,$idAplicacion);
+			$F6 = $this->vida_model->obtenerCluster(176,180,$idAplicacion);
+			$G6 = $this->vida_model->obtenerCluster(206,210,$idAplicacion);
+			$H6 = $this->vida_model->obtenerCluster(236,240,$idAplicacion);
+			$R12 = $E6 + $F6 +$G6 + $H6;
+
+			$this->vida_model->insertarVida($idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12);
+			//print_r($R1.' '.$R2.' '.$R3.' '.$R4.' '.$R5.' '.$R6.' '.$R7.' '.$R8.' '.$R9.' '.$R10.' '.$R11.' '.$R12.' ');
 		}
 	}
 ?>
