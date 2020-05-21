@@ -23,13 +23,9 @@
             } 
         }
   
-         public function eliminar($id){
-             $this->db->where('idAplicacion', $id);
-             $this->db->delete('aplicacion');
-        }
-  
-         public function obtener_por_id($id){
-            $this->db->select('idAplicacion, idEncuesta, idEncuestado, codigo, fechaConclusion, fechaCreacion, estado, pregunta');
+        public function obtener_por_id($id){
+            $this->db->select('idAplicacion, idEncuesta, idEncuestado, codigo,
+                        fechaConclusion, fechaCreacion, estado, pregunta');
             $this->db->from('aplicacion');
             $this->db->where('idAplicacion', $id);
             $consulta = $this->db->get();
@@ -37,10 +33,14 @@
             return $resultado;
         }
   
-         public function obtener_todos(){
-            $this->db->select('encuesta.nombre as nomEncuesta, encuestado.nombre as nomEncuestado, aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idEncuestado, aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion, aplicacion.estado');
+        public function obtener_todos(){
+            $this->db->select('encuesta.nombre as nomEncuesta, encuestado.nombre as nomEncuestado,
+                        aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idEncuestado,
+                        aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion,
+                        aplicacion.estado');
             $this->db->from('encuesta,encuestado,aplicacion');
-            $this->db->where('aplicacion.idEncuesta = encuesta.idEncuesta AND encuestado.idEncuestado = aplicacion.idEncuestado');  
+            $this->db->where('aplicacion.idEncuesta = encuesta.idEncuesta AND
+                encuestado.idEncuestado = aplicacion.idEncuestado');  
 
             //$this->db->order_by('prioridad, titulo', 'asc');
             $consulta = $this->db->get();
@@ -50,22 +50,26 @@
 
         public function obtenerIdEncuesta(){
             //buscamos los candidatos que no estan aplicando en esa encuesta
-               $this->db->select('*');
-               $this->db->from('encuesta');
-      
-               $consulta = $this->db->get();
-               $resultado = $consulta->result();
-               return $resultado;
+            $this->db->select('*');
+            $this->db->from('encuesta');
+    
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+            return $resultado;
          }
 
-         public function obtenerIdEncuestado(){
+        public function obtenerIdEncuestado(){
             //buscamos los candidatos que no estan aplicando en esa encuesta
-               $this->db->select('*');
-               $this->db->from('encuestado');
-      
-               $consulta = $this->db->get();
-               $resultado = $consulta->result();
-               return $resultado;
-         }
+            $this->db->select('*');
+            $this->db->from('encuestado');
+            $consulta = $this->db->get();
+            $resultado = $consulta->result();
+            return $resultado;
+        }
+
+        /* public function eliminar($id){
+            $this->db->where('idAplicacion', $id);
+            $this->db->delete('aplicacion');
+        } */
     }
 ?>

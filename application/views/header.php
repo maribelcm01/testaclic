@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-	<div class="container mt40">
+	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #7c7e80;">
 		<span class="glyphicon glyphicon-print"></span>
 			<a class="navbar-brand" href="<?=base_url('') ?>"><i class="fas fa-home"></i> Testalia</a>

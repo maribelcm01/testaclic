@@ -33,9 +33,10 @@
 						<td> <?php echo $item->estado ?> </td>
 						<td> <?php echo $item->fechaConclusion ?> </td>
 		             	<td> 
-		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>aplicacion/ver/<?php echo $item->idAplicacion ?>"> Ver </a>-->
-		                	<a class="btn btn-primary" href="<?php echo base_url() ?>aplicacion/guardar/<?php echo $item->idAplicacion ?>"><i class="fas fa-edit"></i>Editar</a>
-		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>aplicacion/eliminar/<?php echo $item->idAplicacion ?>"><i class="fas fa-times-circle"></i>Borrar</a> 
+							<a class="btn btn-primary" href="<?php echo base_url() ?>aplicacion/guardar/<?php echo $item->idAplicacion ?>"><i class="fas fa-edit"></i>Editar</a>
+							
+							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>aplicacion/eliminar/<?php echo $item->idAplicacion ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
+							<!--<a class="btn btn-info" href="<?php echo base_url() ?>aplicacion/ver/<?php echo $item->idAplicacion ?>"> Ver </a>-->
 		             	</td>
 		          	</tr>
 		       	<?php endforeach; ?>
