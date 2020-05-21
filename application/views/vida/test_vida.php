@@ -12,23 +12,27 @@
 	<form action="<?=base_url('vida/encuestapost')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post" id="form-encuesta">
 		<div class="row justify-content-center">
 			<div class="col-3">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 0) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="0">Casi Nunca</button>
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 0) ? 'btn-warning' : 'btn-dark' ?>" required type="submit" name="valor" value="0">Casi Nunca</button>
 			</div>
 			<div class="col-3">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 1) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="1">Con Frecuencia</button>
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 1) ? 'btn-warning' : 'btn-dark' ?>" required type="submit" name="valor" value="1">Con Frecuencia</button>
 			</div>
 			<div class="col-3">
-				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-success' : 'btn-warning' ?>" required type="submit" name="valor" value="2">Casi Siempre</button>               
+				<button class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-warning' : 'btn-dark' ?>" required type="submit" name="valor" value="2">Casi Siempre</button>               
 			</div>
 		</div>
 	</form><br><br><br>
 	<div class="row">
-		<?php if($menor != $pregunta):?> 
-			<div class="col"><button name="back" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i> Anterior</button></div>
-		<?php endif; ?>
-		<?php if($mayor != $pregunta && $control_siguiente == false):?>
-			<div class="col"><button name="next" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta+1)?>'">Siguiente <i class="fas fa-angle-double-right"></i></button></div>
-		<?php endif; ?>
+		<div class="col">
+			<?php if($menor != $pregunta):?> 
+				<button name="back" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i> Anterior</button>
+			<?php endif; ?>
+		</div>
+		<div class="col">
+			<?php if($mayor != $pregunta && $control_siguiente == false):?>
+				<button name="next" class="btn btn-secondary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta+1)?>'">Siguiente <i class="fas fa-angle-double-right"></i></button>
+			<?php endif; ?>
+		</div>
 	</div>
 
 	<h4><?=$pregunta?> / <?=$mayor?></h4>
