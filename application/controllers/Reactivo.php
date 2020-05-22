@@ -12,23 +12,25 @@
       
         public function index($idEncuesta) {
             $data = array();
-
-            $data['menu'] = main_menu();
             
             $this->load->model('reactivo_model');
+            $e = $this->reactivo_model->obtenerIdEncuesta($idEncuesta);
             $data['reactivo'] = $this->reactivo_model->obtener_todos($idEncuesta);
+            $data['idEncuesta'] = $e->idEncuesta;
+            $data['nombre'] = $e->nombre;
+            $data['menu'] = main_menu();
 
             if ($this->session->userdata('is_logged')) {
                 $this->load->view('reactivo/header');
                 $this->load->view('layout/navbar',$data);
-                $this->load->view('reactivo/index', $data);
+                $this->load->view('reactivo/index',$data);
                 $this->load->view('layout/footer');
             }else{
                 redirect(base_url('login'));
             }
         }
 
-        public function guardar($id=null){
+        public function guardar($idEncuesta,$id=null){
             $data = array(); 
             $this->load->model('reactivo_model');
             if($id){
@@ -40,14 +42,16 @@
                 $data['indice'] = $reactivo->indice;
             }else{
                 $data['idReactivo'] = null;
-                $data['idEncuesta'] = null;
+                $data['idEncuesta'] = $idEncuesta;
                 $data['reactivo'] = null;
                 $data['comentario'] = null;
                 $data['indice'] = null;
             }
 
-            $data['encuesta'] = $this->reactivo_model->obtenerIdEncuesta();
+            //$data['encuesta'] = $this->reactivo_model->obtenerIdEncuesta();
             $data['menu'] = main_menu();
+            $e = $this->reactivo_model->obtenerIdEncuesta($idEncuesta);
+            $data['nombre'] = $e->nombre;
 
             $this->load->view('reactivo/header');
             $this->load->view('layout/navbar',$data);
@@ -56,20 +60,14 @@
         }
 
 
-        public function guardar_post($id=null){
+        public function guardar_post($idEncuesta,$id=null){
             if($this->input->post()){
-                $idEncuesta = $this->input->post('idEncuesta');
                 $reactivo = $this->input->post('reactivo');
                 $comentario = $this->input->post('comentario');
                 $indice = $this->input->post('indice');
 
 
                 $config = array(
-                    array(
-                        'field' => 'idEncuesta',
-                        'label' => 'Nombre de Encuesta',
-                        'rules' => 'required',
-                    ),
                     array(
                         'field' => 'reactivo',
                         'label' => 'Reactivo',
@@ -92,7 +90,7 @@
                 if ($this->form_validation->run() == TRUE){
                     $this->load->model('reactivo_model');
                     $this->reactivo_model->guardar($idEncuesta, $reactivo, $comentario, $indice, $id);
-                    redirect('reactivo');
+                    redirect('reactivo/index/'.$idEncuesta);
                 }else{
                   $data = array();
                   $data['idReactivo'] = $id;
@@ -103,10 +101,10 @@
 
                   $this->load->view('reactivo/header');
                   $this->load->view('reactivo/guardar', $data);
-                  $this->load->view('reactivo/footer');
+                  $this->load->view('layout/footer');
                 }          	
             }else{
-                $this->guardar();
+                $this->guardar($idEncuesta);
             } 
         }
 

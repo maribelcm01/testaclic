@@ -30,7 +30,8 @@
 		}
 
 		public function obtener_todos($idEncuesta){
-			$this->db->select('encuesta.nombre, reactivo.idReactivo, reactivo.idEncuesta, reactivo.reactivo, reactivo.comentario, reactivo.indice');
+			$this->db->select('encuesta.nombre, reactivo.idReactivo, reactivo.idEncuesta,
+					reactivo.reactivo, reactivo.comentario, reactivo.indice');
 			$this->db->from('encuesta,reactivo');
 			$this->db->where('encuesta.idEncuesta = reactivo.idEncuesta AND encuesta.idEncuesta ='.$idEncuesta);
 			//$this->db->order_by('prioridad, titulo', 'asc');
@@ -39,13 +40,13 @@
 			return $resultado;
 		}
 
-		public function obtenerIdEncuesta(){
+		public function obtenerIdEncuesta($idEncuesta){
 		//buscamos los candidatos que no estan aplicando en esa encuesta
 			$this->db->select('*');
 			$this->db->from('encuesta');
-
+			$this->db->where('idEncuesta = '.$idEncuesta);
 			$consulta = $this->db->get();
-			$resultado = $consulta->result();
+			$resultado = $consulta->row();
 			return $resultado;
 		}
 
