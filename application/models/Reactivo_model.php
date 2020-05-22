@@ -20,11 +20,6 @@
 			} 
 		}
 
-		public function eliminar($id){
-			$this->db->where('idReactivo', $id);
-			$this->db->delete('reactivo');
-		}
-
 		public function obtener_por_id($id){
 			$this->db->select('idReactivo, idEncuesta, reactivo, comentario, indice');
 			$this->db->from('reactivo');
@@ -34,10 +29,10 @@
 			return $resultado;
 		}
 
-		public function obtener_todos(){
+		public function obtener_todos($idEncuesta){
 			$this->db->select('encuesta.nombre, reactivo.idReactivo, reactivo.idEncuesta, reactivo.reactivo, reactivo.comentario, reactivo.indice');
 			$this->db->from('encuesta,reactivo');
-			$this->db->where('encuesta.idEncuesta = reactivo.idEncuesta');
+			$this->db->where('encuesta.idEncuesta = reactivo.idEncuesta AND encuesta.idEncuesta ='.$idEncuesta);
 			//$this->db->order_by('prioridad, titulo', 'asc');
 			$consulta = $this->db->get();
 			$resultado = $consulta->result();
@@ -52,6 +47,11 @@
 			$consulta = $this->db->get();
 			$resultado = $consulta->result();
 			return $resultado;
-	}
+		}
+
+		/* public function eliminar($id){
+			$this->db->where('idReactivo', $id);
+			$this->db->delete('reactivo');
+		} */
 	}
 ?>

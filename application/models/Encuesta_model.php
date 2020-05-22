@@ -17,11 +17,6 @@
 			} 
 		}
 
-		public function eliminar($id){
-			$this->db->where('idEncuesta', $id);
-			$this->db->delete('encuesta');
-		}
-
 		public function obtener_por_id($id){
 			$this->db->select('idEncuesta, nombre');
 			$this->db->from('encuesta');
@@ -39,5 +34,10 @@
 			$resultado = $consulta->result();
 			return $resultado;
 		}
+
+		/* public function eliminar($id){
+			$this->db->where('idEncuesta', $id);
+			$this->db->delete('encuesta');
+		} */
 	}
 ?>

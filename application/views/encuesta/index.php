@@ -23,9 +23,10 @@
 		          	<tr>
 		             	<td> <?php echo $item->nombre ?> </td>
 		             	<td> 
-		                	<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuesta/ver/<?php echo $item->idEncuesta ?>"> Ver </a>-->
-		                	<a class="btn btn-primary" href="<?php echo base_url() ?>encuesta/guardar/<?php echo $item->idEncuesta ?>"><i class="fas fa-edit"></i>Editar</a>
-		                	<a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuesta/eliminar/<?php echo $item->idEncuesta ?>"><i class="fas fa-times-circle"></i>Borrar</a> 
+							<a class="btn btn-primary" href="<?php echo base_url() ?>encuesta/guardar/<?php echo $item->idEncuesta ?>"><i class="fas fa-edit"></i>Editar</a>
+							<a class="btn btn-dark" href="<?php echo base_url() ?>reactivo/index/<?php echo $item->idEncuesta ?>"><i class="fas fa-edit"></i>Reactivos</a>
+							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuesta/eliminar/<?php echo $item->idEncuesta ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
+							<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuesta/ver/<?php echo $item->idEncuesta ?>"> Ver </a>-->
 		             	</td>
 		          	</tr>
 		       	<?php endforeach; ?>
