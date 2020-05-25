@@ -16,6 +16,8 @@
 		<h1>Bienvenido a la interfaz de administrador</h1>	
 	</div>
 	<style>
+		@import url("//fonts.googleapis.com/css?family=Terminal+Dosis");
+        body {font-family: "Terminal Dosis", sans-serif;}
         .mt40{
          	margin-top: 40px;
     	}
