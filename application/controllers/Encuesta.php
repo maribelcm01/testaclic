@@ -19,7 +19,7 @@
 			$data['encuesta'] = $this->encuesta_model->obtener_todos();
 			
 			if ($this->session->userdata('is_logged')) {
-				$this->load->view('encuesta/header');
+				$this->load->view('layout/header');
 				$this->load->view('layout/navbar',$data);
 				$this->load->view('encuesta/index', $data);
 				$this->load->view('layout/footer');    
@@ -40,7 +40,7 @@
 				$data['nombre'] = null;
 			}
 			$data['menu'] = main_menu();
-			$this->load->view('encuesta/header');
+			$this->load->view('layout/header');
 			$this->load->view('layout/navbar',$data);
 			$this->load->view('encuesta/guardar', $data);
 			$this->load->view('layout/footer');
@@ -70,7 +70,7 @@
 				$data['idEncuesta'] = $id;
 				$data['nombre'] = $nombre;
 
-				$this->load->view('encuesta/header');
+				$this->load->view('layout/header');
 				$this->load->view('encuesta/guardar', $data);
 				$this->load->view('encuesta/footer');
 				}          	
@@ -100,7 +100,7 @@
 			$encuesta = $this->encuesta_model->obtener_por_id($id);
 			$data['encuesta'] = $encuesta;
 
-			$this->load->view('encuesta/header');
+			$this->load->view('layout/header');
 			$this->load->view('encuesta/ver', $data);
 			$this->load->view('layout/footer');
 		}*/

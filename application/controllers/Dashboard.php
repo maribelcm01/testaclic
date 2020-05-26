@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller{
 		$data['menu'] = main_menu();
 		
 		if ($this->session->userdata('is_logged')) {
+			$this->load->view('layout/header');	
         	$this->load->view('layout/navbar',$data);	
 			$this->load->view('dashboard',$data);
         	$this->load->view('layout/footer',$data);	

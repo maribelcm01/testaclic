@@ -17,8 +17,10 @@
 			$this->load->model('vida_model');
 			
 			$c = $this->vida_model->validarCodigo($codigo);
+			$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
+			$nombreEncuesta = $this->vida_model->verNombreEncuesta($idEncuesta);
 			//print_r($c);
-			if($c == null){
+			if($c == null || $nombreEncuesta != 'Vida'){
 				$data = array('mensaje' => '<div class="row justify-content-center">'.
 												'<div class="alert alert-danger col-3 ">'.
 													'El código ingresado es incorrecto'.

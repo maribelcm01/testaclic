@@ -21,7 +21,7 @@
             $data['menu'] = main_menu();
 
             if ($this->session->userdata('is_logged')) {
-                $this->load->view('reactivo/header');
+                $this->load->view('layout/header');
                 $this->load->view('layout/navbar',$data);
                 $this->load->view('reactivo/index',$data);
                 $this->load->view('layout/footer');
@@ -53,7 +53,7 @@
             $e = $this->reactivo_model->obtenerIdEncuesta($idEncuesta);
             $data['nombre'] = $e->nombre;
 
-            $this->load->view('reactivo/header');
+            $this->load->view('layout/header');
             $this->load->view('layout/navbar',$data);
             $this->load->view('reactivo/guardar',$data);
             $this->load->view('layout/footer');
@@ -99,7 +99,7 @@
                   $data['comentario'] = $comentario;
                   $data['indice'] = $indice;
 
-                  $this->load->view('reactivo/header');
+                  $this->load->view('layout/header');
                   $this->load->view('reactivo/guardar', $data);
                   $this->load->view('layout/footer');
                 }          	
@@ -114,7 +114,7 @@
             $reactivo = $this->reactivo_model->obtener_por_id($id);
             $data['reactivo'] = $reactivo;
 
-            $this->load->view('reactivo/header');
+            $this->load->view('layout/header');
             $this->load->view('reactivo/ver', $data);
             $this->load->view('layout/footer');
         }*/

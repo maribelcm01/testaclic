@@ -19,7 +19,7 @@
             $data['aplicacion'] = $this->aplicacion_model->obtener_todos();
             
             if ($this->session->userdata('is_logged')) {
-                $this->load->view('aplicacion/header');
+                $this->load->view('layout/header');
                 $this->load->view('layout/navbar',$data);
                 $this->load->view('aplicacion/index', $data);
                 $this->load->view('layout/footer');
@@ -46,7 +46,7 @@
             $data['encuesta'] = $this->aplicacion_model->obtenerIdEncuesta();
             $data['encuestado'] = $this->aplicacion_model->obtenerIdEncuestado();
 
-            $this->load->view('aplicacion/header');
+            $this->load->view('layout/header');
             $this->load->view('layout/navbar',$data);
             $this->load->view('aplicacion/guardar',$data);
             $this->load->view('layout/footer');
@@ -82,7 +82,7 @@
                     $data['idEncuesta'] = $idEncuesta;
                     $data['idEncuestado'] = $idEncuestado;
                     
-                    $this->load->view('aplicacion/header');
+                    $this->load->view('layout/header');
                     $this->load->view('aplicacion/guardar', $data);
                     $this->load->view('layout/footer');
                 }          	
@@ -97,7 +97,7 @@
             $aplicacion = $this->aplicacion_model->obtener_por_id($id);
             $data['aplicacion'] = $aplicacion;
 
-            $this->load->view('aplicacion/header');
+            $this->load->view('layout/header');
             $this->load->view('aplicacion/ver', $data);
             $this->load->view('layout/footer');
         }*/
