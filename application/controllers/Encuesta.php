@@ -6,8 +6,8 @@
 			parent::__construct();
 			$this->load->library(array('form_validation','session'));
 			$this->load->helper(array('auth/login_rules'));
-			$this->load->model('Auth');
 			$this->load->helper(array('getmenu'));
+			$this->load->model('Auth');
 		}
 	
 		public function index() {
@@ -77,6 +77,21 @@
 			}else{
 				$this->guardar();
 			} 
+		}
+
+		public function cambiarEstado($idEncuesta){
+			$this->load->model('encuesta_model');
+			$estado = $this->encuesta_model->verEstado($idEncuesta);
+			if($estado == 1){
+				$estado = 0;
+				//print_r($estado);
+				$this->encuesta_model->cambiarEstado($estado,$idEncuesta);
+			}else{
+				$estado = 1;
+				//print_r($estado);
+				$this->encuesta_model->cambiarEstado($estado,$idEncuesta);
+			}
+			redirect(base_url("encuesta"));
 		}
 		
 		/*public function ver($id){

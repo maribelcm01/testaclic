@@ -7,7 +7,8 @@
 	
 		public function guardar($nombre, $id=null){
 			$data = array(
-				'nombre' => $nombre
+				'nombre' => $nombre,
+				'estado' => intval(1)
 			);
 			if($id){
 				$this->db->where('idEncuesta', $id);
@@ -33,6 +34,19 @@
 			$consulta = $this->db->get();
 			$resultado = $consulta->result();
 			return $resultado;
+		}
+
+		public function verEstado($idEncuesta){
+			$p = $this->db->select('estado')->
+					where('idEncuesta = '.$idEncuesta)->
+					get('encuesta')->
+					result_array();
+			$estado = $p[0]['estado'];
+			return $estado;
+		}
+
+		public function cambiarEstado($estado,$idEncuesta){
+			$this->db->query("UPDATE encuesta SET estado = $estado WHERE idEncuesta = $idEncuesta;");
 		}
 
 		/* public function eliminar($id){
