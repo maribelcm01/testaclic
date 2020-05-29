@@ -4,7 +4,7 @@
 		<?php echo $reactivo ?>
 			<?php if($comentario != null):?> 
 				<sup>
-					<i data-toggle="mensaje" title="<?=$comentario?>" class="far fa-question-circle"></i>
+					<i data-toggle="mensaje" title="<?=$comentario?>" class="far fa-question-circle" data-placement="right"></i>
 				</sup>
 			<?php endif;?>
 	</h2><br>

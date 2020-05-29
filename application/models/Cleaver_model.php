@@ -1,5 +1,5 @@
 <?php
-    class Vida_model extends CI_Model{
+    class Cleaver_model extends CI_Model{
 		
 		function __construct(){
 			$this->load->database();
@@ -45,6 +45,25 @@
 					result_array();
 			$nombreEncuesta = $p[0]['nombre'];
 			return $nombreEncuesta;
+		}
+
+		public function verIdReactivo($codigo,$indice){
+			$p = $this->db->select('reactivo.idReactivo')->
+					where(array('reactivo.idEncuesta = encuesta.idEncuesta AND
+						encuesta.idEncuesta = aplicacion.idEncuesta AND
+						aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $indice))->
+					get('encuesta, reactivo, aplicacion')->
+					result_array();
+			$idReactivo = $p[0]['idReactivo'];
+			return $idReactivo;
+		}
+
+		public function obtenerPalabras($idEncuesta,$a,$b){
+			$q = $this->db->select('reactivo')->
+					where('idEncuesta ='.$idEncuesta.' AND indice BETWEEN '.$a.' AND '.$b)->
+					get('reactivo')->
+					result();
+			return $q;
 		}
     }
 ?>

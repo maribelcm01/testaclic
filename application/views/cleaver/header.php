@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Encuesta de Autodescripción Personal</title><!-- Required meta tags -->
+        <title>Encuesta Cleaver</title><!-- Required meta tags -->
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

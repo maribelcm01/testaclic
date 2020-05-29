@@ -9,12 +9,12 @@
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-11">
+		<div class="col-12">
 			<?php if (count($reactivo)): ?>
 			<table class="table table-bordered">
 			    <thead>
 				    <tr>
-			    		<th> Encuesta </th>
+			    		<!-- <th> Encuesta </th> -->
 			          	<th> Reactivo </th>
 			          	<th> Comentario </th>
 			          	<th> Índice </th>
@@ -24,7 +24,7 @@
 		    	<tbody>
 		       		<?php foreach($reactivo as $item): ?>
 		          	<tr>
-		             	<td> <?php echo $item->nombre ?> </td>
+		             	<!-- <td> <?php echo $item->nombre ?> </td> -->
 		             	<td> <?php echo $item->reactivo ?> </td>
 		             	<td> <?php echo $item->comentario ?> </td>
 		             	<td> <?php echo $item->indice; ?> </td>
