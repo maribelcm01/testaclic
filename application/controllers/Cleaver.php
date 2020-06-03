@@ -66,6 +66,11 @@
 			$data['palabra2'] = $x[1]['reactivo'];
 			$data['palabra3'] = $x[2]['reactivo'];
 			$data['palabra4'] = $x[3]['reactivo'];
+
+			$data['idreactivo1'] = $x[0]['idReactivo'];
+			$data['idreactivo2'] = $x[1]['idReactivo'];
+			$data['idreactivo3'] = $x[2]['idReactivo'];
+			$data['idreactivo4'] = $x[3]['idReactivo'];
 			$data['codigo'] = $codigo;
 			
 			$this->load->view('cleaver/header');
@@ -73,8 +78,28 @@
 			$this->load->view('layout/footer');
 		}
 
-		public function insertar($codigo){
+		public function guardar_respuesta(){
 			
+			$this->output->set_status_header(200);
+			if (!$this->input->is_ajax_request()) {
+				redirect('404');
+			} else {
+				$input              =   $this->input->post();
+				//numero de la pregunta ++
+				echo $input['reactivo_1']."<br>";
+				echo $input['respuesta_1']."<br>";
+				echo $input['reactivo_2']."<br>";
+				echo $input['respuesta_2']."<br>";
+				$data = array(
+					'r1' => $input['reactivo_1'],
+					'res1' =>$input['respuesta_1'],
+					'r2' => $input['reactivo_2'],
+					'res2' => $input['reacrespuesta_2tivo_1']
+ 				);
+
+				$response = $this->cleaver_model->guardarrespuesta($idEncuesta,$data);
+				
+			}
 		}
 		
      }
