@@ -59,10 +59,10 @@
 		}
 
 		public function obtenerPalabras($idEncuesta,$a,$b){
-			$q = $this->db->select('reactivo')->
+			$q = $this->db->select('idReactivo,reactivo')->
 					where('idEncuesta ='.$idEncuesta.' AND indice BETWEEN '.$a.' AND '.$b)->
 					get('reactivo')->
-					result();
+					result_array();
 			return $q;
 		}
     }

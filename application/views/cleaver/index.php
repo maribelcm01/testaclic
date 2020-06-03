@@ -20,7 +20,7 @@
                 <li>Asegúrate de tener una conexión estable y disponer de aproximadamente 15 minutos sin que te interrumpan.</li>
             </ul>
         </div>
-            <form action="<?=base_url('cleaver/encuesta')?>/<?=$codigo?>" method="post">
+            <form action="<?=base_url('cleaver/encuesta')?>/<?=$codigo?>/1/4" method="post">
                 <input type="submit" name="submit" value="Comenzar" class="btn btn-dark" style="font-weight:bold; font-size:21px; width:300px; margin:50px;">
             </form>
     </div>

@@ -56,14 +56,26 @@
 			}
 		}
 
-		public function encuesta($codigo){
+		public function encuesta($codigo,$a,$b){
 			$data = array();
 			$idEncuesta = $this->cleaver_model->verIdEncuesta($codigo);
-			$data['reactivo'] = $this->cleaver_model->obtenerPalabras($idEncuesta,1,4);
+			$x = $this->cleaver_model->obtenerPalabras($idEncuesta,$a,$b);
+			print_r($x);
+			
+			$data['palabra1'] = $x[0]['reactivo'];
+			$data['palabra2'] = $x[1]['reactivo'];
+			$data['palabra3'] = $x[2]['reactivo'];
+			$data['palabra4'] = $x[3]['reactivo'];
+			$data['codigo'] = $codigo;
 			
 			$this->load->view('cleaver/header');
 			$this->load->view('cleaver/test_cleaver',$data);
 			$this->load->view('layout/footer');
 		}
+
+		public function insertar($codigo){
+			
+		}
+		
      }
 ?>
