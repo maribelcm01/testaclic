@@ -21,6 +21,26 @@
 			$estado = $e[0]['estado'];
 			return $estado;
 		}
+
+		public function verLimite($codigo){
+			$l = $this->db->select_max('reactivo.indice')->
+					where(array('aplicacion.idEncuesta = encuesta.idEncuesta AND
+							reactivo.idEncuesta = encuesta.idEncuesta AND
+							aplicacion.codigo =' => $codigo))->
+					get('aplicacion, encuesta, reactivo')->
+					result_array();
+			$indice = $l[0]['indice'];
+			return $indice;
+		}
+		
+		public function verIdAplicacion($codigo){
+			$e = $this->db->select('idAplicacion')->
+					where(array('codigo'=>$codigo))->
+					get('aplicacion')->
+					result_array();
+			$idAplicacion = $e[0]['idAplicacion'];
+			return $idAplicacion;
+		}
 		
 		public function obtenerDatos($codigo){
 			$d = $this->db->select('encuestado.nombre, aplicacion.codigo')->
@@ -64,6 +84,22 @@
 					get('reactivo')->
 					result_array();
 			return $q;
+		}
+
+		public function insertarRespuesta($idReactivo,$idAplicacion,$mas,$menos){
+			$r = $this->db->query("INSERT INTO aplicacion_cleaver VALUES($idReactivo,$idAplicacion,$mas,$menos)
+					ON DUPLICATE KEY UPDATE mas = $mas,menos = $menos;");
+			if($r == true){return true;
+			}else{return false;}
+		}
+
+		public function estadoFecha($idAplicacion){
+			$data = array(
+				'fechaConclusion' => date('Y-m-d'),
+				'estado' => 'Finalizado'
+			 );
+			$this->db->where('idAplicacion', $idAplicacion);
+			$this->db->update('aplicacion', $data);	
 		}
     }
 ?>

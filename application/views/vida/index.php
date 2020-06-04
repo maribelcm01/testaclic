@@ -1,4 +1,4 @@
-<div class="container" style="text-align:center; background-color:#b5dffb; padding:30px; size:720px;">
+<div class="container" style="text-align:center; background-color:#b5dffb; margin-top:20px; padding:30px; size:720px;">
     <h1 style="font-weight:bold;">Hola <?php echo $nombre ?></h1><br>
     <h2 style="font-weight:bold;">¡Te damos la bienvenida!</h2><br>
     <div class="row justify-content-center" style="text-align:justify;">
