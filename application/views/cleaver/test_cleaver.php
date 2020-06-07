@@ -58,10 +58,11 @@
         $('.isHidden:checked').each(
             function() {
                 respuestas ++;
-                //console.log("El checkbox con valor " + $(this).val() + " check reactivo "+$(this).data("reactivo"));
+                console.log("El checkbox con valor " + $(this).val() + " check reactivo "+$(this).data("reactivo"));
                 datos += '\"reactivo_'+respuestas+'\":\"'+$(this).data('reactivo')+'\",\"respuesta_'+respuestas+'\":\"' +$(this).val()+'\",' ;
             }
         );
+
         if(respuestas == 2){
             enviarRespuesta(datos);
         }else if(respuestas == 1){

@@ -24,7 +24,7 @@
                 .mas{background-color:#fefefe;border:1px solid #4cbed8;width:50px;height:50px;text-align:center;cursor:pointer;}
                 .menos{background-color:#fefefe;border:1px solid #4cbed8;width:50px;height:50px;text-align:center;cursor:pointer;}
                 
-                .isHidden {/* display: none; */ /* hide radio buttons */}
+                .isHidden {display: none; /* hide radio buttons */}
                 .cmas {background-color:green;}
                 .cmenos{background-color:red;}                
             </style>

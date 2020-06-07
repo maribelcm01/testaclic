@@ -65,7 +65,7 @@
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
 
 			if($b > $limite){
-				//$this->vida_model->estadoFecha($idAplicacion);
+				$this->cleaver_model->estadoFecha($idAplicacion);
 				$datos = $this->cleaver_model->obtenerDatos($codigo);
 				$data = array(
 					'nombre' => $datos->nombre,
@@ -123,5 +123,39 @@
 			print_r($response);
 			return $response;
 		}
-     }
+
+		public function resultados($codigo){
+			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
+			//for($i=1; $i<=5; $i++){
+				$respuestas = $this->cleaver_model->resultados($idAplicacion,2);
+				foreach ($respuestas as $row=>$res){
+					$indice = $res->indice;
+					$mas = $res->mas;
+					$menos = $res->menos;
+					//print_r($indice);
+				}
+				print_r($indice);
+				print_r($mas);
+				print_r($menos);
+				print_r($res[1]);
+				
+
+				//$DM = $respuestas['mas'];
+				//print_r($respuestas);
+			//}
+			//print_r($respuestas);
+			$DM = 0;
+			$IM = 0;
+			$SM = 0;
+			$CM = 0;
+			$DL = 0;
+			$IL = 0;
+			$SL = 0;
+			$CL = 0;
+
+			$this->load->view('cleaver/header');
+			$this->load->view('cleaver/resultados');
+			$this->load->view('layout/footer');
+		}
+    }
 ?>
