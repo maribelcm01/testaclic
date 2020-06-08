@@ -7,7 +7,7 @@
 
 		public function validarCodigo($codigo){
 			$c = $this->db->select('codigo')->
-					where(array('codigo'=>$codigo))->
+					where('codigo' , $codigo)->
 					get('aplicacion')->
 					row();
 			return $c;
@@ -54,7 +54,8 @@
 					where(array('codigo =' => $codigo))->
 					get('aplicacion')->
 					result_array();
-			$idEncuesta = $p[0]['idEncuesta'];
+					
+			$idEncuesta = (count($p) > 0) ? $p[0]['idEncuesta'] : [];
 			return $idEncuesta;
 		}
 
@@ -63,7 +64,7 @@
 					where('aplicacion.idEncuesta = encuesta.idEncuesta AND aplicacion.idEncuesta = '.$idEncuesta)->
 					get('aplicacion,encuesta')->
 					result_array();
-			$nombreEncuesta = $p[0]['nombre'];
+			$nombreEncuesta = (count($p) > 0) ? $p[0]['nombre'] : [] ;
 			return $nombreEncuesta;
 		}
 

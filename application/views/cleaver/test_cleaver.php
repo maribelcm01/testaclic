@@ -1,4 +1,9 @@
 <div class="container" style="background-color:#b5dffb; padding:30px;margin-top:25px;">
+
+    
+    <div class="alert alert-danger alert-save" role="alert" style="display:none"></div>
+    
+
     <div class="row" style="position:relative;width:510px;height:270px;margin:auto;margin-top:40px;">
         <div style="margin-top:24px;">
             <div class="reactivo"><?php echo $palabra1?></div>
@@ -8,10 +13,10 @@
         </div>
         <div style="">
             <div style="font-weight:bold;text-align:center;"><i class="fas fa-plus"></i></div>
-            <div data-level="1" data-side="left" class="checks mas"><input class="isHidden lf-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio1" value="1"/></div>
-            <div data-level="2" data-side="left" class="checks mas"><input class="isHidden lf-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio1" value="1"/></div>
-            <div data-level="3" data-side="left" class="checks mas"><input class="isHidden lf-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio1" value="1"/></div>
-            <div data-level="4" data-side="left" class="checks mas"><input class="isHidden lf-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio1" value="1"/></div>
+            <div data-level="1" data-side="left" class="checks mas"><input class="isHidden get-data lf-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio1" value="1"/></div>
+            <div data-level="2" data-side="left" class="checks mas"><input class="isHidden get-data lf-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio1" value="1"/></div>
+            <div data-level="3" data-side="left" class="checks mas"><input class="isHidden get-data lf-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio1" value="1"/></div>
+            <div data-level="4" data-side="left" class="checks mas"><input class="isHidden get-data lf-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio1" value="1"/></div>
         </div>
         <div style="">
             <div style="font-weight:bold;text-align:center;"><i class="fas fa-minus"></i></div>
@@ -54,17 +59,30 @@
 
     function siguientePregunta(){
         var datos = '';
+        var datos_nulos = '';
         var respuestas = 0;
-        $('.isHidden:checked').each(
+        var idReactivo = [];
+        var idResponse = [];
+        $('.get-data').each(
             function() {
-                respuestas ++;
-                console.log("El checkbox con valor " + $(this).val() + " check reactivo "+$(this).data("reactivo"));
-                datos += '\"reactivo_'+respuestas+'\":\"'+$(this).data('reactivo')+'\",\"respuesta_'+respuestas+'\":\"' +$(this).val()+'\",' ;
+                idReactivo.push($(this).data("reactivo"));
             }
         );
 
+        $('.isHidden:checked').each(
+            function() {
+                respuestas ++;
+                idResponse.push($(this).data("reactivo"));
+                //console.log("El checkbox con valor " + $(this).val() + " check reactivo "+$(this).data("reactivo"));
+                datos += '\"reactivo_'+respuestas+'\":\"'+$(this).data('reactivo')+'\",\"respuesta_'+respuestas+'\":\"' +$(this).val()+'\",' ;
+            }
+        );
+        var diferente = _.difference(idReactivo, idResponse);
+        for (let i = 0; i < diferente.length; i++) {
+            datos_nulos += '\"nulo_'+i+'\":\"'+diferente[i]+'\",\"val_'+i+'\":\"00\",' ;            
+        }
         if(respuestas == 2){
-            enviarRespuesta(datos);
+            enviarRespuesta(datos,datos_nulos);
         }else if(respuestas == 1){
             alert("te hace falta dar una respuesta aqui")
         }else{
@@ -72,13 +90,14 @@
         }
     }
     //ajax para enviar la respuesta
-    function enviarRespuesta (datos){
+    function enviarRespuesta (datos,datos_nulos){
         var codigo = document.getElementById("codigo").value;
         var a = parseInt(getParameterByName('a'));
         var b = parseInt(getParameterByName('b'));
-        var aux = datos.slice(0, -1);
+        var aux = datos+datos_nulos;
+        aux = aux.slice(0, -1);
         aux = "{"+aux+"}";
-        //console.log(aux);
+        console.log(aux);
         $.ajax({
             // En data puedes utilizar un objeto JSON, un array o un query string
             //{'reactivo_1':'247','respuesta_1':'1','reactivo_2':'248','respuesta_2':'0'}
@@ -90,6 +109,7 @@
             url: "/testalia/cleaver/guardar_respuesta/"+codigo,
             dataType: 'json',
             success : function(xhr,response) { 
+                $(".alert-save").css("display","none");
                 console.log("actualizamos hora y seguimos corriendo script");
                 console.log(response);
                 console.log(xhr);
@@ -100,6 +120,8 @@
             },
             error : function(xhr, status, error) {
                 //alert('400');
+                $(".alert-save").text("Algo salió mal al guardar intente de nuevo!");
+                $(".alert-save").css("display","block");
                 console.log(error)
                 console.log("No hay datos para mostrar")
             }

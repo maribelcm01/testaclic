@@ -19,18 +19,18 @@
 			$this->load->model('cleaver_model');
 			
 			$c = $this->cleaver_model->validarCodigo($codigo);
-			$idEncuesta = $this->cleaver_model->verIdEncuesta($codigo);
-			$nombreEncuesta = $this->cleaver_model->verNombreEncuesta($idEncuesta);
-			//print_r($c);
-			if($c == null || $nombreEncuesta != 'Cleaver'){
-				$data = array('mensaje' => '<div class="row justify-content-center">'.
-												'<div class="alert alert-danger col-3 ">'.
-													'El código ingresado es incorrecto'.
-												'</div>'.
-											'</div>');
-				$this->load->view('cleaver/header');
-				$this->load->view('cleaver/validar',$data);
-				$this->load->view('layout/footer');
+			
+			//print_r($codigo);exit;
+			if($c == null ){ 
+					$data = array('mensaje' => '<div class="row justify-content-center">'.
+													'<div class="alert alert-danger col-3 ">'.
+														'El código ingresado es incorrecto'.
+													'</div>'.
+												'</div>');
+					$this->load->view('cleaver/header');
+					$this->load->view('cleaver/validar',$data);
+					$this->load->view('layout/footer');
+				
 			}else{
 				$estado = $this->cleaver_model->verEstado($codigo);
 				//print_r($estado);	
@@ -96,7 +96,7 @@
 		public function guardar_respuesta($codigo){
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
 			
-			$this->output->set_status_header(200);
+			
 			if (!$this->input->is_ajax_request()) {
 				redirect('404');
 			} else {
@@ -112,6 +112,9 @@
 				$idReactivo2 = $input['reactivo_2'];
 				$res2 = $input['respuesta_2'];
 
+				$idreactivoNulo1 = $input['nulo_0'];
+				$idreactivoNulo2 = $input['nulo_1'];
+
 				if($res1 == 1 && $res2 == 0){
 					$response = $this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,1,0);
 					$response = $this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,0,1);
@@ -119,9 +122,17 @@
 					$response = $this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,0,1);
 					$response = $this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,1,0);
 				}
+				//nulos
+				$response = $this->cleaver_model->insertarRespuesta($idreactivoNulo1,$idAplicacion,0,0);
+				$response = $this->cleaver_model->insertarRespuesta($idreactivoNulo2,$idAplicacion,0,0);
+
 			}
 			print_r($response);
-			return $response;
+			if($response == true){
+				$this->output->set_status_header(200); //guardo correctamente
+			}else{
+				$this->output->set_status_header(400); // algo ocurrio
+			}
 		}
 
 		public function resultados($codigo){
