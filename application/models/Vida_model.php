@@ -89,9 +89,9 @@
 			return $idReactivo;
 		}
 
-		
 		public function verDatos($codigo,$idReactivo){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo, reactivo.comentario, reactivo.indice, aplicacion.codigo')->
+			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo,
+					reactivo.comentario, reactivo.indice, aplicacion.codigo')->
 					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
 					aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
 					get('reactivo,aplicacion,encuestado')->
@@ -99,10 +99,10 @@
 			return $q;
 		}
 
-
 		public function verDatosBack($codigo,$idReactivo,$back,$idEncuesta){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo, reactivo.comentario, reactivo.indice,aplicaciondetalle.valor ,aplicacion.codigo')->
-			where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
+			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo,
+					reactivo.comentario, reactivo.indice,aplicaciondetalle.valor ,aplicacion.codigo')->
+					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
 					aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND 
 					aplicaciondetalle.idReactivo = reactivo.idReactivo AND
 					aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $back, 'aplicaciondetalle.idReactivo =' => $idReactivo))->
@@ -116,7 +116,7 @@
 					ON DUPLICATE KEY UPDATE valor = $valor;");
 		}
 
-		public function ultimaRegistrada($pregunta,$idAplicacion,$idEncuesta){
+		public function ultimaRegistrada($pregunta,$idAplicacion){
 			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
 		}
 
@@ -173,6 +173,5 @@
 
 			return $contador_de_preguntas_reactivo;
 		}*/
-
 	}
  ?>

@@ -1,4 +1,6 @@
-<?php 
+<?php
+	if (!defined('BASEPATH'))  exit('No direct script access allowed');
+
 	class Vida extends CI_Controller{
 		public function __construct(){
 			parent::__construct();
@@ -15,12 +17,9 @@
 		public function validar(){
 			$codigo = $this->input->post('codigo');
 			$this->load->model('vida_model');
-			
 			$c = $this->vida_model->validarCodigo($codigo);
-			$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
-			$nombreEncuesta = $this->vida_model->verNombreEncuesta($idEncuesta);
 			//print_r($c);
-			if($c == null || $nombreEncuesta != 'Vida'){
+			if($c == null){
 				$data = array('mensaje' => '<div class="row justify-content-center">'.
 												'<div class="alert alert-danger col-3 ">'.
 													'El código ingresado es incorrecto'.
@@ -30,25 +29,38 @@
 				$this->load->view('vida/validar',$data);
 				$this->load->view('layout/footer');
 			}else{
-				$estado = $this->vida_model->verEstado($codigo);
-				//print_r($estado);	
-				if($estado == 'Finalizado'){
+				$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
+				$nombreEncuesta = $this->vida_model->verNombreEncuesta($idEncuesta);
+				if($nombreEncuesta == 'Vida'){
+					$estado = $this->vida_model->verEstado($codigo);
+					//print_r($estado);	
+					if($estado == 'Finalizado'){
+						$data = array('mensaje' => '<div class="row justify-content-center">'.
+														'<div class="alert alert-info col-3 ">'.
+															'La encuesta ya fue contestada'.
+														'</div>'.
+													'</div>');
+						$this->load->view('vida/header');
+						$this->load->view('vida/validar',$data);
+						$this->load->view('layout/footer');
+					}else{
+						$a = $this->vida_model->obtenerDatos($codigo);
+						$data = array(
+							'nombre' => $a->nombre,
+							'codigo' => $a->codigo
+						);
+						$this->load->view('vida/header');
+						$this->load->view('vida/index',$data);
+						$this->load->view('layout/footer');
+					}
+				}else{
 					$data = array('mensaje' => '<div class="row justify-content-center">'.
-													'<div class="alert alert-info col-3 ">'.
-														'La encuesta ya fue contestada'.
+													'<div class="alert alert-warning col-3 ">'.
+														'La código no pertece a esta encuesta'.
 													'</div>'.
 												'</div>');
 					$this->load->view('vida/header');
 					$this->load->view('vida/validar',$data);
-					$this->load->view('layout/footer');
-				}else{
-					$a = $this->vida_model->obtenerDatos($codigo);
-					$data = array(
-						'nombre' => $a->nombre,
-						'codigo' => $a->codigo
-					);
-					$this->load->view('vida/header');
-					$this->load->view('vida/index',$data);
 					$this->load->view('layout/footer');
 				}
 			}
@@ -62,10 +74,8 @@
 			}else{
 				$limite = $this->vida_model->verLimite($codigo);
 				$pregunta = $this->vida_model->verPregunta($codigo);
-
 				//variable barra de progreso
 				$progreso = $this->vida_model->verPregunta($codigo);
-
 				$valor = $this->input->post('valor');
 				$idAplicacion = $this->vida_model->verIdAplicacion($codigo);
 				$idReactivo = $this->vida_model->verIdReactivo($codigo,$pregunta);
@@ -113,8 +123,7 @@
 						$this->load->view('vida/test_vida',$data);
 						$this->load->view('layout/footer');
 					}
-				}else{
-					
+				}else{					
 					$this->load->view('vida/header');
 					$this->load->view('vida/agradecimiento',$data);
 					$this->load->view('layout/footer');
@@ -148,31 +157,26 @@
 				//$total_de_preguntas_reactivo= $this->vida_model->total_de_preguntas_reactivo($idEncuesta);
 				if($limite == $pregunta){
 					//encuesta finalizada manda a gracias
-					
 					//print_r($nombreEncuesta);
 					if($nombreEncuesta == 'Vida'){
 						$this->vida($idAplicacion);
 					}
-
 					$this->vida_model->estadoFecha($idAplicacion);
 					$s = $this->vida_model->obtenerDatos($codigo);
 					//print_r($s);exit;
-
 					$data = array('nombre' => $s->nombre);
-
 					$this->load->view('vida/header');
 					$this->load->view('vida/agradecimiento',$data);
 					$this->load->view('layout/footer');
 				}else{
 					if(isset($_GET['back'])){//es una actualizacion
 						$pregunta = $_GET['back'];
-
 						//avanza a la siguiente pregunta despues de contestar el back
 						$siguientePregunta = $_GET['back']+1;
 						redirect(base_url('vida/encuesta/'.$codigo.'?back='.$siguientePregunta));
 					}else{
 						$pregunta = $pregunta+1;
-						$this->vida_model->ultimaRegistrada($pregunta,$idAplicacion,$idEcuesta);
+						$this->vida_model->ultimaRegistrada($pregunta,$idAplicacion);
 						redirect(base_url('vida/encuesta/'.$codigo));
 					}
 				}

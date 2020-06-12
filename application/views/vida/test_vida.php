@@ -1,5 +1,5 @@
 <div class="container" style="text-align: center; background-color:#b5dffb; margin-top: 40px; padding: 30px; size: 720px;">
-    <h4 style="font-weight:bold;">Test de <?=$nombre?></h4><br><br>
+    <h4 style="font-weight:bold;">Encuesta de <?=$nombre?></h4><br><br>
 	<h2 style="font-weight:bold;">
 		<?php echo $reactivo ?>
 			<?php if($comentario != null):?> 
@@ -23,18 +23,18 @@
 		</div>
 	</form><br><br><br>
 	<div class="row justify-content-center">
-		<div class="col-2">
+		<div class="col-1">
 			<?php if($menor != $pregunta):?> 
 				<button style="font-weight:bold; height:50px;" name="back" class="btn btn-primary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i> </button>
 			<?php endif; ?>
 		</div>
-		<div class="col-6">
+		<div class="col-8">
 			<?php $style = round((($progreso-1) * 100) / $mayor)?>
 			<div class="progress" style="height:50px;">
 				<div class="progress-bar bg-dark progress-bar-striped" style="width:<?=$style?>%;"><?=$style?>%</div>
 			</div>
 		</div>
-		<div class="col-2">
+		<div class="col-1">
 			<?php if($mayor != $pregunta && $control_siguiente == false):?>
 				<button style="font-weight:bold; height:50px;" name="next" class="btn btn-primary" onclick="location.href='<?=base_url('vida/encuesta');?>/<?=$codigo?>?back=<?=($pregunta+1)?>'"> <i class="fas fa-angle-double-right"></i></button>
 			<?php endif; ?>

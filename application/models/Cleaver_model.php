@@ -22,6 +22,15 @@
 			return $estado;
 		}
 
+		public function verPregunta($codigo){
+			$l = $this->db->select('pregunta')->
+					where(array('codigo =' => $codigo))->
+					get('aplicacion')->
+					result_array();
+			$pregunta = $l[0]['pregunta'];
+			return $pregunta;
+		}
+
 		public function verLimite($codigo){
 			$l = $this->db->select_max('reactivo.indice')->
 					where(array('aplicacion.idEncuesta = encuesta.idEncuesta AND
@@ -31,6 +40,18 @@
 					result_array();
 			$indice = $l[0]['indice'];
 			return $indice;
+		}
+
+		public function busca_menor_mayor($idEncuesta){
+			$this->db->select('indice');
+			$this->db->from('reactivo');
+			$this->db->order_by('indice','asc');
+			$this->db->where('idEncuesta',$idEncuesta);
+			$query=$this->db->get();
+			$row=$query->result_array();
+			$first = $row[0];
+			$last = $row[count($row)-1];
+			return [$first,$last];
 		}
 		
 		public function verIdAplicacion($codigo){
@@ -87,11 +108,23 @@
 			return $q;
 		}
 
+		public function obtenerPalabrasBack($idEncuesta,$a,$b){
+			$q = $this->db->select(' reactivo.idReactivo,reactivo.reactivo,aplicacion_cleaver.mas,aplicacion_cleaver.menos')->
+					where('aplicacion_cleaver.idReactivo = reactivo.idReactivo AND idEncuesta ='.$idEncuesta.' AND indice BETWEEN '.$a.' AND '.$b)->
+					get('reactivo,aplicacion_cleaver')->
+					result_array();
+			return $q;
+		}
+
 		public function insertarRespuesta($idReactivo,$idAplicacion,$mas,$menos){
 			$r = $this->db->query("INSERT INTO aplicacion_cleaver VALUES($idReactivo,$idAplicacion,$mas,$menos)
 					ON DUPLICATE KEY UPDATE mas = $mas,menos = $menos;");
 			if($r == true){return true;
 			}else{return false;}
+		}
+
+		public function actualizarPregunta($pregunta,$idAplicacion){
+			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
 		}
 
 		public function estadoFecha($idAplicacion){
