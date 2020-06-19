@@ -1,37 +1,28 @@
 <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Total D</th>
-                <th>Total I</th>
-                <th>Total S</th>
-                <th>Total C</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>M</td>
-                <td><?php echo $DM?></td>
-                <td><?php echo $IM?></td>
-                <td><?php echo $SM?></td>
-                <td><?php echo $CM?></td>
-            </tr>
-            <tr>
-                <td>L</td>
-                <td><?php echo $DL?></td>
-                <td><?php echo $IL?></td>
-                <td><?php echo $SL?></td>
-                <td><?php echo $CL?></td>
-            </tr>
-            <tr>
-                <!-- <td scope="row"></td> -->
-                <td>Total</td>
-                <td><?php echo $totalD?></td>
-                <td><?php echo $totalI?></td>
-                <td><?php echo $totalS?></td>
-                <td><?php echo $totalC?></td>
-            </tr>
-        </tbody>
-    </table>
+    <button class="btn btn-success" style="margin-top:10px;margin-left:100px;" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button>
 </div>
+<div class="container" id="exportContent">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h4 style="margin-top:0px;"><?php echo $nombre?></h4>
+            <table class="table table-striped table-bordered" style="margin-top:0;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Interpretación</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($resultados as $key => $value): ?>
+                        <tr>
+                            <td><?php echo $value->interpretacion ?></td>
+                            <td style="text-align:justify"><?php echo $value->explicacion ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+

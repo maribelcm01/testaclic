@@ -77,7 +77,6 @@
 			$first_last = $this->cleaver_model->busca_menor_mayor($idEncuesta);
 			//$valor_reactivo = null;
 			$control_siguiente = true;
-
 			if($b > $limite){
 				$this->cleaver_model->estadoFecha($idAplicacion);
 				$datos = $this->cleaver_model->obtenerDatos($codigo);
@@ -153,9 +152,7 @@
 				$input = $this->input->post();
 				//numero de la pregunta ++
 				/* echo $input['reactivo_1']."<br>";
-				echo $input['respuesta_1']."<br>";
-				echo $input['reactivo_2']."<br>";
-				echo $input['respuesta_2']."<br>"; */
+				echo $input['respuesta_1']."<br>";*/
 				
 				$idReactivo1 = $input['reactivo_1'];
 				$res1 =$input['respuesta_1'];
@@ -195,10 +192,10 @@
 		public function resultados($codigo){
 			$data = array();
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
+			$us = $this->cleaver_model->obtenerDatos($codigo);
 			for($i=1; $i<=96; $i++){
 				$respuestas = $this->cleaver_model->resultados($idAplicacion,$i);
 				foreach ($respuestas as $row){
-					//$indice[$i] = $row->indice;
 					$mas[$i] = $row->mas;
 					$menos[$i] = $row->menos;
 				}
@@ -214,43 +211,172 @@
 			$SL = $menos[2]+$menos[7] +$menos[9]+ $menos[27]+$menos[30]+$menos[33]+$menos[38]+$menos[43]+$menos[56]+$menos[59]+$menos[63]+$menos[66]+$menos[69]+$menos[76]+$menos[77]+$menos[82]+$menos[85]+$menos[92]+$menos[95];
 			$CL = $menos[3]+$menos[8] +$menos[10]+$menos[13]+$menos[17]+$menos[23]+$menos[31]+$menos[34]+$menos[44]+$menos[47]+$menos[50]+$menos[60]+$menos[71]+$menos[78]+$menos[83]+$menos[96];
 
-			/* print_r($DM);
-			print_r($DL);
-			print_r($IM);
-			print_r($IL);
-			print_r($SM);
-			print_r($SL);
-			print_r($CM);
-			print_r($CL); */
-
 			$TD = $DM-$DL;
 			$TI = $IM-$IL;
 			$TS = $SM-$SL;
 			$TC = $CM-$CL;
 
-			/* print_r($TD);
-			print_r($TI);
-			print_r($TS);
-			print_r($TC); */
+			$D1 = self::getAsignar($TD);			
+			$I1 = self::getAsignar($TI);
+			$S1 = self::getAsignar($TS);
+			$C1 = self::getAsignar($TC);
+			
+			$total[] = array("nombre" => "D","valor" => $D1);
+			$total[] = array("nombre" => "I","valor" => $I1);
+			$total[] = array("nombre" => "S","valor" => $S1);
+			$total[] = array("nombre" => "C","valor" => $C1);
 
+			$totalO = self::ordenar($total);
+			$datos = self::formulas($totalO);
+			
+			foreach($datos as $value){
+				$resultados[] = $this->cleaver_model->interpreta($value);
+			}
+			$resultados_front = [];
+			foreach($resultados as $key){
+                $resultados_front[] = $key[0];
+			}
+			
 			$data = array(
-				'DM' => $DM,
-				'IM' => $IM,
-				'SM' => $SM,
-				'CM' => $CM,
-				'DL' => $DL,
-				'IL' => $IL,
-				'SL' => $SL,
-				'CL' => $CL,
-				'totalD' => $TD,
-				'totalI' => $TI,
-				'totalS' => $TS,
-				'totalC' => $TC
+				'nombre' => $us->nombre,
+				'resultados' => $resultados_front
 			);
-
 			$this->load->view('cleaver/header');
 			$this->load->view('cleaver/resultados',$data);
 			$this->load->view('layout/footer');
+		}
+
+		public function getAsignar($x){
+			switch ($x) {
+				case "10":
+					return 100;
+					break;
+				case "9":
+					return 95;
+					break;
+				case "8":
+					return 90;
+					break;
+				case "7":
+					return 85;
+					break;
+				case "6":
+					return 80;
+					break;
+				case "5":
+					return 75;
+					break;
+				case "4":
+					return 70;
+					break;
+				case "3":
+					return 65;
+					break;
+				case "2":
+					return 60;
+					break;
+				case "1":
+					return 55;
+					break;
+				case "0":
+					return 50;
+					break;
+				case "-1":
+					return 45;
+					break;
+				case "-2":
+					return 40;
+					break;
+				case "-3":
+					return 35;
+					break;
+				case "-4":
+					return 30;
+					break;
+				case "-5":
+					return 25;
+					break;
+				case "-6":
+					return 20;
+					break;
+				case "-7":
+					return 15;
+					break;
+				case "-8":
+					return 10;
+					break;
+				case "-9":
+					return 5;
+					break;
+				case "-10":
+					return 0;
+					break;
+			}
+		}
+		
+		public function ordenar($a){
+			foreach ($a as $key => $row) {
+				$aux[$key] = $row['valor'];
+			}
+			array_multisort($aux, SORT_DESC, $a);
+			return $a;
+		}
+
+		public function formulas($b){
+			$datos = array();
+			if($b[0]["valor"] >= 75){array_push($datos,$b[0]["nombre"]."+");}
+			if($b[1]["valor"] >= 75){array_push($datos,$b[1]["nombre"]."+");}
+			if($b[2]["valor"] >= 75){array_push($datos,$b[2]["nombre"]."+");}
+			if($b[3]["valor"] >= 75){array_push($datos,$b[3]["nombre"]."+");}
+
+			if($b[0]["valor"] > $b[1]["valor"]){
+				array_push($datos,$b[0]["nombre"]."/".$b[1]["nombre"]);
+			}else{
+				if($b[0]["nombre"] == "C" && $b[1]["nombre"] == "D"){array_push($datos,$b[0]["nombre"]."=".$b[1]["nombre"]);}
+				if($b[0]["nombre"] == "D" && $b[1]["nombre"] == "C"){array_push($datos,$b[0]["nombre"]."=".$b[1]["nombre"]);}
+			}
+
+			if($b[0]["valor"] > $b[2]["valor"]){
+				array_push($datos,$b[0]["nombre"]."/".$b[2]["nombre"]);
+			}else{
+				if($b[0]["nombre"] == "C" && $b[2]["nombre"] == "D"){array_push($datos,$b[0]["nombre"]."=".$b[2]["nombre"]);}
+				if($b[0]["nombre"] == "D" && $b[2]["nombre"] == "C"){array_push($datos,$b[0]["nombre"]."=".$b[2]["nombre"]);}
+			}
+
+			if($b[0]["valor"] > $b[3]["valor"]){
+				array_push($datos,$b[0]["nombre"]."/".$b[3]["nombre"]);
+			}else{
+				if($b[0]["nombre"] == "C" && $b[3]["nombre"] == "D"){array_push($datos,$b[0]["nombre"]."=".$b[3]["nombre"]);}
+				if($b[0]["nombre"] == "D" && $b[3]["nombre"] == "C"){array_push($datos,$b[0]["nombre"]."=".$b[3]["nombre"]);}
+			}
+
+			if($b[1]["valor"] > $b[2]["valor"]){
+				array_push($datos,$b[1]["nombre"]."/".$b[2]["nombre"]);
+			}else{
+				if($b[1]["nombre"] == "C" && $b[2]["nombre"] == "D"){array_push($datos,$b[1]["nombre"]."=".$b[2]["nombre"]);}
+				if($b[1]["nombre"] == "D" && $b[2]["nombre"] == "C"){array_push($datos,$b[1]["nombre"]."=".$b[2]["nombre"]);}
+			}
+
+			if($b[1]["valor"] > $b[3]["valor"]){
+				array_push($datos,$b[1]["nombre"]."/".$b[3]["nombre"]);
+			}else{
+				if($b[1]["nombre"] == "C" && $b[3]["nombre"] == "D"){array_push($datos,$b[1]["nombre"]."=".$b[3]["nombre"]);}
+				if($b[1]["nombre"] == "D" && $b[3]["nombre"] == "C"){array_push($datos,$b[1]["nombre"]."=".$b[3]["nombre"]);}
+			}
+
+			if($b[2]["valor"] > $b[3]["valor"]){
+				array_push($datos,$b[2]["nombre"]."/".$b[3]["nombre"]);
+			}else{
+				if($b[2]["nombre"] == "C" && $b[3]["nombre"] == "D"){array_push($datos,$b[2]["nombre"]."=".$b[3]["nombre"]);}
+				if($b[2]["nombre"] == "D" && $b[3]["nombre"] == "C"){array_push($datos,$b[2]["nombre"]."=".$b[3]["nombre"]);}
+			}
+
+			if($b[0]["valor"] <= 25){array_push($datos,$b[0]["nombre"]."-");}
+			if($b[1]["valor"] <= 25){array_push($datos,$b[1]["nombre"]."-");}
+			if($b[2]["valor"] <= 25){array_push($datos,$b[2]["nombre"]."-");}
+			if($b[3]["valor"] <= 25){array_push($datos,$b[3]["nombre"]."-");}
+
+			return $datos;
 		}
     }
 ?>

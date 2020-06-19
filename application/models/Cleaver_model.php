@@ -140,9 +140,16 @@
 			$s = $this->db->select('reactivo.indice,aplicacion_cleaver.mas, aplicacion_cleaver.menos')->
 					where('reactivo.idReactivo = aplicacion_cleaver.idReactivo AND
 					aplicacion_cleaver.idAplicacion = '.$idAplicacion.' AND reactivo.indice= '.$indice)->
-					get('aplicacion_cleaver,reactivo');//->
-					//result();
+					get('aplicacion_cleaver,reactivo');
 			return $s->result();
+		}
+
+		public function interpreta($clave){
+			$q = $this->db->select('interpretacion,explicacion')->
+					where('clave ='.'\''.$clave.'\'')->
+					get('interp_cleaver')->
+					result();
+			return $q;
 		}
     }
 ?>
