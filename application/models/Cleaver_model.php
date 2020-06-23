@@ -108,9 +108,9 @@
 			return $q;
 		}
 
-		public function obtenerPalabrasBack($idEncuesta,$a,$b){
-			$q = $this->db->select(' reactivo.idReactivo,reactivo.reactivo,aplicacion_cleaver.mas,aplicacion_cleaver.menos')->
-					where('aplicacion_cleaver.idReactivo = reactivo.idReactivo AND idEncuesta ='.$idEncuesta.' AND indice BETWEEN '.$a.' AND '.$b)->
+		public function obtenerPalabrasBack($idAplicacion,$a,$b){
+			$q = $this->db->select('reactivo.idReactivo,reactivo.reactivo,aplicacion_cleaver.mas,aplicacion_cleaver.menos')->
+					where('aplicacion_cleaver.idReactivo = reactivo.idReactivo AND idAplicacion ='.$idAplicacion.' AND indice BETWEEN '.$a.' AND '.$b)->
 					get('reactivo,aplicacion_cleaver')->
 					result_array();
 			return $q;

@@ -1,7 +1,7 @@
 <div class="container" style="text-align:center;background-color:#b5dffb;padding:30px;margin-top:25px;">
     <div class="alert alert-danger alert-save" role="alert" style="display:none"></div>
     <h4 style="font-weight:bold;">Encuesta de <?=$nombre?></h4><br><br>
-    <div class="row" style="position:relative;width:510px;height:270px;margin:auto;margin-top:0px;">
+    <div class="row" style="position:relative;width:510px;height:270px;margin:auto;">
         <div style="margin-top:24px;">
             <div class="reactivo"><?php echo $palabra1?></div>
             <div class="reactivo"><?php echo $palabra2?></div>
@@ -24,17 +24,17 @@
         </div>
     </div>
     <div class="row justify-content-center">
-		<!-- <div class="col-2" style="text-align:center;">
+		<div class="col-2" style="text-align:center;">
             <?php if($menor != $pregunta):?>
                 <button type="button" class="btn btn-primary" onclick="location.href='<?=base_url('cleaver/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'">Pregunta Anterior</button>
             <?php endif;?>
-        </div> -->
-        <div class="col-2" style="text-align:center;/* margin-left:50px; */">
+        </div>
+        <div class="col-2" style="text-align:center;margin-left:50px;">
             <button type="button" class="btn btn-primary" onclick="siguientePregunta()">Siguiente pregunta</button>
         </div>
     </div>
     <input type="hidden" id="codigo" value="<?php echo $codigo?>">
-    <input type="text" id="pregunta" value="<?php echo $pregunta?>">
+    <input type="hidden" id="pregunta" value="<?php echo $pregunta?>">
 </div>
 <script>
     $('.mas').click(function() {
@@ -97,34 +97,39 @@
     function enviarRespuesta (datos,datos_nulos){
         var codigo = document.getElementById("codigo").value;
         var pregunta = document.getElementById("pregunta").value;
-        var back = getParameterByName('back');
+        var urlparams = new URLSearchParams(window.location.search);
+        var back = urlparams.get('back');
         var aux = datos+datos_nulos;
         aux = aux.slice(0, -1);
         aux = "{"+aux+"}";
-        console.log(aux);
+        //console.log(back);
+        //debugger;
+        var is_back = (back != null) ? 'true' : 'false';
+        //console.log(is_back);
         $.ajax({
             // En data puedes utilizar un objeto JSON, un array o un query string
-            //{'reactivo_1':'247','respuesta_1':'1','reactivo_2':'248','respuesta_2':'0'}
-            //{"reactivo1":"11","res1":1,"reactivo2":"22","res2":2}
             data:JSON.parse(aux),
             //Cambiar a type: POST si necesario
             type: "POST",
             // URL a la que se enviará la solicitud Ajax
-            url: "/testalia/cleaver/guardar_respuesta/"+codigo,
+            url: "/testalia/cleaver/guardar_respuesta/"+codigo+"/"+is_back,
             dataType: 'json',
-            success : function(xhr,response) { 
+            success : function(data) { 
                 $(".alert-save").css("display","none");
                 console.log("actualizamos hora y seguimos corriendo script");
-                console.log(response);
-                console.log(xhr);
-                //if(back == null){
-                    window.location = "/testalia/cleaver/encuesta/"+codigo;
-                /* }else{
+                //console.log(typeof(is_back));
+                if(is_back == 'true'){
                     back = (back*1)+1;
-                    window.location = "/testalia/cleaver/encuesta/"+codigo+"?back="+back;
-                } */
+                    if(back == pregunta){
+                        window.location = "/testalia/cleaver/encuesta/"+codigo;
+                    }else{
+                        window.location = "/testalia/cleaver/encuesta/"+codigo+"?back="+back;
+                    }
+                }else{
+                    window.location = "/testalia/cleaver/encuesta/"+codigo; 
+                }
             },
-            error : function(xhr, status, error) {
+            error : function(error) {
                 //alert('400');
                 $(".alert-save").text("Algo salió mal al guardar intente de nuevo!");
                 $(".alert-save").css("display","block");

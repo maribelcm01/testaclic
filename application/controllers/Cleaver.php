@@ -91,13 +91,13 @@
 				$datos = $this->cleaver_model->obtenerDatos($codigo);
 				if(isset($_GET['back'])){
 					if($_GET['back'] == $pregunta){ 
-						redirect(base_url('vida/encuesta/'.$codigo));
+						redirect(base_url('cleaver/encuesta/'.$codigo));
 					}
 					$pregunta = $_GET['back'];
 					$b = $pregunta*4;
 					$a = $b-3;
-					$x = $this->cleaver_model->obtenerPalabrasBack($idEncuesta,$a,$b);
-					/* print_r($x); */
+					$x = $this->cleaver_model->obtenerPalabrasBack($idAplicacion,$a,$b);
+					
 					$mas1 = $x[0]['mas'];
 					$mas2 = $x[1]['mas'];
 					$mas3 = $x[2]['mas'];
@@ -142,7 +142,7 @@
 			}
 		}
 
-		public function guardar_respuesta($codigo){
+		public function guardar_respuesta($codigo,$is_back){
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
 			$pregunta = $this->cleaver_model->verPregunta($codigo);
 				
@@ -150,43 +150,31 @@
 				redirect('404');
 			} else {
 				$input = $this->input->post();
-				//numero de la pregunta ++
-				/* echo $input['reactivo_1']."<br>";
-				echo $input['respuesta_1']."<br>";*/
 				
 				$idReactivo1 = $input['reactivo_1'];
 				$res1 =$input['respuesta_1'];
 				$idReactivo2 = $input['reactivo_2'];
 				$res2 = $input['respuesta_2'];
-
 				$idreactivoNulo1 = $input['nulo_0'];
 				$idreactivoNulo2 = $input['nulo_1'];
 				
 				if($res1 == 1 && $res2 == 0){
-					$response = $this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,1,0);
-					$response = $this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,0,1);
+					$this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,1,0);
+					$this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,0,1);
 				}else{
-					$response = $this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,0,1);
-					$response = $this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,1,0);
+					$this->cleaver_model->insertarRespuesta($idReactivo1,$idAplicacion,0,1);
+					$this->cleaver_model->insertarRespuesta($idReactivo2,$idAplicacion,1,0);
 				}
 				//nulos
-				$response = $this->cleaver_model->insertarRespuesta($idreactivoNulo1,$idAplicacion,0,0);
-				$response = $this->cleaver_model->insertarRespuesta($idreactivoNulo2,$idAplicacion,0,0);
+				$this->cleaver_model->insertarRespuesta($idreactivoNulo1,$idAplicacion,0,0);
+				$this->cleaver_model->insertarRespuesta($idreactivoNulo2,$idAplicacion,0,0);
 				
-				/* if(isset($_GET['back'])){
-					$pregunta = $_GET['back']+1;
-				}else{ */
+				if($is_back == 'false'){
 					$pregunta = $pregunta+1;
 					$this->cleaver_model->actualizarPregunta($pregunta,$idAplicacion);
-				//}
+				}				
 			}
-
-			print_r($response);
-			if($response == true){
-				$this->output->set_status_header(200); //guardo correctamente
-			}else{
-				$this->output->set_status_header(400); // algo ocurrio
-			}
+			print_r($is_back);
 		}
 
 		public function resultados($codigo){
