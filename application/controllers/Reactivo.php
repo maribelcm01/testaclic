@@ -6,14 +6,13 @@
             parent::__construct();
             $this->load->library(array('form_validation','session'));
             $this->load->helper(array('auth/login_rules'));
-            $this->load->model('Auth');
+            $this->load->model('reactivo_model');
             $this->load->helper(array('getmenu'));
+            $this->load->model('Auth');
         }
       
         public function index($idEncuesta) {
             $data = array();
-            
-            $this->load->model('reactivo_model');
             $e = $this->reactivo_model->obtenerIdEncuesta($idEncuesta);
             $data['reactivo'] = $this->reactivo_model->obtener_todos($idEncuesta);
             $data['idEncuesta'] = $e->idEncuesta;
@@ -32,7 +31,6 @@
 
         public function guardar($idEncuesta,$id=null){
             $data = array(); 
-            $this->load->model('reactivo_model');
             if($id){
                 $reactivo = $this->reactivo_model->obtener_por_id($id); 
                 $data['idReactivo'] = $reactivo->idReactivo;
@@ -66,7 +64,6 @@
                 $comentario = $this->input->post('comentario');
                 $indice = $this->input->post('indice');
 
-
                 $config = array(
                     array(
                         'field' => 'reactivo',
@@ -88,7 +85,6 @@
                 $this->form_validation->set_rules($config);
 
                 if ($this->form_validation->run() == TRUE){
-                    $this->load->model('reactivo_model');
                     $this->reactivo_model->guardar($idEncuesta, $reactivo, $comentario, $indice, $id);
                     redirect('reactivo/index/'.$idEncuesta);
                 }else{
@@ -110,7 +106,6 @@
 
         /*public function ver($id){
             $data = array();
-            $this->load->model('reactivo_model');
             $reactivo = $this->reactivo_model->obtener_por_id($id);
             $data['reactivo'] = $reactivo;
 
@@ -120,7 +115,6 @@
         }*/
 
         /*public function eliminar($id){
-            $this->load->model('reactivo_model');
             $this->reactivo_model->eliminar($id);
             redirect('reactivo');
         }*/

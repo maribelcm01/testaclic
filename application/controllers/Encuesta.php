@@ -7,17 +7,14 @@
 			$this->load->library(array('form_validation','session'));
 			$this->load->helper(array('auth/login_rules'));
 			$this->load->helper(array('getmenu'));
+			$this->load->model('encuesta_model');
 			$this->load->model('Auth');
 		}
 	
 		public function index() {
 			$data = array();
-
-			$data['menu'] = main_menu();
-			
-			$this->load->model('encuesta_model');
-			$data['encuesta'] = $this->encuesta_model->obtener_todos();
-			
+			$data['menu'] = main_menu();			
+			$data['encuesta'] = $this->encuesta_model->obtener_todos();			
 			if ($this->session->userdata('is_logged')) {
 				$this->load->view('layout/header');
 				$this->load->view('layout/navbar',$data);
@@ -30,7 +27,7 @@
 
 		public function guardar($id=null){
 			$data = array(); 
-			$this->load->model('encuesta_model');
+			
 			if($id){
 				$encuesta = $this->encuesta_model->obtener_por_id($id); 
 				$data['idEncuesta'] = $encuesta->idEncuesta;
@@ -62,7 +59,6 @@
 				$this->form_validation->set_rules($config);
 
 				if ($this->form_validation->run() == TRUE){
-					$this->load->model('encuesta_model');
 					$this->encuesta_model->guardar($nombre, $id);
 					redirect('encuesta');
 				}else{
@@ -80,7 +76,6 @@
 		}
 
 		public function cambiarEstado($idEncuesta){
-			$this->load->model('encuesta_model');
 			$estado = $this->encuesta_model->verEstado($idEncuesta);
 			if($estado == 1){
 				$estado = 0;
@@ -96,7 +91,6 @@
 		
 		/*public function ver($id){
 			$data = array();
-			$this->load->model('encuesta_model');
 			$encuesta = $this->encuesta_model->obtener_por_id($id);
 			$data['encuesta'] = $encuesta;
 
@@ -106,7 +100,6 @@
 		}*/
 
 		/*public function eliminar($id){
-			$this->load->model('encuesta_model');
 			$this->encuesta_model->eliminar($id);
 			redirect('encuesta');
 		}*/

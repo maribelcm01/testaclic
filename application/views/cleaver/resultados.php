@@ -1,11 +1,21 @@
 <div class="container">
-    <button class="btn btn-success" style="margin-top:10px;margin-left:100px;" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button>
-</div>
-<div class="container" id="exportContent">
-    <div class="row justify-content-center">
-        <div class="col-10">
-            <h4 style="margin-top:0px;"><?php echo $nombre?></h4>
-            <table class="table table-striped table-bordered" style="margin-top:0;">
+    <div class="row m-4">
+        <div class="col-md-2">
+            <div class="">
+                <button class="btn btn-success" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button><br>
+                <button class="btn btn-success" style="margin-top:10px;margin-left:20px;width:100px" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Métricas </button>
+                <div style="margin-top:10px;margin-left:20px;" id="collapseExample" class="collapse">
+                    <ul style= "list-style-type: none">
+                        <?php foreach($datos as $key):?>
+                            <li style="font-weight:bold"><?php echo $key;?></li>
+                        <?php endforeach; ?>
+                    </ul> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10" id="exportContent">
+            <h4><?php echo $nombre?></h4>
+            <table bordercolor="black" border="1" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
                         <th>Interpretación</th>
@@ -15,14 +25,12 @@
                 <tbody>
                     <?php foreach($resultados as $key => $value): ?>
                         <tr>
-                            <td><?php echo $value->interpretacion ?></td>
+                            <td align="center" valign="top"><?php echo $value->interpretacion ?></td>
                             <td style="text-align:justify"><?php echo $value->explicacion ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-            </table>
-            
+            </table> 
         </div>
     </div>
 </div>
-

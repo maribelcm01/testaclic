@@ -4,7 +4,7 @@
 	class Vida extends CI_Controller{
 		public function __construct(){
 			parent::__construct();
-			$this->load->model('Vida_model');
+			$this->load->model('vida_model');
 		}
 
 		public function index(){
@@ -16,7 +16,6 @@
 
 		public function validar(){
 			$codigo = $this->input->post('codigo');
-			$this->load->model('vida_model');
 			$c = $this->vida_model->validarCodigo($codigo);
 			//print_r($c);
 			if($c == null){
@@ -67,7 +66,6 @@
 		}
 
 		public function encuesta($codigo){
-			$this->load->model('vida_model');
 			$c = $this->vida_model->validarCodigo($codigo);
 			if($c == null){
 				redirect('errors/error_404');
@@ -132,7 +130,6 @@
 		}
 
 		public function encuestapost($codigo){
-			$this->load->model('vida_model');
 			$c = $this->vida_model->validarCodigo($codigo);
 			if($c == null){
 				redirect('errors/error_404');
@@ -184,7 +181,6 @@
 		}
 
 		public function vida($idAplicacion){
-			$this->load->model('vida_model');
 			$A1 = $this->vida_model->obtenerCluster(1,5,$idAplicacion);
 			$B1 = $this->vida_model->obtenerCluster(31,35,$idAplicacion);
 			$C1 = $this->vida_model->obtenerCluster(61,65,$idAplicacion);

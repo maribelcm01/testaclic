@@ -6,19 +6,21 @@
                 <div class="form-group">
                     <label>Encuesta</label>
                     <select name="idEncuesta" id="input" class="form-control" required="required">
+                    <option value="">--Seleccione una opción--</option>
                         <?php foreach($encuesta as $item): ?>
-                            <option value="<?php echo $item->idEncuesta ?>"> <?php echo $item->nombre ?></option>
+                            <option value="<?php echo $item->idEncuesta ?>" <?= ( $item->idEncuesta == $idEncuesta) ? 'selected' : '' ?>> <?php echo $item->nombre ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Encuestado</label>
                     <select name="idEncuestado" id="input" class="form-control" required="required">
+                            <option value="">--Seleccione un nombre--</option>
                         <?php foreach($encuestado as $item): ?>
-                            <option value="<?php echo $item->idEncuestado ?>"> <?php echo $item->nombre ?></option>
+                            <option value="<?php echo $item->idEncuestado ?>" <?= ( $item->idEncuestado == $idEncuestado) ? 'selected' : '' ?>> <?php echo $item->nombre ?></option>
                         <?php endforeach; ?>
                     </select>
-                </div>
+                </div> 
                 <div class="form-group">
                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
                    <a class="btn btn-danger" href="<?php echo base_url() ?>aplicacion"><i class="fas fa-times-circle"></i> Cancelar </a>

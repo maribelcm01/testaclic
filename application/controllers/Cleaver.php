@@ -16,7 +16,6 @@
 
         public function validar(){
 			$codigo = $this->input->post('codigo');
-			$this->load->model('cleaver_model');
 			$c = $this->cleaver_model->validarCodigo($codigo);
 			//print_r($codigo);exit;
 			if($c == null ){ 
@@ -227,6 +226,7 @@
 			
 			$data = array(
 				'nombre' => $us->nombre,
+				'datos' => $datos,
 				'resultados' => $resultados_front
 			);
 			$this->load->view('cleaver/header');

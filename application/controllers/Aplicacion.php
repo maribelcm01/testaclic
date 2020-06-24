@@ -6,16 +6,14 @@
             parent::__construct();
             $this->load->library(array('form_validation','session'));
             $this->load->helper(array('auth/login_rules'));
-            $this->load->model('Auth');
+            $this->load->model('aplicacion_model');
             $this->load->helper(array('getmenu'));
+            $this->load->model('Auth');
         }
 
         public function index() {
             $data = array();
-
             $data['menu'] = main_menu();
-            
-            $this->load->model('aplicacion_model');
             $data['aplicacion'] = $this->aplicacion_model->obtener_todos();
             
             if ($this->session->userdata('is_logged')) {
@@ -30,7 +28,6 @@
 
         public function guardar($id=null){
             $data = array();
-            $this->load->model('aplicacion_model');
             if($id){
                 $aplicacion = $this->aplicacion_model->obtener_por_id($id); 
                 $data['idAplicacion'] = $aplicacion->idAplicacion;
@@ -73,7 +70,6 @@
                 $this->form_validation->set_rules($config);
 
                 if ($this->form_validation->run() == TRUE){
-                    $this->load->model('aplicacion_model');
                     $this->aplicacion_model->guardar($idEncuesta, $idEncuestado, $id);
                     redirect('aplicacion');
                 }else{
@@ -93,7 +89,6 @@
 
         /*public function ver($id){
             $data = array();
-            $this->load->model('aplicacion_model');
             $aplicacion = $this->aplicacion_model->obtener_por_id($id);
             $data['aplicacion'] = $aplicacion;
 
@@ -103,8 +98,7 @@
         }*/
 
         /* public function eliminar($id){
-            $this->load->model('aplicacion_model');
-            $this->aplicacion_model->eliminar($id);
+           $this->aplicacion_model->eliminar($id);
             redirect('aplicacion');
         } */
     }

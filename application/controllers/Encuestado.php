@@ -6,18 +6,15 @@
             parent::__construct();
             $this->load->library(array('form_validation','session'));
             $this->load->helper(array('auth/login_rules'));
-            $this->load->model('Auth');
+            $this->load->model('encuestado_model');
             $this->load->helper(array('getmenu'));
+            $this->load->model('Auth');
         }
     
         public function index() {
             $data = array();
-
             $data['menu'] = main_menu();
-            
-            $this->load->model('encuestado_model');
             $data['encuestado'] = $this->encuestado_model->obtener_todos();
-            
             if ($this->session->userdata('is_logged')) {
                 $this->load->view('layout/header');
                 $this->load->view('layout/navbar',$data);
@@ -30,7 +27,6 @@
 
         public function guardar($id=null){
             $data = array(); 
-            $this->load->model('encuestado_model');
             if($id){
                 $encuestado = $this->encuestado_model->obtener_por_id($id); 
                 $data['idEncuestado'] = $encuestado->idEncuestado;
@@ -84,7 +80,6 @@
                 $this->form_validation->set_rules($config);
 
                 if ($this->form_validation->run() == TRUE){
-                    $this->load->model('encuestado_model');
                     $this->encuestado_model->guardar($nombre, $telefono, $email, $id);
                     redirect('encuestado');
                 }else{
@@ -104,14 +99,12 @@
 
 
         /* public function eliminar($id){
-            $this->load->model('encuestado_model');
             $this->encuestado_model->eliminar($id);
             redirect('encuestado');
         } */
         
         /*public function ver($id){
             $data = array();
-            $this->load->model('encuestado_model');
             $encuestado = $this->encuestado_model->obtener_por_id($id);
             $data['encuestado'] = $encuestado;
 
