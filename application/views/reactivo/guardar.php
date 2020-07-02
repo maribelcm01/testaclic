@@ -8,16 +8,16 @@
                     <input class="form-control" type="text" disabled value="<?php echo $nombre?>"/>
                 </div>
                 <div class="form-group">
-                    <label> Reactivo </label>
-                    <input class="form-control" type="text" name="reactivo" required="required" value="<?php echo $reactivo?>"/>
+                    <label>Reactivo</label>
+                    <input class="form-control" type="text" name="reactivo" value="<?php echo $reactivo?>" required/>
                 </div>
                 <div class="form-group">
-                    <label> Comentario </label>
+                    <label>Comentario</label>
                     <input class="form-control" type="text" name="comentario" value="<?php echo $comentario; ?>">
                 </div>
                 <div class="form-group">
-                   <label> Índice </label>
-                   <input class="form-control" type="text" name="indice" required="required" value="<?php echo $indice; ?>"/>
+                   <label>Índice</label>
+                   <input class="form-control" type="text" name="indice" value="<?php echo $indice; ?>" required/>
                 </div>
                 <div class="form-group">
                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>

@@ -18,5 +18,3 @@
             </form>
     </div>
 </div>
-
-<p>&nbsp;</p>

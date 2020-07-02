@@ -46,18 +46,19 @@
                 $data['indice'] = null;
             }
 
-            //$data['encuesta'] = $this->reactivo_model->obtenerIdEncuesta();
             $data['menu'] = main_menu();
             $e = $this->reactivo_model->obtenerIdEncuesta($idEncuesta);
             $data['nombre'] = $e->nombre;
 
-            $this->load->view('layout/header');
-            $this->load->view('layout/navbar',$data);
-            $this->load->view('reactivo/guardar',$data);
-            $this->load->view('layout/footer');
+            if ($this->session->userdata('is_logged')) {
+                $this->load->view('layout/header');
+                $this->load->view('layout/navbar',$data);
+                $this->load->view('reactivo/guardar',$data);
+                $this->load->view('layout/footer');
+            }else{
+                redirect(base_url('login'));
+            }
         }
-
-
         public function guardar_post($idEncuesta,$id=null){
             if($this->input->post()){
                 $reactivo = $this->input->post('reactivo');
@@ -101,6 +102,81 @@
                 }          	
             }else{
                 $this->guardar($idEncuesta);
+            } 
+        }
+
+        public function guardarOpc($idEncuesta,$idReactivo=null){
+            $reactivo = $this->reactivo_model->obtener_por_idOpc($idReactivo);
+            if($reactivo == null){   
+                $data = array(
+                    'menu' => main_menu(),
+                    'idEncuesta' => $idEncuesta,
+                    'idReactivo' =>$idReactivo,
+                    'respuestaA' => null,
+                    'respuestaB' => null,
+                    'respuestaC' => null,
+                    'respuestaD' => null,
+                    'idRespuestaA' => '',
+                    'idRespuestaB' => null,
+                    'idRespuestaC' => null,
+                    'idRespuestaD' => null,
+                    'indiceA' => 1,
+                    'indiceB' => 2,
+                    'indiceC' => 3,
+                    'indiceD' => 4
+                );
+            }else{      
+                $data = array(
+                    'menu' => main_menu(),
+                    'idEncuesta' => $idEncuesta,
+                    'idReactivo' =>$idReactivo,
+                    'respuestaA' => $reactivo[0]['respuesta'],
+                    'respuestaB' => $reactivo[1]['respuesta'],
+                    'respuestaC' => $reactivo[2]['respuesta'],
+                    'respuestaD' => $reactivo[3]['respuesta'],
+                    'idRespuestaA' => $reactivo[0]['idRespuesta'],
+                    'idRespuestaB' => $reactivo[1]['idRespuesta'],
+                    'idRespuestaC' => $reactivo[2]['idRespuesta'],
+                    'idRespuestaD' => $reactivo[3]['idRespuesta'],
+                    'indiceA' => $reactivo[0]['indice'],
+                    'indiceB' => $reactivo[1]['indice'],
+                    'indiceC' => $reactivo[2]['indice'],
+                    'indiceD' => $reactivo[3]['indice']
+                );
+            }
+            
+            if ($this->session->userdata('is_logged')) {
+                $this->load->view('layout/header');
+                $this->load->view('layout/navbar',$data);
+                $this->load->view('reactivo/opciones',$data);
+                $this->load->view('layout/footer');
+            }else{
+                redirect(base_url('login'));
+            }
+        }
+
+        public function guardar_postOpc($idEncuesta,$idReactivo){
+            if($this->input->post()){
+                $idRespuestaA = $this->input->post('idRespuestaA');
+                $respuestaA = $this->input->post('respuestaA');
+                $indiceA = $this->input->post('indiceA');
+                $idRespuestaB = $this->input->post('idRespuestaB');
+                $respuestaB = $this->input->post('respuestaB');
+                $indiceB = $this->input->post('indiceB');
+                $idRespuestaC = $this->input->post('idRespuestaC');
+                $respuestaC = $this->input->post('respuestaC');
+                $indiceC = $this->input->post('indiceC');
+                $idRespuestaD = $this->input->post('idRespuestaD');
+                $respuestaD = $this->input->post('respuestaD');
+                $indiceD = $this->input->post('indiceD');
+                
+                $this->reactivo_model->guardarOpc($idRespuestaA, $respuestaA, $indiceA, $idReactivo);
+                $this->reactivo_model->guardarOpc($idRespuestaB, $respuestaB, $indiceB, $idReactivo);
+                $this->reactivo_model->guardarOpc($idRespuestaC, $respuestaC, $indiceC, $idReactivo);
+                $this->reactivo_model->guardarOpc($idRespuestaD, $respuestaD, $indiceD, $idReactivo);
+                redirect('reactivo/index/'.$idEncuesta);
+            }else{
+                $this->guardarOpc($idEncuesta);
             } 
         }
 

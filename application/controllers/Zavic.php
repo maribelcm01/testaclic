@@ -63,10 +63,22 @@
 					$this->load->view('layout/footer');
 				}
 			}
-        }
+		}
+		
         public function encuesta($codigo){
+			$datos = $this->zavic_model->obtenerDatos($codigo);
+			$r = $this->zavic_model->obtenerPregunta($codigo);
+			
+			$data = array(
+				'nombre' => $datos->nombre,
+				'reactivo' => $r[0]['reactivo'],
+				'respuestaA' => $r[0]['respuesta'],
+				'respuestaB' => $r[1]['respuesta'],
+				'respuestaC' => $r[2]['respuesta'],
+				'respuestaD' => $r[3]['respuesta']
+			);
             $this->load->view('zavic/header');
-            $this->load->view('zavic/test_zavic');
+            $this->load->view('zavic/test_zavic',$data);
             $this->load->view('layout/footer');
         }
     }

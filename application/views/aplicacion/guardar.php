@@ -5,7 +5,7 @@
             <form method="post" action="<?php echo base_url() ?>aplicacion/guardar_post/<?php echo $idAplicacion ?>">
                 <div class="form-group">
                     <label>Encuesta</label>
-                    <select name="idEncuesta" id="input" class="form-control" required="required">
+                    <select name="idEncuesta" id="input" class="form-control" required>
                     <option value="">--Seleccione una opción--</option>
                         <?php foreach($encuesta as $item): ?>
                             <option value="<?php echo $item->idEncuesta ?>" <?= ( $item->idEncuesta == $idEncuesta) ? 'selected' : '' ?>> <?php echo $item->nombre ?></option>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     <label>Encuestado</label>
-                    <select name="idEncuestado" id="input" class="form-control" required="required">
+                    <select name="idEncuestado" id="input" class="form-control" required>
                             <option value="">--Seleccione un nombre--</option>
                         <?php foreach($encuestado as $item): ?>
                             <option value="<?php echo $item->idEncuestado ?>" <?= ( $item->idEncuestado == $idEncuestado) ? 'selected' : '' ?>> <?php echo $item->nombre ?></option>

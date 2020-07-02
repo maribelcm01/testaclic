@@ -39,12 +39,22 @@
 					result_array();
 			$nombreEncuesta = (count($p) > 0) ? $p[0]['nombre'] : [] ;
 			return $nombreEncuesta;
-        }
+		}
+		
         public function obtenerDatos($codigo){
-			$d = $this->db->select('encuestado.nombre, aplicacion.codigo')->
+			$d = $this->db->select('encuestado.nombre,aplicacion.idAplicacion, aplicacion.codigo')->
 					where(array('encuestado.idEncuestado = aplicacion.idEncuestado AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, encuestado')->
 					row();
+			return $d;
+		}
+		
+		public function obtenerPregunta($codigo){
+			$d = $this->db->select('reactivo.reactivo, rpta_zavic.respuesta')->
+					where(array('reactivo.idReactivo = rpta_zavic.idReactivo AND
+					reactivo.indice = aplicacion.pregunta AND aplicacion.codigo =' => $codigo))->
+					get('reactivo,rpta_zavic,aplicacion')->
+					result_array();
 			return $d;
         }
     }

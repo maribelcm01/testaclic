@@ -50,6 +50,29 @@
 			return $resultado;
 		}
 
+		public function obtener_por_idOpc($id){
+			$this->db->select('idRespuesta, respuesta, indice, idReactivo');
+			$this->db->from('rpta_zavic');
+			$this->db->where('idReactivo', $id);
+			$consulta = $this->db->get();
+			$resultado = $consulta->result_array();
+			return $resultado;
+		}
+
+		public function guardarOpc($idRespuesta, $respuesta, $indice, $idReactivo){
+			$data = array(
+				'respuesta' => $respuesta,
+				'indice' => $indice,
+				'idReactivo' => $idReactivo
+			);
+			if($idRespuesta){
+				$this->db->where('idRespuesta', $idRespuesta);
+				$this->db->update('rpta_zavic', $data);
+			}else{
+				$this->db->insert('rpta_zavic', $data);
+			}
+		}
+
 		/* public function eliminar($id){
 			$this->db->where('idReactivo', $id);
 			$this->db->delete('reactivo');
