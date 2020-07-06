@@ -74,7 +74,6 @@
 			$idEncuesta = $this->cleaver_model->verIdEncuesta($codigo);
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
 			$first_last = $this->cleaver_model->busca_menor_mayor($idEncuesta);
-			//$valor_reactivo = null;
 			$control_siguiente = true;
 			if($b > $limite){
 				$this->cleaver_model->estadoFecha($idAplicacion);
@@ -107,8 +106,14 @@
 					$menos4 = $x[3]['menos'];
 				}else{
 					$x = $this->cleaver_model->obtenerPalabras($idEncuesta,$a,$b);
-					$mas1 = 0; $mas2 = 0; $mas3 = 0; $mas4 = 0;
-					$menos1 = 0; $menos2 = 0; $menos3 = 0; $menos4 = 0;			
+					$mas1 = 0;
+					$mas2 = 0;
+					$mas3 = 0;
+					$mas4 = 0;
+					$menos1 = 0;
+					$menos2 = 0;
+					$menos3 = 0;
+					$menos4 = 0;			
 				}
 
 				$data = array(
