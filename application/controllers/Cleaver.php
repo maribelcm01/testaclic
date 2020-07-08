@@ -3,7 +3,8 @@
 
     class Cleaver extends CI_Controller{
         public function __construct(){
-            parent::__construct();
+			parent::__construct();
+			$this->load->library(array('form_validation','session'));
 			$this->load->model('cleaver_model');
         }
 
@@ -234,9 +235,14 @@
 				'datos' => $datos,
 				'resultados' => $resultados_front
 			);
-			$this->load->view('cleaver/header');
-			$this->load->view('cleaver/resultados',$data);
-			$this->load->view('layout/footer');
+
+			if ($this->session->userdata('is_logged')) {
+				$this->load->view('cleaver/header');
+				$this->load->view('cleaver/resultados',$data);
+				$this->load->view('layout/footer');
+			}else{
+				redirect(base_url('login'));
+			}
 		}
 
 		public function getAsignar($x){

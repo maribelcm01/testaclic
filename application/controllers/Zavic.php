@@ -3,7 +3,8 @@
 
     class Zavic extends CI_Controller{
         public function __construct(){
-            parent::__construct();
+			parent::__construct();
+			$this->load->library(array('form_validation','session'));
 			$this->load->model('zavic_model');
         }
 
@@ -76,7 +77,7 @@
 			$RptaB = null;
 			$RptaC = null;
 			$RptaD = null;
-			if($pregunta < $limite){
+			if($pregunta <= $limite){
 				if(isset($_GET['back'])){
 					if($_GET['back'] == $pregunta){ 
 						redirect(base_url('zavic/encuesta/'.$codigo));
@@ -142,5 +143,47 @@
 			}
 			print_r($is_back);
 		}
+
+		public function resultados($codigo){
+			for($i=1; $i<=20; $i++){
+				$respuestas = $this->zavic_model->resultados($codigo,$i);
+				foreach ($respuestas as $row){
+					$A[$i] = $row->A;
+					$B[$i] = $row->B;
+					$C[$i] = $row->C;
+					$D[$i] = $row->D;
+				}
+			}
+			
+			$VM = $A[3]+$D[4]+$A[6]+$B[8]+$B[9]+$B[12]+$A[13]+$D[15]+$D[17]+$A[19];
+			$VL = $B[3]+$C[4]+$B[6]+$A[8]+$A[9]+$D[12]+$B[13]+$C[15]+$B[17]+$D[19];
+			$VI = $C[3]+$A[4]+$D[6]+$C[8]+$D[9]+$A[12]+$C[13]+$B[15]+$A[17]+$B[19];
+			$VC = $D[3]+$B[4]+$C[6]+$D[8]+$C[9]+$C[12]+$D[13]+$A[15]+$C[17]+$C[19];
+
+			$IE = $C[1]+$C[2]+$D[5]+$B[7]+$A[10]+$A[11]+$A[14]+$A[16]+$B[18]+$A[20];
+			$IP = $B[1]+$D[2]+$B[5]+$C[7]+$B[10]+$D[11]+$D[14]+$B[16]+$C[18]+$B[20];
+			$IS = $A[1]+$B[2]+$A[5]+$A[7]+$D[10]+$B[11]+$C[14]+$D[16]+$D[18]+$D[20];
+			$IR = $D[1]+$A[2]+$C[5]+$D[7]+$C[10]+$C[11]+$B[14]+$C[16]+$A[18]+$C[20];
+			
+			$data = array(
+				'Moral' => $VM,
+				'Legal' => $VL,
+				'Indif' => $VI,
+				'Corru' => $VC,
+				'Econo' => $IE,
+				'Polit' => $IP,
+				'Socia' => $IS,
+				'Relig' => $IR
+			);
+			
+			if ($this->session->userdata('is_logged')) {
+                $this->load->view('zavic/header');
+				$this->load->view('zavic/resultados',$data);
+				$this->load->view('layout/footer');
+            }else{
+                redirect(base_url('login'));
+            }   
+		}
+		
     }
 ?>

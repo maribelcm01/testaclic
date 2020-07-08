@@ -1,28 +1,28 @@
 <div class="container" style="text-align:center; background-color:#b5dffb; margin-top:40px; padding:30px;">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <h4 style="font-weight:bold;">Test de <?php echo $nombre ?></h4><br>
-            <h5 style="font-weight:bold;"><?php echo $reactivo?></h5><br>
+            <h5 style="font-weight:bold;"><?php echo $reactivo?>:</h5><br>
             <div>
                 <input type="text" name="respuesta" value="<?php echo $RptaA;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
                 <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
-                <label class="control-label col-sm-6 col-xs-6"><b><?php echo $respuestaA?></b></label>
-            </div>
+                <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaA?>.</b></label>
+            </div><br>
             <div>
                 <input type="text" name="respuesta" value="<?php echo $RptaB;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
                 <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
-                <label class="control-label col-sm-6 col-xs-6"><b><?php echo $respuestaB?></b></label>
-            </div>
+                <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaB?>.</b></label>
+            </div><br>
             <div>
                 <input type="text" name="respuesta" value="<?php echo $RptaC;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
                 <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
-                <label class="control-label col-sm-6 col-xs-6"><b><?php echo $respuestaC?></b></label>
-            </div>
+                <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaC?>.</b></label>
+            </div><br>
             <div>
                 <input type="text" name="respuesta" value="<?php echo $RptaD;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
                 <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
-                <label class="control-label col-sm-6 col-xs-6"><b><?php echo $respuestaD?></b></label>
-            </div><br><br>
+                <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaD?>.</b></label>
+            </div><br>
             <div class="row justify-content-center">
                 <div class="col-2" style="text-align:center;">
                     <?php if($menor != $pregunta):?>
@@ -36,7 +36,7 @@
             <input type="hidden" id="idAplicacion" value="<?php echo $idAplicacion?>">
             <input type="hidden" id="idReactivo" value="<?php echo $idReactivo?>">
             <input type="hidden" id="codigo" value=<?php echo $codigo?>>
-            <input type="hidden" id="pregunta" value="<?php echo $pregunta?>"
+            <input type="text" id="pregunta" value="<?php echo $pregunta?>"
         </div>
     </div>
 </div>

@@ -37,6 +37,9 @@
 							<?php if($item->nomEncuesta == "Cleaver" && $item->estado == "Finalizado"):?>
 								<a class="btn btn-success" href="<?php echo base_url() ?>cleaver/resultados/<?php echo $item->codigo ?>">Resultados</a>
 				   			<?php endif;?>
+							<?php if($item->nomEncuesta == "Zavic" && $item->estado == "Finalizado"):?>
+								<a class="btn btn-success" href="<?php echo base_url() ?>zavic/resultados/<?php echo $item->codigo ?>">Resultados</a>
+				   			<?php endif;?>
 							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>aplicacion/eliminar/<?php echo $item->idAplicacion ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
 							<!--<a class="btn btn-info" href="<?php echo base_url() ?>aplicacion/ver/<?php echo $item->idAplicacion ?>"> Ver </a>-->
 		             	</td>
