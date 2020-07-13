@@ -1,41 +1,19 @@
 <div class="container" style="text-align:center;background-color:#b5dffb;padding:30px;margin-top:25px;">
     <div class="alert alert-danger alert-save" role="alert" style="display:none"></div>
-    <h3 style="font-weight:bold;padding-top:30px;">Encuesta de <?=$nombre?></h3>
-    <!-- <div class="row" style="position:relative;width:510px;height:270px;margin:auto;">
-        <div style="margin-top:24px;">
-            <div class="reactivo"><?php echo $palabra1?></div>
-            <div class="reactivo"><?php echo $palabra2?></div>
-            <div class="reactivo"><?php echo $palabra3?></div>
-            <div class="reactivo"><?php echo $palabra4?></div>
-        </div>
-        <div>
-            <div style="font-weight:bold;text-align:center;"><i class="fas fa-plus"></i></div>
-            <div data-level="1" data-side="left" class = "<?= ($mas1 != null && $mas1 == 1) ? 'cmas' : '' ?> checks mas"><input class="isHidden get-data lf-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio1" value="1" <?= ($mas1 != null && $mas1 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="2" data-side="left" class = "<?= ($mas2 != null && $mas2 == 1) ? 'cmas' : '' ?> checks mas"><input class="isHidden get-data lf-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio1" value="1" <?= ($mas2 != null && $mas2 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="3" data-side="left" class = "<?= ($mas3 != null && $mas3 == 1) ? 'cmas' : '' ?> checks mas"><input class="isHidden get-data lf-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio1" value="1" <?= ($mas3 != null && $mas3 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="4" data-side="left" class = "<?= ($mas4 != null && $mas4 == 1) ? 'cmas' : '' ?> checks mas"><input class="isHidden get-data lf-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio1" value="1" <?= ($mas4 != null && $mas4 == 1) ? 'checked' : '' ?>/></div>
-        </div>
-        <div>
-            <div style="font-weight:bold;text-align:center;"><i class="fas fa-minus"></i></div>
-            <div data-level="1" data-side="right" class = "<?= ($menos1 != null && $menos1 == 1) ? 'cmenos' : '' ?> checks menos"><input class="isHidden rg-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio2" value="0" <?= ($menos1 != null && $menos1 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="2" data-side="right" class = "<?= ($menos2 != null && $menos2 == 1) ? 'cmenos' : '' ?> checks menos"><input class="isHidden rg-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio2" value="0" <?= ($menos2 != null && $menos2 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="3" data-side="right" class = "<?= ($menos3 != null && $menos3 == 1) ? 'cmenos' : '' ?> checks menos"><input class="isHidden rg-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio2" value="0" <?= ($menos3 != null && $menos3 == 1) ? 'checked' : '' ?>/></div>
-            <div data-level="4" data-side="right" class = "<?= ($menos4 != null && $menos4 == 1) ? 'cmenos' : '' ?> checks menos"><input class="isHidden rg-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio2" value="0" <?= ($menos4 != null && $menos4 == 1) ? 'checked' : '' ?>/></div>
-        </div>
-    </div> -->
+    <h3 style="padding-top:30px;"><b>Encuesta de <?=$nombre?></b></h3>
     <div class="row justify-content-center">
         <div class="col-md-6 table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th class="col-6"></th>
-                        <th class="col-3" style="font-weight:bold;text-align:center;"><i class="fas fa-plus"></i></th>
-                        <th class="col-3" style="font-weight:bold;text-align:center;"><i class="fas fa-minus"></i></th>
+                        <th class="col-3" style="text-align:center;"><i class="fas fa-plus"></i></th>
+                        <th class="col-3" style="text-align:center;"><i class="fas fa-minus"></i></th>
                     </tr>
                 </thead>
-                <tbody style="font-weight:bold;">
+                <tbody>
                     <tr class="bg-white">
-                        <td><h5><?php echo $palabra1?></h5></td>
+                        <td><h5><b><?php echo $palabra1?></b></h5></td>
                         <td>
                             <div data-level="1" data-side="left" class = "<?= ($mas1 != null && $mas1 == 1) ? 'cmas' : '' ?> checks mas">
                                 <input class="isHidden get-data lf-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio1" value="1" <?= ($mas1 != null && $mas1 == 1) ? 'checked' : '' ?>/>
@@ -48,7 +26,7 @@
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><?php echo $palabra2?></h5></td>
+                        <td><h5><b><?php echo $palabra2?></b></h5></td>
                         <td>
                             <div data-level="2" data-side="left" class = "<?= ($mas2 != null && $mas2 == 1) ? 'cmas' : '' ?> checks mas">
                                 <input class="isHidden get-data lf-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio1" value="1" <?= ($mas2 != null && $mas2 == 1) ? 'checked' : '' ?>/>
@@ -61,7 +39,7 @@
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><?php echo $palabra3?></h5></td>
+                        <td><h5><b><?php echo $palabra3?></b></h5></td>
                         <td>
                             <div data-level="3" data-side="left" class = "<?= ($mas3 != null && $mas3 == 1) ? 'cmas' : '' ?> checks mas">
                                 <input class="isHidden get-data lf-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio1" value="1" <?= ($mas3 != null && $mas3 == 1) ? 'checked' : '' ?>/>
@@ -74,7 +52,7 @@
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><?php echo $palabra4?></h5></td>
+                        <td><h5><b><?php echo $palabra4?></b></h5></td>
                         <td>
                             <div data-level="4" data-side="left" class = "<?= ($mas4 != null && $mas4 == 1) ? 'cmas' : '' ?> checks mas">
                                 <input class="isHidden get-data lf-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio1" value="1" <?= ($mas4 != null && $mas4 == 1) ? 'checked' : '' ?>/>
@@ -91,15 +69,22 @@
         </div>
     </div>
     <div class="row justify-content-center">
-		<div class="col-2" style="text-align:center;">
+		<div class="col-md-1" style="text-align:center;">
             <?php if($menor != $pregunta):?>
                 <button type="button" class="btn btn-primary" onclick="location.href='<?=base_url('cleaver/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i></button>
             <?php endif;?>
         </div>
-        <div class="col-2" style="text-align:center;">
+        <div class="col-md-8">
+			<?php $style = round((($progreso-1) * 100) / $mayor)?>
+			<div class="progress" style="height:50px;">
+				<div class="progress-bar bg-dark progress-bar-striped" style="width:<?=$style?>%;"><?=$style?>%</div>
+			</div>
+		</div>
+        <div class="col-md-1" style="text-align:center;">
             <button type="button" class="btn btn-primary" onclick="siguientePregunta()"><i class="fas fa-angle-double-right"></i></button>
         </div>
     </div>
+    <h4><b><?=$pregunta?> / <?=$mayor?></b></h4>
     <input type="hidden" id="codigo" value="<?php echo $codigo?>">
     <input type="hidden" id="pregunta" value="<?php echo $pregunta?>">
 </div>

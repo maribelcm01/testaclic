@@ -70,6 +70,7 @@
 			if($c == null){
 				redirect('errors/error_404');
 			}else{
+				$a = $this->vida_model->obtenerDatos($codigo);
 				$limite = $this->vida_model->verLimite($codigo);
 				$pregunta = $this->vida_model->verPregunta($codigo);
 				//variable barra de progreso
@@ -104,7 +105,7 @@
 					'idReactivo' => $s->idReactivo,
 					'reactivo' => $s->reactivo,
 					'comentario' =>$s->comentario,
-					'nombre' => $s->nombre,
+					'nombre' => $a->nombre,
 					'codigo' => $s->codigo,
 					'pregunta' => $pregunta,
 					'progreso' => $progreso,

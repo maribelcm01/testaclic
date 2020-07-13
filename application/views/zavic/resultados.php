@@ -1,13 +1,11 @@
 <figure class="highcharts-figure">
     <div id="container1"></div>
-</figure>
-
+</figure><br>
 <figure class="highcharts-figure">
-  <div id="container2"></div>
-</figure>
-
+   <div id="container2"></div>
+</figure><br>
 <figure class="highcharts-figure">
-  <div id="container3"></div>
+   <div id="container3"></div>
 </figure>
 
 <script>
@@ -34,8 +32,8 @@
             }
         },
         tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b> del total<br/>'
+            headerFormat: ' ',//'<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
         },
         series: [{
             name: "Resultados",
@@ -85,7 +83,10 @@
             type: 'pie'
         },
         title: { text: 'Valores' },
-        tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>' },
+        tooltip: {
+            headerFormat: ' ',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.percentage:.0f}%</b>'
+        },
         accessibility: {
             point: { valueSuffix: '%' }
         },
@@ -95,7 +96,7 @@
                 cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.0f} %'
+                    format: '<b>{point.name}</b>: {point.percentage:.0f}%'
                 },
                 showInLegend: true
             }
@@ -128,7 +129,10 @@
             type: 'pie'
         },
         title: { text: 'Intereses' },
-        tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>' },
+        tooltip: {
+            headerFormat: ' ',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.percentage:.0f}%</b>'
+        },
         accessibility: {
             point: { valueSuffix: '%' }
         },
@@ -138,7 +142,7 @@
                 cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.0f} %'
+                    format: '<b>{point.name}</b>: {point.percentage:.0f}%'
                 },
                 showInLegend: true
             }

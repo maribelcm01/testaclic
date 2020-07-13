@@ -1,8 +1,9 @@
 <div class="container" style="text-align:center; background-color:#b5dffb; margin-top:40px; padding:30px;">
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <h4 style="font-weight:bold;">Test de <?php echo $nombre ?></h4><br>
-            <h5 style="font-weight:bold;"><?php echo $reactivo?>:</h5><br>
+            <h4><b>Test de <?php echo $nombre ?></b></h4>
+            <h6>(Enlista, siendo <b>4 el más importante</b> al <b>1 el menos importante</b>.)</h6><br>
+            <h5><b><?php echo $reactivo?>:</b></h5><br>
             <div>
                 <input type="text" name="respuesta" value="<?php echo $RptaA;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
                 <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
@@ -24,19 +25,26 @@
                 <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaD?>.</b></label>
             </div><br>
             <div class="row justify-content-center">
-                <div class="col-2" style="text-align:center;">
+                <div class="col-md-1" style="text-align:center;">
                     <?php if($menor != $pregunta):?>
                         <button type="button" class="btn btn-primary" onclick="location.href='<?=base_url('zavic/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i></button>
                     <?php endif;?>
                 </div>
-                <div class="col-2" style="text-align:center;">
+                <div class="col-md-8">
+                    <?php $style = round((($progreso-1) * 100) / $mayor)?>
+                    <div class="progress" style="height:50px;">
+                        <div class="progress-bar bg-dark progress-bar-striped" style="width:<?=$style?>%;"><?=$style?>%</div>
+                    </div>
+                </div>
+                <div class="col-md-1" style="text-align:center;">
                     <button class="btn btn-primary" onclick="validar();"><i class="fas fa-angle-double-right"></i></button>
                 </div>
             </div>
+            <h4><b><?=$pregunta?> / <?=$mayor?></b></h4>
             <input type="hidden" id="idAplicacion" value="<?php echo $idAplicacion?>">
             <input type="hidden" id="idReactivo" value="<?php echo $idReactivo?>">
             <input type="hidden" id="codigo" value=<?php echo $codigo?>>
-            <input type="text" id="pregunta" value="<?php echo $pregunta?>"
+            <input type="hidden" id="pregunta" value="<?php echo $pregunta?>"
         </div>
     </div>
 </div>

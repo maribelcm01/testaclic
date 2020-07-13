@@ -90,23 +90,21 @@
 		}
 
 		public function verDatos($codigo,$idReactivo){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo,
+			$q = $this->db->select('reactivo.idReactivo, reactivo.reactivo,
 					reactivo.comentario, reactivo.indice, aplicacion.codigo')->
-					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
-					aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
-					get('reactivo,aplicacion,encuestado')->
+					where(array('aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
+					get('reactivo,aplicacion')->
 					row();
 			return $q;
 		}
 
 		public function verDatosBack($codigo,$idReactivo,$back,$idEncuesta){
-			$q = $this->db->select('encuestado.nombre, reactivo.idReactivo, reactivo.reactivo,
+			$q = $this->db->select('reactivo.idReactivo, reactivo.reactivo,
 					reactivo.comentario, reactivo.indice,aplicaciondetalle.valor ,aplicacion.codigo')->
-					where(array('aplicacion.idEncuestado = encuestado.idEncuestado AND 
-					aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND 
+					where(array('aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND 
 					aplicaciondetalle.idReactivo = reactivo.idReactivo AND
 					aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $back, 'aplicaciondetalle.idReactivo =' => $idReactivo))->
-					get('reactivo,aplicacion,encuestado,aplicaciondetalle')->
+					get('reactivo,aplicacion,aplicaciondetalle')->
 					row();
 			return $q;
 		}

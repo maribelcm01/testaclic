@@ -69,9 +69,11 @@
 		public function encuesta($codigo){
 			$data = array();
 			$pregunta = $this->cleaver_model->verPregunta($codigo);
+			$progreso = $this->cleaver_model->verPregunta($codigo);
 			$b = $pregunta*4;
 			$a = $b-3;
 			$limite = $this->cleaver_model->verLimite($codigo);
+			$mayor = $limite/4;
 			$idEncuesta = $this->cleaver_model->verIdEncuesta($codigo);
 			$idAplicacion = $this->cleaver_model->verIdAplicacion($codigo);
 			$first_last = $this->cleaver_model->busca_menor_mayor($idEncuesta);
@@ -137,8 +139,9 @@
 					'menos4' => $menos4,
 					'codigo' => $codigo,
 					'pregunta' => $pregunta,
+					'progreso' => $progreso,
 					'menor' => $first_last[0]['indice'],
-					'mayor' => $first_last[1]['indice']
+					'mayor' => $mayor
 				);
 				
 				$this->load->view('cleaver/header');
@@ -213,6 +216,14 @@
 			$I1 = self::getAsignar($TI);
 			$S1 = self::getAsignar($TS);
 			$C1 = self::getAsignar($TC);
+			$D2 = self::getAsignar($DM);			
+			$I2 = self::getAsignar($IM);
+			$S2 = self::getAsignar($SM);
+			$C2 = self::getAsignar($CM);
+			$D3 = self::getAsignar($DL);			
+			$I3 = self::getAsignar($IL);
+			$S3 = self::getAsignar($SL);
+			$C3 = self::getAsignar($CL);
 			
 			$total[] = array("nombre" => "D","valor" => $D1);
 			$total[] = array("nombre" => "I","valor" => $I1);
@@ -233,7 +244,19 @@
 			$data = array(
 				'nombre' => $us->nombre,
 				'datos' => $datos,
-				'resultados' => $resultados_front
+				'resultados' => $resultados_front,
+				'DTotal' => $D1,
+				'ITotal' => $I1,
+				'STotal' => $S1,
+				'CTotal' => $C1,
+				'DMas' => $D2,
+				'IMas' => $I2,
+				'SMas' => $S2,
+				'CMas' => $C2,
+				'DMenos' => $D3,
+				'IMenos' => $I3,
+				'SMenos' => $S3,
+				'CMenos' => $C3
 			);
 
 			if ($this->session->userdata('is_logged')) {

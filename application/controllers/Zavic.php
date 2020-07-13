@@ -72,6 +72,7 @@
 			$idEncuesta = $this->zavic_model->verIdEncuesta($codigo);
 			$idAplicacion = $this->zavic_model->verIdAplicacion($codigo);
 			$first_last = $this->zavic_model->busca_menor_mayor($idEncuesta);
+			$progreso = $this->zavic_model->verPregunta($codigo);
 			$pregunta = $this->zavic_model->verPregunta($codigo);
 			$RptaA = null;
 			$RptaB = null;
@@ -101,6 +102,7 @@
 					'idReactivo' => $r[0]['idReactivo'],
 					'reactivo' => $r[0]['reactivo'],
 					'pregunta' => $pregunta,
+					'progreso' => $progreso,
 					'respuestaA' => $r[0]['respuesta'],
 					'respuestaB' => $r[1]['respuesta'],
 					'respuestaC' => $r[2]['respuesta'],
