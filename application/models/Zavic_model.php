@@ -82,21 +82,22 @@
 		}
 		
 		public function obtenerPregunta($codigo){
-			$d = $this->db->select('reactivo.idReactivo,reactivo.reactivo, rpta_zavic.respuesta')->
-					where(array('reactivo.idReactivo = rpta_zavic.idReactivo AND
+			$d = $this->db->select('reactivo.idReactivo,reactivo.reactivo, respuesta.respuesta')->
+					where(array('reactivo.idReactivo = respuesta.idReactivo AND
+					encuesta.idEncuesta = aplicacion.idEncuesta AND encuesta.idEncuesta = reactivo.idEncuesta AND
 					reactivo.indice = aplicacion.pregunta AND aplicacion.codigo =' => $codigo))->
-					get('reactivo,rpta_zavic,aplicacion')->
+					get('reactivo,respuesta,aplicacion,encuesta')->
 					result_array();
 			return $d;
 		}
 		public function obtenerPreguntaBack($codigo,$pregunta){
-			$d = $this->db->select('reactivo.idReactivo,reactivo.reactivo, rpta_zavic.respuesta,
+			$d = $this->db->select('reactivo.idReactivo,reactivo.reactivo, respuesta.respuesta,
 					aplicacion_zavic.A, aplicacion_zavic.B, aplicacion_zavic.C, aplicacion_zavic.D')->
-					where(array('reactivo.idReactivo = rpta_zavic.idReactivo AND
+					where(array('reactivo.idReactivo = respuesta.idReactivo AND
 					aplicacion_zavic.idAplicacion = aplicacion.idAplicacion AND
 					reactivo.idReactivo = aplicacion_zavic.idReactivo AND
 					reactivo.indice = '.$pregunta.' AND aplicacion.codigo =' => $codigo))->
-					get('reactivo,rpta_zavic,aplicacion,aplicacion_zavic')->
+					get('reactivo,respuesta,aplicacion,aplicacion_zavic')->
 					result_array();
 			return $d;
 		}

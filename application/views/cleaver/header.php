@@ -39,7 +39,7 @@
             
             .highcharts-figure, .highcharts-data-table table {
                 min-width: 360px; 
-                max-width: 700px;
+                max-width: 500px;
                 margin: 1em auto;
             }
             .highcharts-data-table table {

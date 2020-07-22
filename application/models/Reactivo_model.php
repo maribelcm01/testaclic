@@ -52,10 +52,20 @@
 
 		public function obtener_por_idOpc($id){
 			$this->db->select('idRespuesta, respuesta, indice, idReactivo');
-			$this->db->from('rpta_zavic');
+			$this->db->from('respuesta');
 			$this->db->where('idReactivo', $id);
 			$consulta = $this->db->get();
-			$resultado = $consulta->result_array();
+			$resultado = $consulta->result();
+			return $resultado;
+		}
+
+		public function obtener_por_indice($id,$indice){
+			$this->db->select('idRespuesta, respuesta, indice, idReactivo');
+			$this->db->from('respuesta');
+			$this->db->where('idReactivo', $id);
+			$this->db->where('indice', $indice);
+			$consulta = $this->db->get();
+			$resultado = $consulta->row();
 			return $resultado;
 		}
 
@@ -67,9 +77,9 @@
 			);
 			if($idRespuesta){
 				$this->db->where('idRespuesta', $idRespuesta);
-				$this->db->update('rpta_zavic', $data);
+				$this->db->update('respuesta', $data);
 			}else{
-				$this->db->insert('rpta_zavic', $data);
+				$this->db->insert('respuesta', $data);
 			}
 		}
 

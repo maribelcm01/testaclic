@@ -77,7 +77,6 @@
 				$progreso = $this->vida_model->verPregunta($codigo);
 				$valor = $this->input->post('valor');
 				$idAplicacion = $this->vida_model->verIdAplicacion($codigo);
-				$idReactivo = $this->vida_model->verIdReactivo($codigo,$pregunta);
 				
 				$estado = $this->vida_model->verEstado($codigo);
 				$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
@@ -90,15 +89,15 @@
 					if($_GET['back'] == $pregunta){ 
 						redirect(base_url('vida/encuesta/'.$codigo));
 					}
-					$idReactivo = $this->vida_model->verIdReactivo($codigo,$_GET['back']);
-					$s = $this->vida_model->verDatosBack($codigo,$idReactivo,$_GET['back'],$idEncuesta);
+					$pregunta = $_GET['back'];
+					$s = $this->vida_model->verDatosBack($codigo,$pregunta);
 					$valor_reactivo = $s->valor;
 					$control_siguiente=false;
 					$pregunta = $s->indice;
 					
 					//print_r($s->reactivo);exit;
 				}else{
-					$s = $this->vida_model->verDatos($codigo,$idReactivo);
+					$s = $this->vida_model->verDatos($codigo);
 					//print_r($s);exit;
 				}
 				$data = array(
@@ -135,11 +134,11 @@
 			if($c == null){
 				redirect('errors/error_404');
 			}else{
+				$valor = $this->input->post('valor');			
+				$idReactivo = $this->input->post('idReactivo');
 				$limite = $this->vida_model->verLimite($codigo);
 				$pregunta = $this->vida_model->verPregunta($codigo);
-				$valor = $this->input->post('valor');			
 				$idAplicacion = $this->vida_model->verIdAplicacion($codigo);
-				$idReactivo = $this->vida_model->verIdReactivo($codigo,$pregunta);
 				$idEncuesta = $this->vida_model->verIdEncuesta($codigo);
 				$nombreEncuesta = $this->vida_model->verNombreEncuesta($idEncuesta);
 				
@@ -147,12 +146,10 @@
 				//evaluar si es la ultima pregunta
 				//evaluar si es una actualización de pregunta
 				if(isset($_GET['back'])){
-					$idReactivo = $this->vida_model->verIdReactivo($codigo,$_GET['back']);
-					$this->vida_model->registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor);
+					$this->vida_model->insertarAplicacionVida($idReactivo,$idAplicacion,$valor);
 				}else{
-					$this->vida_model->registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor);
+					$this->vida_model->insertarAplicacionVida($idReactivo,$idAplicacion,$valor);
 				}
-				//$total_de_preguntas_reactivo= $this->vida_model->total_de_preguntas_reactivo($idEncuesta);
 				if($limite == $pregunta){
 					//encuesta finalizada manda a gracias
 					//print_r($nombreEncuesta);

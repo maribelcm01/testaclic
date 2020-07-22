@@ -7,7 +7,7 @@
                 <button type="button" class="btn btn-success" style="margin-top:10px;margin-left:20px;width:100px" data-toggle="modal" data-target=".modal-graficas">Gráficas</button>
                 <!-- Modal -->
                 <div class="modal fade modal-graficas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Gráficas Cleaver</h5>
@@ -17,13 +17,13 @@
                             </div>
                             <div class="modal-body">
                                 <figure class="highcharts-figure">
-                                    <div id="container1" style="height:250px"></div>
+                                    <div id="container1"></div>
                                 </figure><br>
                                 <figure class="highcharts-figure">
-                                    <div id="container2" style="height:250px"></div>
+                                    <div id="container2"></div>
                                 </figure><br>
                                 <figure class="highcharts-figure">
-                                    <div id="container3" style="height:250px"></div>
+                                    <div id="container3"></div>
                                 </figure>
                             </div>
                             <div class="modal-footer">

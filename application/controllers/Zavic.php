@@ -95,7 +95,6 @@
 				$data = array(
 					'codigo' => $codigo,
 					'nombre' => $datos->nombre,
-					'pregunta' => $pregunta,
 					'menor' => $first_last[0]['indice'],
 					'mayor' => $first_last[1]['indice'],
 					'idAplicacion' => $datos->idAplicacion,

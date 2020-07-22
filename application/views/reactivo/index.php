@@ -31,6 +31,9 @@
 							<?php if($item->nombre == "Zavic"): ?>
 								<a class="btn btn-secondary" href="<?php echo base_url() ?>reactivo/guardarOpc/<?php echo $idEncuesta?>/<?php echo $item->idReactivo?>">Opciones</a>
 							<?php endif; ?>
+							<?php if($item->nombre == "IPV"): ?>
+								<a class="btn btn-secondary" href="<?php echo base_url() ?>reactivo/guardarOpc/<?php echo $idEncuesta?>/<?php echo $item->idReactivo?>">Opciones</a>
+							<?php endif; ?>
 							<a class="btn btn-primary" href="<?php echo base_url() ?>reactivo/guardar/<?php echo $idEncuesta?>/<?php echo $item->idReactivo ?>"><i class="fas fa-edit"></i>Editar </a>
 							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>reactivo/eliminar/<?php echo $item->idReactivo ?>"><i class="fas fa-times-circle"></i>Borrar </a>  -->
 							<!--<a class="btn btn-info" href="<?php echo base_url() ?>reactivo/ver/<?php echo $item->idReactivo ?>"> Ver </a>-->
@@ -40,19 +43,8 @@
 		    	</tbody>
 		 	</table>
 		 	<?php else: ?>
-		    No hay Registro 
+		    	No hay Registro 
 		    <?php endif; ?>
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-		$(".eliminar_alert").each(function() {
-	   		var href = $(this).attr('href');
-	      		$(this).attr('href', 'javascript:void(0)');
-	      		$(this).click(function() {
-	        	if (confirm("¿Seguro desea eliminar este Registro?")) {
-	            	location.href = href;
-	        	}
-	    	});
-	   	});	
-	</script>

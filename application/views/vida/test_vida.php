@@ -21,6 +21,7 @@
 				<button style="height:50px; width:120px;" class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-warning' : 'btn-dark' ?>" required type="submit" name="valor" value="2"><b>Casi Siempre</b></button>               
 			</div>
 		</div>
+		<input type="hidden" name="idReactivo" value="<?php echo $idReactivo?>">
 	</form><br><br>
 	<div class="row justify-content-center">
 		<div class="col-md-1">
@@ -41,7 +42,6 @@
 		</div>
 	</div>
 	<h4><b><?=$pregunta?> / <?=$mayor?></b></h4>
-	
 </div>
 
 <script>

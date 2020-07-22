@@ -68,7 +68,7 @@
 			$idEncuesta = $p[0]['idEncuesta'];
 			return $idEncuesta;
 		}
-
+		
 		public function verNombreEncuesta($idEncuesta){
 			$p = $this->db->select('encuesta.nombre')->
 					where('aplicacion.idEncuesta = encuesta.idEncuesta AND aplicacion.idEncuesta = '.$idEncuesta)->
@@ -77,40 +77,27 @@
 			$nombreEncuesta = $p[0]['nombre'];
 			return $nombreEncuesta;
 		}
-
-		public function verIdReactivo($codigo,$pregunta){
-			$p = $this->db->select('reactivo.idReactivo')->
-					where(array('reactivo.idEncuesta = encuesta.idEncuesta AND
-						encuesta.idEncuesta = aplicacion.idEncuesta AND
-						aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $pregunta))->
-					get('encuesta, reactivo, aplicacion')->
-					result_array();
-			$idReactivo = $p[0]['idReactivo'];
-			return $idReactivo;
-		}
-
-		public function verDatos($codigo,$idReactivo){
-			$q = $this->db->select('reactivo.idReactivo, reactivo.reactivo,
-					reactivo.comentario, reactivo.indice, aplicacion.codigo')->
-					where(array('aplicacion.codigo =' => $codigo, 'reactivo.idReactivo =' => $idReactivo))->
+		public function verDatos($codigo){
+			$q = $this->db->select('reactivo.idReactivo, reactivo.reactivo,reactivo.comentario, reactivo.indice, aplicacion.codigo')->
+					where(array( 'reactivo.indice = aplicacion.pregunta AND aplicacion.codigo =' => $codigo))->
 					get('reactivo,aplicacion')->
 					row();
 			return $q;
 		}
 
-		public function verDatosBack($codigo,$idReactivo,$back,$idEncuesta){
+		public function verDatosBack($codigo,$pregunta){
 			$q = $this->db->select('reactivo.idReactivo, reactivo.reactivo,
-					reactivo.comentario, reactivo.indice,aplicaciondetalle.valor ,aplicacion.codigo')->
-					where(array('aplicaciondetalle.idAplicacion = aplicacion.idAplicacion AND 
-					aplicaciondetalle.idReactivo = reactivo.idReactivo AND
-					aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $back, 'aplicaciondetalle.idReactivo =' => $idReactivo))->
-					get('reactivo,aplicacion,aplicaciondetalle')->
+					reactivo.comentario, reactivo.indice,aplicacion_vida.valor ,aplicacion.codigo')->
+					where(array('aplicacion_vida.idAplicacion = aplicacion.idAplicacion AND 
+					aplicacion_vida.idReactivo = reactivo.idReactivo AND
+					aplicacion.codigo =' => $codigo, 'reactivo.indice =' => $pregunta))->
+					get('reactivo,aplicacion,aplicacion_vida')->
 					row();
 			return $q;
 		}
 		
-		public function registrarAplicacionDetalle($idAplicacion,$idReactivo,$valor){
-			$this->db->query("INSERT INTO aplicaciondetalle VALUES($idAplicacion,$idReactivo,$valor)
+		public function insertarAplicacionVida($idReactivo,$idAplicacion,$valor){
+			$this->db->query("INSERT INTO aplicacion_vida VALUES($idReactivo,$idAplicacion,$valor)
 					ON DUPLICATE KEY UPDATE valor = $valor;");
 		}
 
@@ -140,10 +127,10 @@
 		}
 
 		public function obtenerCluster($a,$b,$idAplicacion){
-			$p = $this->db->select_sum('aplicaciondetalle.valor')->
-					where('reactivo.idReactivo = aplicaciondetalle.idReactivo AND
-						aplicaciondetalle.idAplicacion = '.$idAplicacion.' AND reactivo.indice BETWEEN '.$a.' AND '.$b)->
-					get('aplicaciondetalle,reactivo')->
+			$p = $this->db->select_sum('aplicacion_vida.valor')->
+					where('reactivo.idReactivo = aplicacion_vida.idReactivo AND
+						aplicacion_vida.idAplicacion = '.$idAplicacion.' AND reactivo.indice BETWEEN '.$a.' AND '.$b)->
+					get('aplicacion_vida,reactivo')->
 					result_array();
 			$suma = $p[0]['valor'];
 			return $suma;
@@ -152,24 +139,5 @@
 		public function insertarVida($idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12){
 			$this->db->query("INSERT INTO vida VALUES(NULL,$idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12);");
 		}
-
-		/*public function busca_pregunta_control($codigo){
-			$p = $this->db->select('aplicacion.pregunta')->
-					where(array('aplicacion.idEncuesta = encuesta.idEncuesta AND
-							aplicacion.codigo =' => $codigo))->
-					get('aplicacion, encuesta')->
-					row();
-			$pregunta = $p;
-			return $pregunta;
-		}*/
-		/*public function total_de_preguntas_reactivo($idEncuesta){
-			$this->db->select('*');
-			$this->db->from('reactivo');
-			$this->db->where('idEncuesta',$idEncuesta);
-			$query = $this->db->get();
-			$contador_de_preguntas_reactivo =  $query->num_rows();
-
-			return $contador_de_preguntas_reactivo;
-		}*/
 	}
  ?>
