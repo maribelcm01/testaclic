@@ -129,5 +129,13 @@
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
 		}
+		public function resultados($codigo,$indice){
+			$d = $this->db->select('aplicacion_ipv.A,aplicacion_ipv.B,aplicacion_ipv.C')->
+					where(array('aplicacion.idAplicacion = aplicacion_ipv.idAplicacion AND
+					aplicacion_ipv.idReactivo = reactivo.idReactivo AND reactivo.indice = '.$indice.' AND aplicacion.codigo =' => $codigo))->
+					get('aplicacion_ipv,reactivo,aplicacion ')->
+					result();
+			return $d;
+		}
     }
 ?>
