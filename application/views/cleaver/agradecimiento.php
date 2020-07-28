@@ -5,3 +5,4 @@
 
     <h6 style="font-weight:bold;"><a href="<?=base_url('')?>"><i class="fas fa-home"></i> Volver a la página principal</a></h6>
 </div>
+<script> document.title = 'Cleaver'; </script>

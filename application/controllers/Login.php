@@ -10,9 +10,10 @@ class Login extends CI_Controller {
 	}
 
 	public function index(){
-		$this->load->view('header');
+		$this->load->view('layout/header');
+		$this->load->view('navbar');
 		$this->load->view('login');
-		$this->load->view('footer');
+		$this->load->view('layout/footer');
 	}
 
 	public function validate(){

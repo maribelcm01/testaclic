@@ -9,6 +9,7 @@
 </figure>
 
 <script>
+    document.title = 'Zavic';
     // Create the chart
     Highcharts.chart('container1', {
         chart: { type: 'column' },

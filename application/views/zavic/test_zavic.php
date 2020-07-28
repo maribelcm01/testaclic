@@ -49,6 +49,7 @@
     </div>
 </div>
 <script>
+    document.title = 'Zavic';
     function validar(){
         var array_inputs_valores = [];
         var inputs_valores = document.getElementsByName("respuesta");

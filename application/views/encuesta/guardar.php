@@ -5,7 +5,7 @@
             <form method="post" action="<?php echo base_url() ?>encuesta/guardar_post/<?php echo $idEncuesta ?>">
                 <div class="form-group">
                    <label> Nombre </label>
-                   <input class="form-control" type="text" name="nombre" required value="<?php echo $nombre ?>"/>
+                   <input class="form-control" type="text" name="nombre" placeholder="Nombre de la encuesta" value="<?php echo $nombre ?>" required/>
                 </div>
                 <div class="form-group">
                    <button type="submit" class="btn btn-success" value="Guardar"><i class="fas fa-save"></i> Guardar</button>

@@ -9,7 +9,7 @@
 
 		public function index(){
 			$data = array('mensaje' => '');
-			$this->load->view('vida/header');
+			$this->load->view('layout/header');
 			$this->load->view('vida/validar',$data);
 			$this->load->view('layout/footer');
 		}
@@ -24,7 +24,7 @@
 													'El código ingresado es incorrecto'.
 												'</div>'.
 											'</div>');
-				$this->load->view('vida/header');
+				$this->load->view('layout/header');
 				$this->load->view('vida/validar',$data);
 				$this->load->view('layout/footer');
 			}else{
@@ -39,7 +39,7 @@
 															'La encuesta ya fue contestada'.
 														'</div>'.
 													'</div>');
-						$this->load->view('vida/header');
+						$this->load->view('layout/header');
 						$this->load->view('vida/validar',$data);
 						$this->load->view('layout/footer');
 					}else{
@@ -48,7 +48,7 @@
 							'nombre' => $a->nombre,
 							'codigo' => $a->codigo
 						);
-						$this->load->view('vida/header');
+						$this->load->view('layout/header');
 						$this->load->view('vida/index',$data);
 						$this->load->view('layout/footer');
 					}
@@ -58,7 +58,7 @@
 														'La código no pertece a esta encuesta'.
 													'</div>'.
 												'</div>');
-					$this->load->view('vida/header');
+					$this->load->view('layout/header');
 					$this->load->view('vida/validar',$data);
 					$this->load->view('layout/footer');
 				}
@@ -117,12 +117,12 @@
 				//print_r($data);
 				if($estado != "Finalizado"){
 					if($pregunta <= $limite){
-						$this->load->view('vida/header');
+						$this->load->view('layout/header');
 						$this->load->view('vida/test_vida',$data);
 						$this->load->view('layout/footer');
 					}
 				}else{					
-					$this->load->view('vida/header');
+					$this->load->view('layout/header');
 					$this->load->view('vida/agradecimiento',$data);
 					$this->load->view('layout/footer');
 				}
@@ -160,7 +160,7 @@
 					$s = $this->vida_model->obtenerDatos($codigo);
 					//print_r($s);exit;
 					$data = array('nombre' => $s->nombre);
-					$this->load->view('vida/header');
+					$this->load->view('layout/header');
 					$this->load->view('vida/agradecimiento',$data);
 					$this->load->view('layout/footer');
 				}else{

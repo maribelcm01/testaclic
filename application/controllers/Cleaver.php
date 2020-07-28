@@ -10,7 +10,7 @@
 
         public function index() {
             $data = array('mensaje' => '');
-            $this->load->view('cleaver/header');
+            $this->load->view('layout/header');
             $this->load->view('cleaver/validar',$data);
             $this->load->view('layout/footer');
         }
@@ -25,7 +25,7 @@
 														'El código ingresado es incorrecto'.
 													'</div>'.
 												'</div>');
-					$this->load->view('cleaver/header');
+					$this->load->view('layout/header');
 					$this->load->view('cleaver/validar',$data);
 					$this->load->view('layout/footer');
 			}else{
@@ -40,7 +40,7 @@
 															'La encuesta ya fue contestada'.
 														'</div>'.
 													'</div>');
-						$this->load->view('cleaver/header');
+						$this->load->view('layout/header');
 						$this->load->view('cleaver/validar',$data);
 						$this->load->view('layout/footer');
 					}else{
@@ -49,7 +49,7 @@
 							'nombre' => $a->nombre,
 							'codigo' => $a->codigo
 						);
-						$this->load->view('cleaver/header');
+						$this->load->view('layout/header');
 						$this->load->view('cleaver/index',$data);
 						$this->load->view('layout/footer');
 					}
@@ -59,7 +59,7 @@
 														'La código no pertece a esta encuesta'.
 													'</div>'.
 												'</div>');
-					$this->load->view('cleaver/header');
+					$this->load->view('layout/header');
 					$this->load->view('cleaver/validar',$data);
 					$this->load->view('layout/footer');
 				}
@@ -85,7 +85,7 @@
 					'nombre' => $datos->nombre,
 					'codigo' => $datos->codigo
 				);
-				$this->load->view('cleaver/header');
+				$this->load->view('layout/header');
 				$this->load->view('cleaver/agradecimiento',$data);
 				$this->load->view('layout/footer');
 			}else{
@@ -144,7 +144,7 @@
 					'mayor' => $mayor
 				);
 				
-				$this->load->view('cleaver/header');
+				$this->load->view('layout/header');
 				$this->load->view('cleaver/test_cleaver',$data);
 				$this->load->view('layout/footer');
 			}
@@ -260,7 +260,7 @@
 			);
 
 			if ($this->session->userdata('is_logged')) {
-				$this->load->view('cleaver/header');
+				$this->load->view('layout/header');
 				$this->load->view('cleaver/resultados',$data);
 				$this->load->view('layout/footer');
 			}else{

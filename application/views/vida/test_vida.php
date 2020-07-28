@@ -45,6 +45,7 @@
 </div>
 
 <script>
+	document.title = 'Vida';
     $(document).ready(function(){
         $('[data-toggle="mensaje"]').tooltip(); 
     });

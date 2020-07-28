@@ -5,15 +5,15 @@
             <form method="post" action="<?php echo base_url() ?>encuestado/guardar_post/<?php echo $idEncuestado ?>">
                 <div class="form-group">
                     <label> Nombre </label>
-                    <input class="form-control" type="text" name="nombre" value="<?php echo $nombre ?>" required/>
+                    <input class="form-control" type="text" name="nombre" placeholder="Nombre y apellidos" value="<?php echo $nombre ?>" required/>
                 </div>
                 <div class="form-group">
                     <label> Teléfono </label>
-                    <input class="form-control" type="tel" name="telefono" value="<?php echo $telefono; ?>" required/>
+                    <input class="form-control" type="tel" name="telefono" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="0123456789" value="<?php echo $telefono; ?>" required/>
                 </div>
                 <div class="form-group">
                    <label> Correo </label>
-                   <input class="form-control" type="email" name="email" value="<?php echo $email; ?>" required/>
+                   <input class="form-control" type="email" name="email" placeholder="usuario@dominio.com"value="<?php echo $email; ?>" required/>
                 </div>
                 <div class="form-group">
                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>

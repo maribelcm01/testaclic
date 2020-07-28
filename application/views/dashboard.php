@@ -4,3 +4,4 @@
 	</div>
 </body>
 </html>
+<script>document.title = 'Inicio';</script>

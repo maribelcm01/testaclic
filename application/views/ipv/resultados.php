@@ -192,6 +192,7 @@
 </div>
 
 <script>
+    document.title = 'IPV';
     Highcharts.chart('container', {
         chart: {
             type: 'spline'

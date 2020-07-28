@@ -41,14 +41,15 @@
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-		$(".eliminar_alert").each(function() {
-	   		var href = $(this).attr('href');
-	      		$(this).attr('href', 'javascript:void(0)');
-	      		$(this).click(function() {
-	        	if (confirm("¿Seguro desea eliminar este Registro?")) {
-	            	location.href = href;
-	        	}
-	    	});
-	   	});	
-	</script>
+<script type="text/javascript">
+	document.title = 'Encuestados';
+	$(".eliminar_alert").each(function() {
+		var href = $(this).attr('href');
+			$(this).attr('href', 'javascript:void(0)');
+			$(this).click(function() {
+			if (confirm("¿Seguro desea eliminar este Registro?")) {
+				location.href = href;
+			}
+		});
+	});	
+</script>

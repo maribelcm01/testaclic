@@ -9,9 +9,10 @@
 
 		public function index(){
 			$data['menu'] = main_menu();
-			$this->load->view('header');
+			$this->load->view('layout/header');
+			$this->load->view('navbar');
 			$this->load->view('index',$data);		
-			$this->load->view('footer');
+			$this->load->view('layout/footer');
 		}
 	}
 ?>

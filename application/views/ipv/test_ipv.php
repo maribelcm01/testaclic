@@ -43,9 +43,4 @@
 	<h4><b><?=$pregunta?> / <?=$mayor?></b></h4>
 </div>
 
-<script>
-    $('.mas').click(function() {
-        $('.cmas').removeClass('cmas');
-        $(this).addClass('cmas').find('input').prop('checked', true)    
-    });
-</script>
+<script> document.title = 'IPV'; </script>

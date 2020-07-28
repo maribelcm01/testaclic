@@ -10,7 +10,7 @@
 
         public function index() {
             $data = array('mensaje' => '');
-            $this->load->view('zavic/header');
+            $this->load->view('layout/header');
             $this->load->view('zavic/validar',$data);
             $this->load->view('layout/footer');
         }
@@ -25,7 +25,7 @@
 														'El código ingresado es incorrecto'.
 													'</div>'.
 												'</div>');
-					$this->load->view('zavic/header');
+					$this->load->view('layout/header');
 					$this->load->view('zavic/validar',$data);
 					$this->load->view('layout/footer');
 			}else{
@@ -40,7 +40,7 @@
 															'La encuesta ya fue contestada'.
 														'</div>'.
 													'</div>');
-						$this->load->view('zavic/header');
+						$this->load->view('layout/header');
 						$this->load->view('zavic/validar',$data);
 						$this->load->view('layout/footer');
 					}else{
@@ -49,7 +49,7 @@
 							'nombre' => $a->nombre,
 							'codigo' => $a->codigo
 						);
-						$this->load->view('zavic/header');
+						$this->load->view('layout/header');
 						$this->load->view('zavic/index',$data);
 						$this->load->view('layout/footer');
 					}
@@ -59,7 +59,7 @@
 														'La código no pertece a esta encuesta'.
 													'</div>'.
 												'</div>');
-					$this->load->view('zavic/header');
+					$this->load->view('layout/header');
 					$this->load->view('zavic/validar',$data);
 					$this->load->view('layout/footer');
 				}
@@ -111,7 +111,7 @@
 					'RptaC' => $RptaC,
 					'RptaD' => $RptaD
 				);
-				$this->load->view('zavic/header');
+				$this->load->view('layout/header');
 				$this->load->view('zavic/test_zavic',$data);
 				$this->load->view('layout/footer');
 			}else{
@@ -121,7 +121,7 @@
 					'nombre' => $datos->nombre,
 					'codigo' => $datos->codigo
 				);
-				$this->load->view('zavic/header');
+				$this->load->view('layout/header');
 				$this->load->view('zavic/agradecimiento',$data);
 				$this->load->view('layout/footer');
 			}
@@ -178,7 +178,7 @@
 			);
 			
 			if ($this->session->userdata('is_logged')) {
-                $this->load->view('zavic/header');
+                $this->load->view('layout/header');
 				$this->load->view('zavic/resultados',$data);
 				$this->load->view('layout/footer');
             }else{

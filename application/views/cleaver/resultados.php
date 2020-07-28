@@ -89,6 +89,7 @@
 </div>
 
 <script>
+    document.title = 'Cleaver';
     Highcharts.chart('container1', {
         title: { text: 'Normal' },
         subtitle: { text: '' },

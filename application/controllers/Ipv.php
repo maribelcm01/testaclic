@@ -9,7 +9,7 @@
 
 		public function index(){
 			$data = array('mensaje' => '');
-			$this->load->view('ipv/header');
+			$this->load->view('layout/header');
 			$this->load->view('ipv/validar',$data);
 			$this->load->view('layout/footer');
         }
@@ -24,7 +24,7 @@
 														'El código ingresado es incorrecto'.
 													'</div>'.
 												'</div>');
-					$this->load->view('ipv/header');
+					$this->load->view('layout/header');
 					$this->load->view('ipv/validar',$data);
 					$this->load->view('layout/footer');
 			}else{
@@ -39,7 +39,7 @@
 															'La encuesta ya fue contestada'.
 														'</div>'.
 													'</div>');
-						$this->load->view('ipv/header');
+						$this->load->view('layout/header');
 						$this->load->view('ipv/validar',$data);
 						$this->load->view('layout/footer');
 					}else{
@@ -48,7 +48,7 @@
 							'nombre' => $a->nombre,
 							'codigo' => $a->codigo
 						);
-						$this->load->view('ipv/header');
+						$this->load->view('layout/header');
 						$this->load->view('ipv/index',$data);
 						$this->load->view('layout/footer');
 					}
@@ -58,7 +58,7 @@
 														'La código no pertece a esta encuesta'.
 													'</div>'.
 												'</div>');
-					$this->load->view('ipv/header');
+					$this->load->view('layout/header');
 					$this->load->view('ipv/validar',$data);
 					$this->load->view('layout/footer');
 				}
@@ -102,7 +102,7 @@
 					'mayor' => $first_last[1]['indice'],
 					'control_siguiente' => $control_siguiente
 				);
-				$this->load->view('ipv/header');
+				$this->load->view('layout/header');
 				$this->load->view('ipv/test_ipv',$data);
 				$this->load->view('layout/footer');
 			}else{
@@ -112,7 +112,7 @@
 					'nombre' => $datos->nombre,
 					'codigo' => $datos->codigo
 				);
-				$this->load->view('ipv/header');
+				$this->load->view('layout/header');
 				$this->load->view('ipv/agradecimiento',$data);
 				$this->load->view('layout/footer');
 			}
@@ -203,7 +203,7 @@
 				'IXC' => $IXC
 			);
 
-			$this->load->view('ipv/header');
+			$this->load->view('layout/header');
 			$this->load->view('ipv/resultados',$data);
 			$this->load->view('layout/footer');
 		}

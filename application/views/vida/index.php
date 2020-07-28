@@ -18,3 +18,4 @@
         </form>
     </div>
 </div>
+<script> document.title ='Vida'; </script>

@@ -89,6 +89,7 @@
     <input type="hidden" id="pregunta" value="<?php echo $pregunta?>">
 </div>
 <script>
+    document.title = 'Cleaver';
     $('.mas').click(function() {
         $('.cmas').removeClass('cmas');
         $(this).addClass('cmas').find('input').prop('checked', true)    
