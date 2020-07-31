@@ -1,23 +1,23 @@
 <div class="container">
-	<div class="row justify-content-sm-center mt40">
-		<div class="col-6">
+	<div class="row m-4 justify-content-sm-center">
+		<div class="col-md-6">
             <h2>Reactivos de Encuesta <?php echo $nombre?></h2>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
 			<a class="btn btn-success" href="<?php echo base_url() ?>reactivo/guardar/<?php echo $idEncuesta?>"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 	<div class="row justify-content-center">
-		<div class="col-12">
+		<div class="col-md-12">
 			<?php if (count($reactivo)): ?>
-			<table class="table table-bordered">
+			<table id="example" class="table table-bordered">
 			    <thead>
 				    <tr>
 			    		<!-- <th> Encuesta </th> -->
 			          	<th> Reactivo </th>
 			          	<th> Comentario </th>
 			          	<th> Índice </th>
-			          	<td colspan="2">Action</td>
+			          	<th>Acción</th>
 			       	</tr>
 			    </thead>
 		    	<tbody>
@@ -48,4 +48,11 @@
 		</div>
 	</div>
 </div>
-<script>document.title = 'Reactivos';</script>
+<script>
+	document.title = 'Reactivos';
+	$('#example').DataTable({
+		"language": {
+		"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+		}
+	});
+</script>

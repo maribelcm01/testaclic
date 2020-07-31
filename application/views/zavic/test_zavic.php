@@ -5,23 +5,20 @@
             <h6>(Enlista, siendo <b>4 el más importante</b> al <b>1 el menos importante</b>.)</h6><br>
             <h5><b><?php echo $reactivo?>:</b></h5><br>
             <div>
-                <input type="text" name="respuesta" value="<?php echo $RptaA;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
-                <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
+                <input type="number" name="respuesta" value="<?php echo $RptaA;?>" pattern="[1-4]{1}" onchange="changeresponse(this);" class="col-sm-1 col-xs-1 input" required>
+                <!-- <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i> -->
                 <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaA?>.</b></label>
             </div><br>
             <div>
-                <input type="text" name="respuesta" value="<?php echo $RptaB;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
-                <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
+                <input type="number" name="respuesta" value="<?php echo $RptaB;?>" pattern="[1-4]{1}" onchange="changeresponse(this);" class="col-sm-1 col-xs-1 input" required>
                 <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaB?>.</b></label>
             </div><br>
             <div>
-                <input type="text" name="respuesta" value="<?php echo $RptaC;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
-                <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
+                <input type="number" name="respuesta" value="<?php echo $RptaC;?>" pattern="[1-4]{1}" onchange="changeresponse(this);" class="col-sm-1 col-xs-1 input" required>
                 <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaC?>.</b></label>
             </div><br>
             <div>
-                <input type="text" name="respuesta" value="<?php echo $RptaD;?>" onchange="changeresponse(this);" class="col-sm-1 col-xs-1" required>
-                <i class="fa fa-times check-ko"></i><i class="fa fa-check check-ok"></i>
+                <input type="number" name="respuesta" value="<?php echo $RptaD;?>" pattern="[1-4]{1}" onchange="changeresponse(this);" class="col-sm-1 col-xs-1 input" required>
                 <label class="col-sm-6 col-xs-6"><b><?php echo $respuestaD?>.</b></label>
             </div><br>
             <div class="row justify-content-center">
@@ -61,14 +58,12 @@
         if(diferente.length == 0){
             enviarRespuestas(array_inputs_valores);
         }else{
-            alert("Revisa tus respuestas. \nRecuerda llenar todos los campos. \nNo repetir los números.");
+            alert("Revisa tus respuestas. \n * Recuerda llenar todos los campos. \n * No repetir los números.");
         }
     }
     function changeresponse (val){
-        regexInput = /[1-4]{1}/;
-        if(regexInput.test(val.value)){
-            
-        }else{
+        if(val.value < 1 || val.value > 4){
+            alert("Respuesta no válida");
             val.value = '';
         }
     }

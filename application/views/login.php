@@ -1,6 +1,6 @@
 <?= validation_errors() ?>
-<div class="container mt40">
-	<div class="row justify-content-lg-center align-items-lg-center">
+<div class="container">
+	<div class="row m-4 justify-content-lg-center align-items-lg-center">
 		<div class="col-lg-4 alogn-self-center">
 			<h1>Login</h1>
 			<form action="<?= base_url('login/validate')?>" method="POST" id="frm_login">

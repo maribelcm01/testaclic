@@ -1,17 +1,17 @@
 <div class="container">
-	<div class="row justify-content-sm-center mt40">
-		<div class="col-6">
+	<div class="row m-4 justify-content-sm-center">
+		<div class="col-md-6">
             <h2>Lista de Aplicación de Encuestas</h2>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
 			<a class="btn btn-success" href="<?php echo base_url() ?>aplicacion/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-11">
-		<?php if (count($aplicacion)): ?>
-			<table class="table table-bordered">
+		<div class="col-md-11">
+			<?php if (count($aplicacion)): ?>
+			<table id="example" class="table table-bordered">
 			    <thead>
 				    <tr>
 						<th>Encuesta</th>
@@ -20,11 +20,11 @@
 						<th>Creado</th>
 						<th>Estado</th>
 						<th>Finalizado</th>
-			          	<td colspan="2">Action</td>
+			          	<th>Acción</th>
 			       	</tr>
 			    </thead>
 		    	<tbody>
-		       	<?php foreach($aplicacion as $item): ?>
+		       		<?php foreach($aplicacion as $item): ?>
 		          	<tr>
 						<td> <?php echo $item->nomEncuesta ?> </td>
 						<td> <?php echo $item->nomEncuestado ?> </td>
@@ -47,7 +47,7 @@
 							<!--<a class="btn btn-info" href="<?php echo base_url() ?>aplicacion/ver/<?php echo $item->idAplicacion ?>"> Ver </a>-->
 		             	</td>
 		          	</tr>
-		       	<?php endforeach; ?>
+		       		<?php endforeach; ?>
 		    	</tbody>
 		 	</table>
 		 	<?php else: ?>
@@ -58,13 +58,9 @@
 </div>
 <script type="text/javascript">
 	document.title = 'Aplicaciones';
-	$(".eliminar_alert").each(function() {
-		var href = $(this).attr('href');
-		$(this).attr('href', 'javascript:void(0)');
-		$(this).click(function() {
-			if (confirm("¿Seguro desea eliminar este Registro?")) {
-				location.href = href;
-			}
-		});
-	});	
+	$('#example').DataTable({
+		"language": {
+		"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+		}
+	});
 </script>

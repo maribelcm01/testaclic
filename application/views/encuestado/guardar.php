@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row justify-content-center mt40">
-        <div class=" col-4">
+    <div class="row m-4 justify-content-center">
+        <div class="col-md-4">
             <h4> Guardar Registro </h4>
             <form method="post" action="<?php echo base_url() ?>encuestado/guardar_post/<?php echo $idEncuestado ?>">
                 <div class="form-group">

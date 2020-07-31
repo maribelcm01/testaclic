@@ -137,5 +137,13 @@
 					result();
 			return $d;
 		}
+
+		public function interpreta($enfoque,$etiqueta){
+			$q = $this->db->select('*')->
+					where('enfoque = '.'\''.$enfoque.'\''.' AND etiqueta ='.'\''.$etiqueta.'\'')->
+					get('interp_ipv')->
+					row();
+			return $q;
+		}
     }
 ?>

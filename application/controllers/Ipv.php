@@ -4,6 +4,7 @@
 	class Ipv extends CI_Controller{
 		public function __construct(){
 			parent::__construct();
+			$this->load->library(array('form_validation','session'));
 			$this->load->model('ipv_model');
 		}
 
@@ -161,51 +162,46 @@
 			$DGV = $B[1]+$B[2]+$B[3]+$B[4]+$A[5]+$C[6]+$A[7]+$A[8]+$C[8]+$A[9]+$B[10]+$B[11]+$C[12]+$B[13]+$B[14]+$A[15]+$C[16]+$B[17]+$C[18];
 			$R = $I + $II + $III + $IV;
 			$A = $V + $VI + $VII + $VIII;
-/*print_r($DGV.'<br>'.$R.'<br>'.$A.'<br>'.$I.'<br>'.$II.'<br>'.$III.'<br>'.$IV.'<br>'.$V.'<br>'.$VI.'<br>'.$VII.'<br>'.$VIII.'<br>'.$IX.'<br>');*/
-			$DGVC = self::convertir($DGV,'DGV');
-			$RC = self::convertir($R,'R');
-			$AC = self::convertir($A,'A');
-			$IC = self::convertir($I,'I');
-			$IIC = self::convertir($II,'II');
-			$IIIC = self::convertir($III,'III');
-			$IVC = self::convertir($IV,'IV');
-			$VC = self::convertir($V,'V');
-			$VIC = self::convertir($VI,'VI');
-			$VIIC = self::convertir($VII,'VII');
-			$VIIIC = self::convertir($VIII,'VIII');
-			$IXC = self::convertir($IX,'IX');
-/*print_r($DGVC.'<br>'.$RC.'<br>'.$AC.'<br>'.$IC.'<br>'.$IIC.'<br>'.$IIIC.'<br>'.$IVC.'<br>'.$VC.'<br>'.$VIC.'<br>'.$VIIC.'<br>'.$VIIIC.'<br>'.$IXC.'<br>');*/			
-			
-			$data = array(
-				'DGV' =>$DGV,
-				'R' => $R,
-				'A' => $A,
-				'I' => $I,
-				'II' => $II,
-				'III' => $III,
-				'IV' => $IV,
-				'V' => $V,
-				'VI' => $VI,
-				'VII' => $VII,
-				'VIII' => $VIII,
-				'IX' => $IX,
-				'DGVC' =>$DGVC,
-				'RC' => $RC,
-				'AC' => $AC,
-				'IC' => $IC,
-				'IIC' => $IIC,
-				'IIIC' => $IIIC,
-				'IVC' => $IVC,
-				'VC' => $VC,
-				'VIC' => $VIC,
-				'VIIC' => $VIIC,
-				'VIIIC' => $VIIIC,
-				'IXC' => $IXC
-			);
 
-			$this->load->view('layout/header');
-			$this->load->view('ipv/resultados',$data);
-			$this->load->view('layout/footer');
+			$PD[] = array("enfoque" => "DGV","valor" => $DGV);
+			$PD[] = array("enfoque" => "R","valor" => $R);
+			$PD[] = array("enfoque" => "A","valor" => $A);
+			$PD[] = array("enfoque" => "I","valor" => $I);
+			$PD[] = array("enfoque" => "II","valor" => $II);
+			$PD[] = array("enfoque" => "III","valor" => $III);
+			$PD[] = array("enfoque" => "IV","valor" => $IV);
+			$PD[] = array("enfoque" => "V","valor" => $V);
+			$PD[] = array("enfoque" => "VI","valor" => $VI);
+			$PD[] = array("enfoque" => "VII","valor" => $VII);
+			$PD[] = array("enfoque" => "VIII","valor" => $VIII);
+			$PD[] = array("enfoque" => "IX","valor" => $IX);
+			for($i = 0; $i < sizeof($PD); $i++){
+				$PT[] = self::convertir($PD[$i]['valor'],$PD[$i]['enfoque']);
+			}
+			for($i = 0; $i < sizeof($PT); $i++){
+				$etiqueta[] = self::verEtiqueta($PT[$i]);
+				$consulta[] = $this->ipv_model->interpreta($PD[$i]['enfoque'],$etiqueta[$i]);				
+				$resultado[] = array(
+					"interpretacion" => $consulta[$i]->interpretacion,
+					"enfoque" => $PD[$i]['enfoque'],
+					"PD" => $PD[$i]['valor'],
+					"PT" => $PT[$i],
+					"Escala" => $consulta[$i]->escala
+				);
+			}
+			$datos = $this->ipv_model->obtenerDatos($codigo);	
+			$data = array(
+				'nombre' => $datos->nombre,
+				'resultado' => $resultado,
+				'consulta' => $consulta
+			);
+			if ($this->session->userdata('is_logged')) {
+				$this->load->view('layout/header');
+				$this->load->view('ipv/resultados',$data);
+				$this->load->view('layout/footer');
+			}else{
+				redirect(base_url('login'));
+			}
 		}
 		public function convertir($x,$y){
 			switch ($y) {
@@ -334,6 +330,40 @@
 					if($x >= 17 && $x <= 18){ return 8; }
 					if($x >= 19 && $x <= 20){ return 9; }
 					if($x >= 21 && $x <= 38){ return 10; }
+				break;
+			}
+		}
+		public function verEtiqueta($x){
+			switch ($x) {
+				case "1":
+					return "Menor a 2";
+				break;
+				case "2":
+					return "Entre 2.1 y 4";
+				break;
+				case "3":
+					return "Entre 2.1 y 4";
+				break;
+				case "4":
+					return "Entre 2.1 y 4";
+				break;
+				case "5":
+					return "Entre 4.1 y 6";
+				break;
+				case "6":
+					return "Entre 4.1 y 6";
+				break;
+				case "7":
+					return "Entre 6.1 y 8";
+				break;
+				case "8":
+					return "Entre 6.1 y 8";
+				break;
+				case "9":
+					return "Mayor a 8";
+				break;
+				case "10":
+					return "Mayor a 8";
 				break;
 			}
 		}

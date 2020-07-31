@@ -1,21 +1,21 @@
 <div class="container">
-	<div class="row justify-content-sm-center mt40">
-		<div class="col-4">
+	<div class="row m-4 justify-content-sm-center">
+		<div class="col-md-4">
             <h2>Lista de Encuestas</h2>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
 			<a class="btn btn-success" href="<?php echo base_url() ?>encuesta/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-6">
-		<?php if (count($encuesta)): ?>
-			<table class="table table-bordered">
+		<div class="col-md-6">
+			<?php if (count($encuesta)): ?>
+			<table id="example" class="table table-bordered">
 			    <thead>
 				    <tr>
 			    		<th> Nombre </th>
-			          	<td colspan="2">Action</td>
+			          	<th>Acción</th>
 			       	</tr>
 			    </thead>
 		    	<tbody>
@@ -41,13 +41,9 @@
 </div>
 <script type="text/javascript">
 	document.title = 'Encuestas';
-	$(".eliminar_alert").each(function() {
-		var href = $(this).attr('href');
-		$(this).attr('href', 'javascript:void(0)');
-		$(this).click(function() {
-			if (confirm("¿Seguro desea eliminar este Registro?")) {
-				location.href = href;
-			}
-		});
+	$('#example').DataTable({
+		"language": {
+		"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+		}
 	});
 </script>

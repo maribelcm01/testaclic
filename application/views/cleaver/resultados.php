@@ -1,69 +1,67 @@
 <div class="container">
     <div class="row m-4">
         <div class="col-md-2">
-            <div class="">
-                <button class="btn btn-success" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button><br>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" style="margin-top:10px;margin-left:20px;width:100px" data-toggle="modal" data-target=".modal-graficas">Gráficas</button>
-                <!-- Modal -->
-                <div class="modal fade modal-graficas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Gráficas Cleaver</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <figure class="highcharts-figure">
-                                    <div id="container1"></div>
-                                </figure><br>
-                                <figure class="highcharts-figure">
-                                    <div id="container2"></div>
-                                </figure><br>
-                                <figure class="highcharts-figure">
-                                    <div id="container3"></div>
-                                </figure>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button><br>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" data-toggle="modal" data-target=".modal-graficas">Gráficas</button>
+            <!-- Modal -->
+            <div class="modal fade modal-graficas" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gráficas Cleaver</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <figure class="highcharts-figure">
+                                <div id="container1"></div>
+                            </figure><br>
+                            <figure class="highcharts-figure">
+                                <div id="container2"></div>
+                            </figure><br>
+                            <figure class="highcharts-figure">
+                                <div id="container3"></div>
+                            </figure>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success" style="margin-top:10px;margin-left:20px;width:100px" data-toggle="modal" data-target=".modal-patron">Patrones</button>
-                <!-- Modal -->
-                <div class="modal fade modal-patron" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Patrones Cleaver</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <figure class="figure">
-                                    <img src="<?=base_url("application/assets/img/patrones.jpeg")?>" class="figure-img img-fluid rounded" alt="">
-                                </figure>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+            </div>
+            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" data-toggle="modal" data-target=".modal-patron">Patrones</button>
+            <!-- Modal -->
+            <div class="modal fade modal-patron" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Patrones Cleaver</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <figure class="figure">
+                                <img src="<?=base_url("application/assets/img/patrones.jpeg")?>" class="figure-img img-fluid rounded" alt="">
+                            </figure>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success" style="margin-top:10px;margin-left:20px;width:100px" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Métricas
-                </button>
-                <div style="margin-top:10px;margin-left:20px;" id="collapseExample" class="collapse">
-                    <ul style= "list-style-type: none">
-                        <?php foreach($datos as $key):?>
-                            <li style="font-weight:bold"><?php echo $key;?></li>
-                        <?php endforeach; ?>
-                    </ul> 
-                </div>
+            </div>
+            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Métricas
+            </button>
+            <div style="margin-top:10px" id="collapseExample" class="collapse">
+                <ul style= "list-style-type: none">
+                    <?php foreach($datos as $key):?>
+                        <li><b><?php echo $key;?></b></li>
+                    <?php endforeach; ?>
+                </ul> 
             </div>
         </div>
         <div class="col-md-10" id="exportContent">

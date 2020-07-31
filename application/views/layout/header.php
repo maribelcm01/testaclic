@@ -15,18 +15,26 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <!-- Libreria underscore comparacion de arreglos -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script> 
+        
+        <!-- Exportacion a pdf encuesta Cleaver-->
         <script type="text/javascript" src="<?=base_url('application/assets/js/Export2Doc.js')?>"></script> 
-
+        
+        <!-- Highcharts -->
 		<script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+        <!-- Datatables -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
 		<style>
 			@import url("//fonts.googleapis.com/css?family=Terminal+Dosis");
 			body { font-family: "Terminal Dosis", sans-serif; }
-			.mt40{ margin-top: 40px; }
 
 			/* codigo css cleaver */
 			.mas{border:1px solid #4cbed8;width:40px;
@@ -38,12 +46,14 @@
             .cmenos{background-color:red;}
 			
 			/* codigo css zavic */
-			.check-ok { color: green; }
+            input.input:invalid { border-color: red; }
+			input.input:valid { border-color: green; }
+			/* .check-ok { color: green; }
 			.check-ko { color: red; }
 			input:invalid ~ .check-ok { display: none; }
 			input:valid ~ .check-ok { display: inline; }
 			input:invalid ~ .check-ko { display: inline; }
-			input:valid ~ .check-ko { display: none; }
+			input:valid ~ .check-ko { display: none; } */
 
 			/* css gráficas cleaver, zavic e ipv */
 			.highcharts-figure, .highcharts-data-table table {
