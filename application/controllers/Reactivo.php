@@ -106,12 +106,10 @@
         }
 
         public function guardarOpc($idEncuesta,$idReactivo = null,$indice = null){
-            $idRespuesta = null;
             $respuesta = null;
             $respuestas = $this->reactivo_model->obtener_por_idOpc($idReactivo);
             if($indice != null){
                 $opcion = $this->reactivo_model->obtener_por_indice($idReactivo,$indice);
-                $idRespuesta = $opcion->idRespuesta;
                 $respuesta = $opcion->respuesta;
             }
             $data = array(
@@ -119,7 +117,6 @@
                 'idEncuesta' => $idEncuesta,
                 'idReactivo' => $idReactivo,
                 'respuestas' => $respuestas,
-                'idRespuesta' => $idRespuesta,
                 'indice' => $indice,
                 'respuesta' => $respuesta,
             );
@@ -136,11 +133,9 @@
 
         public function guardar_postOpc($idEncuesta,$idReactivo){
             if($this->input->post()){
-                $idRespuesta = $this->input->post('idRespuesta');
                 $respuesta = $this->input->post('respuesta');
                 $indice = $this->input->post('indice');
-                
-                $this->reactivo_model->guardarOpc($idRespuesta, $respuesta, $indice, $idReactivo);
+                $this->reactivo_model->guardarOpc($idReactivo, $indice, $respuesta);
                 redirect('reactivo/guardarOpc/'.$idEncuesta.'/'.$idReactivo);
             }else{
                 $this->guardarOpc($idEncuesta);

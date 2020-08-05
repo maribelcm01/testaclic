@@ -251,8 +251,8 @@
 			$H6 = $this->vida_model->obtenerCluster(236,240,$idAplicacion);
 			$R12 = $E6 + $F6 +$G6 + $H6;
 
-			$this->vida_model->insertarVida($idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12);
-			//print_r($R1.' '.$R2.' '.$R3.' '.$R4.' '.$R5.' '.$R6.' '.$R7.' '.$R8.' '.$R9.' '.$R10.' '.$R11.' '.$R12.' ');
+			//$this->vida_model->insertarVida($idAplicacion,$R1,$R2,$R3,$R4,$R5,$R6,$R7,$R8,$R9,$R10,$R11,$R12);
+			print_r($R1.' '.$R2.' '.$R3.' '.$R4.' '.$R5.' '.$R6.' '.$R7.' '.$R8.' '.$R9.' '.$R10.' '.$R11.' '.$R12.' ');
 		}
 	}
 ?>

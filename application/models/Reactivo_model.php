@@ -51,7 +51,7 @@
 		}
 
 		public function obtener_por_idOpc($id){
-			$this->db->select('idRespuesta, respuesta, indice, idReactivo');
+			$this->db->select('idReactivo, indice, respuesta');
 			$this->db->from('respuesta');
 			$this->db->where('idReactivo', $id);
 			$consulta = $this->db->get();
@@ -60,7 +60,7 @@
 		}
 
 		public function obtener_por_indice($id,$indice){
-			$this->db->select('idRespuesta, respuesta, indice, idReactivo');
+			$this->db->select('idReactivo, indice, respuesta');
 			$this->db->from('respuesta');
 			$this->db->where('idReactivo', $id);
 			$this->db->where('indice', $indice);
@@ -69,18 +69,9 @@
 			return $resultado;
 		}
 
-		public function guardarOpc($idRespuesta, $respuesta, $indice, $idReactivo){
-			$data = array(
-				'respuesta' => $respuesta,
-				'indice' => $indice,
-				'idReactivo' => $idReactivo
-			);
-			if($idRespuesta){
-				$this->db->where('idRespuesta', $idRespuesta);
-				$this->db->update('respuesta', $data);
-			}else{
-				$this->db->insert('respuesta', $data);
-			}
+		public function guardarOpc($idReactivo, $indice, $respuesta){
+			$this->db->query("INSERT INTO respuesta VALUES($idReactivo, ".'\''.$indice.'\''.", ".'\''.$respuesta.'\''.")
+					ON DUPLICATE KEY UPDATE respuesta = ".'\''.$respuesta.'\''.";");
 		}
 
 		/* public function eliminar($id){

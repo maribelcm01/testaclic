@@ -3,7 +3,6 @@
         <div class=" col-md-6">
             <form action="<?php echo base_url() ?>reactivo/guardar_postOpc/<?php echo $idEncuesta?>/<?php echo $idReactivo?>" method="post">
                 <div class="form-group">
-                    <input type="hidden" name="idRespuesta" value="<?php echo $idRespuesta?>">
                     <input type="text" name="indice" class="form-control" placeholder="Opción" value="<?php echo $indice?>" required>
                     <input type="text" name="respuesta" class="form-control" placeholder="Nueva Opción" value="<?php echo $respuesta?>" required>
                 </div>
@@ -15,7 +14,7 @@
         </div>
     </div>
     <div class="row m-4 justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <?php if (count($respuestas)): ?>
                 <table id="example" class="table">
                     <thead>

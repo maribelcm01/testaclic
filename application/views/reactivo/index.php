@@ -13,25 +13,20 @@
 			<table id="example" class="table table-bordered">
 			    <thead>
 				    <tr>
-			    		<!-- <th> Encuesta </th> -->
+			          	<th> Índice </th>
 			          	<th> Reactivo </th>
 			          	<th> Comentario </th>
-			          	<th> Índice </th>
 			          	<th>Acción</th>
 			       	</tr>
 			    </thead>
 		    	<tbody>
 		       		<?php foreach($reactivo as $item): ?>
 		          	<tr>
-		             	<!-- <td> <?php echo $item->nombre ?> </td> -->
+		             	<td> <?php echo $item->indice; ?> </td>
 		             	<td> <?php echo $item->reactivo ?> </td>
 		             	<td> <?php echo $item->comentario ?> </td>
-		             	<td> <?php echo $item->indice; ?> </td>
 		             	<td>
-							<?php if($item->nombre == "Zavic"): ?>
-								<a class="btn btn-secondary" href="<?php echo base_url() ?>reactivo/guardarOpc/<?php echo $idEncuesta?>/<?php echo $item->idReactivo?>">Opciones</a>
-							<?php endif; ?>
-							<?php if($item->nombre == "IPV"): ?>
+							<?php if($item->nombre == "Zavic" || $item->nombre == "IPV" || $item->nombre == "Terman merril"): ?>
 								<a class="btn btn-secondary" href="<?php echo base_url() ?>reactivo/guardarOpc/<?php echo $idEncuesta?>/<?php echo $item->idReactivo?>">Opciones</a>
 							<?php endif; ?>
 							<a class="btn btn-primary" href="<?php echo base_url() ?>reactivo/guardar/<?php echo $idEncuesta?>/<?php echo $item->idReactivo ?>"><i class="fas fa-edit"></i>Editar </a>
