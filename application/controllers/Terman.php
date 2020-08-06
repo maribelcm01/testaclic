@@ -6,7 +6,7 @@
 			parent::__construct();
 			$this->load->library(array('form_validation','session'));
 			$this->load->model('terman_model');
-        }
+		}
 
         public function index() {
             $data = array('mensaje' => '');
@@ -63,6 +63,37 @@
 					$this->load->view('layout/footer');
 				}
 			}
+		}
+		
+		public function encuesta($codigo){
+			$a = $this->terman_model->obtenerDatos($codigo);
+			$numero = array('','I','II','III','IV','V','VI','VII','VIII','IX','X');
+			$estado = $this->terman_model->verEstado($codigo);
+			if($estado == 'Pendiente'){
+				$estado = $numero[1];
+				$this->terman_model->cambiarEstado($codigo,$estado);
+			}else{
+				$estado = $this->terman_model->verEstado($codigo);
+				$subtest = $this->terman_model->datosST($estado);
+				$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$estado);
+				/* $aux = array_search($estado, $numero);
+				$aux = $aux+1;
+				print_r($aux);
+				$estado = $numero[$aux];
+				print_r($estado); */
+			}
+			$data = array(
+				'nombre' => $a->nombre,
+				'codigo' => $a->codigo,
+				'serie' => $subtest->serie,
+				'instruccion' => $subtest->instruccion,
+				'ejemplo' => $subtest->ejemplo,
+				'reactivo' => $datosPregunta[0]->reactivo,
+				'datos' => $datosPregunta
+			);
+			$this->load->view('layout/header');
+			$this->load->view('terman/test_terman',$data);
+			$this->load->view('layout/footer');
 		}
     }
 ?>

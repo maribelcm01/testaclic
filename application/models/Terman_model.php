@@ -47,5 +47,26 @@
 					row();
 			return $d;
 		}
+		public function datosST($estado){
+			$d = $this->db->select("*")->
+					where("serie",$estado)->
+					get("info_terman")->
+					row();
+			return $d;
+		}
+		public function cambiarEstado($codigo,$estado){
+				$data = array('estado' => $estado);
+				$this->db->where('codigo',$codigo);
+        		$this->db->update('aplicacion',$data);
+		}
+		public function obtenerPregunta($codigo,$estado){
+			$d = $this->db->select('reactivo.idReactivo, reactivo.reactivo, respuesta.respuesta, respuesta.indice,')->
+                    where('reactivo.indice = aplicacion.pregunta
+					AND respuesta.idReactivo = reactivo.idReactivo AND aplicacion.codigo ='.'\''.$codigo.'\''.
+					'AND reactivo.comentario ='.'\''.$estado.'\'')->
+					get('reactivo,respuesta,aplicacion')->
+					result();
+			return $d;
+		}
     }
 ?>

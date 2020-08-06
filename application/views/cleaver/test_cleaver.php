@@ -1,6 +1,6 @@
 <div class="container" style="text-align:center;background-color:#b5dffb;padding:30px;margin-top:25px;">
     <div class="alert alert-danger alert-save" role="alert" style="display:none"></div>
-    <h3 style="padding-top:30px;"><b>Encuesta de <?=$nombre?></b></h3>
+    <h4 style="padding-top:30px;"><b>Encuesta de <?=$nombre?></b></h4>
     <div class="row justify-content-center">
         <div class="col-md-6 table-responsive">
             <table class="table">
