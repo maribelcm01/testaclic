@@ -108,7 +108,6 @@
 			return $d;
 		}
 
-<<<<<<< HEAD
 		public function verCodigoSesion($codigo){
 			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion')->
 					where(array('codigo =' => $codigo))->
@@ -117,7 +116,7 @@
 					
 			return $p;
         }
-		public function actualizarPregunta($codigo,$contador){
+		public function actualizarPreguntaSesion($codigo,$contador){
 			$data = array(
 				'sesion' => $contador,
 				'acabo' => ($contador == 0) ? 1 : 0
@@ -135,7 +134,7 @@
 			$this->db->where('codigo', $codigo);
 			$this->db->update('aplicacion', $data);	
 			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
-=======
+		}
 		public function actualizarPregunta($pregunta,$idAplicacion){
 			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
 		}
@@ -147,7 +146,6 @@
 			 );
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
 		}
     }
 ?>

@@ -66,7 +66,6 @@
 		}
 		
 		public function encuesta($codigo){
-<<<<<<< HEAD
 			$showInstructions = 1;
 			if(isset($_COOKIE['name']))
 			{ 
@@ -76,9 +75,8 @@
 				// $mensaje = 'Número de visitas: ' . $_COOKIE['contador']; 
 			} 
 
-=======
 			$se = $this->terman_model->verSerie($codigo);
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
+ 
 			$a = $this->terman_model->obtenerDatos($codigo);
 			$idAplicacion = $a->idAplicacion;
 			$pregunta = $this->terman_model->verPregunta($codigo);
@@ -129,34 +127,28 @@
 				'ejemplo' => $subtest->ejemplo,
 				'idReactivo' => $datosPregunta[0]->idReactivo,
 				'reactivo' => $datosPregunta[0]->reactivo,
-<<<<<<< HEAD
-				'datos' => $datosPregunta,
+				//'datos' => $datosPregunta,
 				'showInstructions' => $showInstructions,
 				'duracion_en_segundos' => $subtest->tiempo,
 				'fecha_fin_sesion' => date($a->finSesion),
-				'acabo_tiempo' => $a->acabo
-=======
+				'acabo_tiempo' => $a->acabo,
 				'pregunta' => $pregunta,
 				'limite' => $limite,
 				'indiceR' => $datosPregunta[0]->indiceR,
 				'datos' => $datosRespuesta
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
 			);
 			$this->load->view('layout/header');
 			$this->load->view('terman/test_terman',$data);
 			$this->load->view('layout/footer');
 		}
 
-<<<<<<< HEAD
 		public function actualizar_contador($codigo){
 			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
 			$contador = $idAplicacion[0]['sesion']-1;
 			$contador = ($contador <= 0) ? 0 : $contador;
 
 			if ($this->input->is_ajax_request() && $idAplicacion) {
-			
-				
-				$this->terman_model->actualizarPregunta($codigo,$contador);
+				$this->terman_model->actualizarPreguntaSesion($codigo,$contador);
 			}
 
 			print_r($contador);
@@ -170,12 +162,9 @@
 			if ($this->input->is_ajax_request() && $idAplicacion) {
 			 	$this->terman_model->guardarFinSesion($codigo,$finSesion,$_POST['duracion_en_segundos']);
 			}
-			print_r(true);
+			print_r(date("Y-m-d H:i:s ", $finSesion));
 
 		}
-		
-
-=======
 		public function encuesta_post($codigo){
 			$opcion = $this->input->post('opcion');
 			$idAplicacion = $this->input->post('idAplicacion');
@@ -186,6 +175,5 @@
 				$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
 			}
 		}
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
     }
 ?>

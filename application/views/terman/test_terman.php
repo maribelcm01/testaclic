@@ -1,12 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="modelId" tabindex="-1"  data-keyboard="false" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Serie <?=$serie?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                
             </div>
             <div class="modal-body">
                 <h5><b>Instrucciones: <?=$instruccion?></b></h5>
@@ -30,17 +28,10 @@
         <div class="col-md-8">
             <h5><b><?php echo $reactivo?></b></h5>
         </div>
-<<<<<<< HEAD
         <div class="col-md-6 contenedor-cuestionario">
-            <form action="<?=base_url('ipv/encuesta_post')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post">
-                <table class="table">
-                    <tbody>
-=======
-        <div class="col-md-5">
             <table class="table">
                 <tbody>
                     <?php if($serie == 'I' || $serie == 'II' || $serie == 'VII' || $serie == 'IX'):?>
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
                         <?php foreach($datos as $item):?>
                         <tr>
                             <td>
@@ -103,18 +94,22 @@
 </div>
 <script>
     document.title = "Terman merril";
+    
     $( document ).ready(function() {
-<<<<<<< HEAD
+
         h = 0;
         m = 0;
         s = 0;
         limite = 0;
         console.log( <?= $showInstructions ?>);
         if(<?=$showInstructions ?> === 1  && <?= $acabo_tiempo ?> != 1){
-            $('#modelId').modal('toggle');
-            contando = setInterval('reloj()',1000);
+            $('#modelId').modal({backdrop: 'static', keyboard: false});
+            $("#modelId").modal('toggle');
+            //contando = setInterval('reloj()',1000);
         }else {
-             contando = setInterval('reloj()',1000);
+            
+                contando = setInterval('reloj()',1000);
+            
         }
     });
 
@@ -171,11 +166,8 @@
             }
         })
 
-=======
-        if(<?=$indiceR?> == 1){
-            $('#modelId').modal('toggle')
-        }
-    });
+    };
+
     function insertar(){
         var opcion = $('input:radio[name=opcion]:checked').val();
         var idAplicacion = $('input[name=idAplicacion]').val();
@@ -196,10 +188,9 @@
                     alert('Something is wrong');
                 },
                 success: function(data) {
-                    window.location = "/testalia/terman/encuesta/"+codigo;
+                   window.location = "/testalia/terman/encuesta/"+codigo;
                 }
             });
         }
->>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
     }
 </script>
