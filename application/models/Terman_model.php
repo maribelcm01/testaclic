@@ -70,6 +70,14 @@
 			$pregunta = $l[0]['pregunta'];
 			return $pregunta;
 		}
+		public function verRespuesta($serie,$pregunta){
+			$l = $this->db->select('respuesta')->
+					where(array('serie =' => $serie, 'numero_pregunta =' => $pregunta))->
+					get('hoja_respuestas')->
+					result_array();
+			$respuesta = $l[0]['respuesta'];
+			return $respuesta;
+		}
 		public function verLimite($codigo,$serie){
 			$l = $this->db->select_max('reactivo.indice')->
 					where(array('aplicacion.idEncuesta = encuesta.idEncuesta AND
@@ -135,6 +143,11 @@
 			$this->db->update('aplicacion', $data);	
 			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
 		}
+		public function insertarRespuesta($idReactivo,$idAplicacion,$valor){
+			$this->db->query("INSERT INTO aplicacion_terman VALUES($idReactivo,$idAplicacion,$valor)
+					ON DUPLICATE KEY UPDATE valor = $valor;");
+		}
+
 		public function actualizarPregunta($pregunta,$idAplicacion){
 			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
 		}

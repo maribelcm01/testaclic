@@ -76,7 +76,6 @@
 			} 
 
 			$se = $this->terman_model->verSerie($codigo);
- 
 			$a = $this->terman_model->obtenerDatos($codigo);
 			$idAplicacion = $a->idAplicacion;
 			$pregunta = $this->terman_model->verPregunta($codigo);
@@ -118,6 +117,7 @@
 			
 			$subtest = $this->terman_model->datosST($se);
 			$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$se);
+			$respuesta = $this->terman_model->verRespuesta($se,$pregunta);
 			$data = array(
 				'nombre' => $a->nombre,
 				'codigo' => $a->codigo,
@@ -133,6 +133,7 @@
 				'fecha_fin_sesion' => date($a->finSesion),
 				'acabo_tiempo' => $a->acabo,
 				'pregunta' => $pregunta,
+				'respuesta' => $respuesta,
 				'limite' => $limite,
 				'indiceR' => $datosPregunta[0]->indiceR,
 				'datos' => $datosRespuesta
@@ -140,6 +141,22 @@
 			$this->load->view('layout/header');
 			$this->load->view('terman/test_terman',$data);
 			$this->load->view('layout/footer');
+		}
+
+		public function encuesta_post($codigo){
+			$opcion = $this->input->post('opcion');
+			$idReactivo = $this->input->post('idReactivo');
+			$idAplicacion = $this->input->post('idAplicacion');
+			$pregunta = $this->terman_model->verPregunta($codigo);
+			$se = $this->terman_model->verSerie($codigo);
+			$respuesta = $this->terman_model->verRespuesta($se,$pregunta);
+			if($opcion == $respuesta){
+				$this->terman_model->insertarRespuesta($idReactivo,$idAplicacion,1);
+			}else{
+				$this->terman_model->insertarRespuesta($idReactivo,$idAplicacion,0);
+			}
+			$pregunta = $pregunta+1;
+			$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
 		}
 
 		public function actualizar_contador($codigo){
@@ -164,16 +181,6 @@
 			}
 			print_r(date("Y-m-d H:i:s ", $finSesion));
 
-		}
-		public function encuesta_post($codigo){
-			$opcion = $this->input->post('opcion');
-			$idAplicacion = $this->input->post('idAplicacion');
-			$pregunta = $this->terman_model->verPregunta($codigo);
-			print_r($pregunta);
-			if($opcion){
-				$pregunta = $pregunta+1;
-				$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
-			}
 		}
     }
 ?>

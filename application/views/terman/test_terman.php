@@ -88,6 +88,7 @@
             <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
             <input type="text" value="<?php echo $pregunta?>" disabled>
             <input type="text" value="<?php echo $limite?>"disabled>
+            <input type="text" value="<?php echo $respuesta?>"disabled>
             <button class="btn btn-primary" onclick="insertar()"><i class="fas fa-angle-double-right"></i></button>
         </div>
     </div>
@@ -173,6 +174,7 @@
         var idAplicacion = $('input[name=idAplicacion]').val();
         var idReactivo = $('input[name=idReactivo]').val();
         var codigo = $('input[name=codigo]').val();
+        console.log(opcion);
         if(opcion == undefined){
             alert("No hay ningun valor");
         }else{
