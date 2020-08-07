@@ -30,27 +30,81 @@
         <div class="col-md-8">
             <h5><b><?php echo $reactivo?></b></h5>
         </div>
+<<<<<<< HEAD
         <div class="col-md-6 contenedor-cuestionario">
             <form action="<?=base_url('ipv/encuesta_post')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post">
                 <table class="table">
                     <tbody>
+=======
+        <div class="col-md-5">
+            <table class="table">
+                <tbody>
+                    <?php if($serie == 'I' || $serie == 'II' || $serie == 'VII' || $serie == 'IX'):?>
+>>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
                         <?php foreach($datos as $item):?>
                         <tr>
                             <td>
-                                <button type="submit" class="btn btn-warning" name="opcion" value="<?php echo $item->indice?>"><?php echo $item->indice?></button>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="opcion" value="<?php echo $item->indice?>" required/>
+                                        <a><?php echo $item->indice?></a>
+                                    </label>
+                                </div>
                             </td>
                             <td><b><?php echo $item->respuesta?></b></td>
                         </tr>
                         <?php endforeach;?>
-                    </tbody>
-                </table>
-            </form>
+                    <?php endif;?>
+                    <?php if($serie == 'III' || $serie == 'VI' || $serie == 'VIII'):?>
+                        <?php foreach($datos as $item):?>
+                            <div class="btn-group" data-toggle="buttons">
+                                <tr>
+                                    <td>
+                                        <label class="btn btn-primary btn-lg">
+                                            <input type="radio" name="opcion" value="<?php echo $item['opc1']?>">
+                                            <a><?php echo $item['opc1']?></a> 
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="btn btn-primary btn-lg">
+                                            <input type="radio" name="opcion" value="<?php echo $item['opc2']?>">
+                                            <a><?php echo $item['opc2']?></a> 
+                                        </label>
+                                    </td>
+                                </tr>
+                            </div>
+                        <?php endforeach;?>
+                    <?php endif;?>
+                    <?php if($serie == 'IV'):?>
+                        <?php foreach($datos as $item):?>
+                        <tr>
+                            <td>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <a><?php echo $item->indice?></a>
+                                        <input type="checkbox" name="opciones" value="<?php echo $item->indice?>" required/>
+                                    </label>
+                                </div>
+                            </td>
+                            <td><b><?php echo $item->respuesta?></b></td>
+                        </tr>
+                        <?php endforeach;?>
+                    <?php endif;?>
+                </tbody>
+            </table>
+            <input type="hidden" name="idAplicacion" value="<?php echo $idAplicacion ?>">
+            <input type="hidden" name="idReactivo" value="<?php echo $idReactivo ?>">
+            <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
+            <input type="text" value="<?php echo $pregunta?>" disabled>
+            <input type="text" value="<?php echo $limite?>"disabled>
+            <button class="btn btn-primary" onclick="insertar()"><i class="fas fa-angle-double-right"></i></button>
         </div>
     </div>
 </div>
 <script>
     document.title = "Terman merril";
     $( document ).ready(function() {
+<<<<<<< HEAD
         h = 0;
         m = 0;
         s = 0;
@@ -117,5 +171,35 @@
             }
         })
 
+=======
+        if(<?=$indiceR?> == 1){
+            $('#modelId').modal('toggle')
+        }
+    });
+    function insertar(){
+        var opcion = $('input:radio[name=opcion]:checked').val();
+        var idAplicacion = $('input[name=idAplicacion]').val();
+        var idReactivo = $('input[name=idReactivo]').val();
+        var codigo = $('input[name=codigo]').val();
+        if(opcion == undefined){
+            alert("No hay ningun valor");
+        }else{
+            $.ajax({
+                url: '/testalia/terman/encuesta_post/'+codigo,
+                type: 'POST',
+                data: {
+                        idReactivo: idReactivo,
+                        idAplicacion: idAplicacion,
+                        opcion: opcion
+                    },
+                error: function() {
+                    alert('Something is wrong');
+                },
+                success: function(data) {
+                    window.location = "/testalia/terman/encuesta/"+codigo;
+                }
+            });
+        }
+>>>>>>> 9b57c30e3f67a0d15484b456977f24067fcc657a
     }
 </script>
