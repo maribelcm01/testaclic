@@ -66,34 +66,76 @@
 		}
 		
 		public function encuesta($codigo){
+			$se = $this->terman_model->verSerie($codigo);
 			$a = $this->terman_model->obtenerDatos($codigo);
-			$numero = array('','I','II','III','IV','V','VI','VII','VIII','IX','X');
-			$estado = $this->terman_model->verEstado($codigo);
-			if($estado == 'Pendiente'){
-				$estado = $numero[1];
-				$this->terman_model->cambiarEstado($codigo,$estado);
+			$idAplicacion = $a->idAplicacion;
+			$pregunta = $this->terman_model->verPregunta($codigo);
+			$limite = $this->terman_model->verLimite($codigo,$se);
+			$numero = array('','I','II','III','IV','V','VI','VII','VIII','IX','X','XI');
+			$datosRespuesta = null;
+			$datosPregunta = null;
+			$subtest = null;
+			if($se == ''){
+				$se = $numero[1];
+				$this->terman_model->cambiarSerie($codigo,$se);
 			}else{
-				$estado = $this->terman_model->verEstado($codigo);
-				$subtest = $this->terman_model->datosST($estado);
-				$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$estado);
-				/* $aux = array_search($estado, $numero);
-				$aux = $aux+1;
-				print_r($aux);
-				$estado = $numero[$aux];
-				print_r($estado); */
+				if($se != 'XI'){
+					if($pregunta > $limite){
+						$this->terman_model->cambiarPregunta($codigo);
+						$aux = array_search($se, $numero);
+						$aux = $aux+1;
+						$se = $numero[$aux];
+						$this->terman_model->cambiarSerie($codigo,$se);
+					}
+				}else{
+					$this->terman_model->estadoFecha($idAplicacion);
+					$datos = $this->terman_model->obtenerDatos($codigo);
+					$data = array(
+						'nombre' => $datos->nombre,
+						'codigo' => $datos->codigo
+					);
+					$this->load->view('layout/header');
+					$this->load->view('zavic/agradecimiento',$data);
+					$this->load->view('layout/footer');
+				}
 			}
+			if($se == 'I' || $se == 'II' || $se == 'IV' || $se == 'VII' ||$se == 'IX'){
+				$datosRespuesta = $this->terman_model->obtenerRespuesta($codigo,$se);
+			}
+			if($se == 'III'){ $datosRespuesta[] = array('opc1' => '0', 'opc2' => '1'); }
+			if($se == 'VI'){ $datosRespuesta[] = array('opc1' => 'Si', 'opc2' => 'No'); }
+			if($se == 'VIII'){ $datosRespuesta[] = array('opc1' => 'V', 'opc2' => 'F'); }
+			
+			$subtest = $this->terman_model->datosST($se);
+			$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$se);
 			$data = array(
 				'nombre' => $a->nombre,
 				'codigo' => $a->codigo,
+				'idAplicacion' => $a->idAplicacion,
 				'serie' => $subtest->serie,
 				'instruccion' => $subtest->instruccion,
 				'ejemplo' => $subtest->ejemplo,
+				'idReactivo' => $datosPregunta[0]->idReactivo,
 				'reactivo' => $datosPregunta[0]->reactivo,
-				'datos' => $datosPregunta
+				'pregunta' => $pregunta,
+				'limite' => $limite,
+				'indiceR' => $datosPregunta[0]->indiceR,
+				'datos' => $datosRespuesta
 			);
 			$this->load->view('layout/header');
 			$this->load->view('terman/test_terman',$data);
 			$this->load->view('layout/footer');
+		}
+
+		public function encuesta_post($codigo){
+			$opcion = $this->input->post('opcion');
+			$idAplicacion = $this->input->post('idAplicacion');
+			$pregunta = $this->terman_model->verPregunta($codigo);
+			print_r($pregunta);
+			if($opcion){
+				$pregunta = $pregunta+1;
+				$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
+			}
 		}
     }
 ?>
