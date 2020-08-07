@@ -70,9 +70,6 @@
 			if(isset($_COOKIE['name']))
 			{ 
 				$showInstructions = 0;
-				// Caduca en un año 
-				// setcookie('contador', $_COOKIE['contador'] + 1, time() + 365 * 24 * 60 * 60); 
-				// $mensaje = 'Número de visitas: ' . $_COOKIE['contador']; 
 			} 
 
 			$se = $this->terman_model->verSerie($codigo);
@@ -95,6 +92,9 @@
 						$aux = $aux+1;
 						$se = $numero[$aux];
 						$this->terman_model->cambiarSerie($codigo,$se);
+						setcookie('name', '', time() - 1000);
+						$this->terman_model->actualizarPreguntaSesion($codigo,1); //reiniciamos sesion 0 & contador a 0
+						exit;
 					}
 				}else{
 					$this->terman_model->estadoFecha($idAplicacion);
@@ -130,7 +130,7 @@
 				//'datos' => $datosPregunta,
 				'showInstructions' => $showInstructions,
 				'duracion_en_segundos' => $subtest->tiempo,
-				'fecha_fin_sesion' => date($a->finSesion),
+				'fecha_fin_sesion' => date("d-m-Y   H:m:s",strtotime($a->finSesion)),
 				'acabo_tiempo' => $a->acabo,
 				'pregunta' => $pregunta,
 				'respuesta' => $respuesta,
@@ -157,6 +157,7 @@
 			}
 			$pregunta = $pregunta+1;
 			$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
+			print_r($respuesta);
 		}
 
 		public function actualizar_contador($codigo){
@@ -179,8 +180,33 @@
 			if ($this->input->is_ajax_request() && $idAplicacion) {
 			 	$this->terman_model->guardarFinSesion($codigo,$finSesion,$_POST['duracion_en_segundos']);
 			}
-			print_r(date("Y-m-d H:i:s ", $finSesion));
+			print_r($_POST['finSesion']);
 
 		}
+
+		//finalizar encuesta de serie por cronometro en 0
+
+		public function fin_encuesta_por_cronometro($codigo){
+			$buscarPreguntaActual = $this->terman_model->obtenerDatos($codigo);
+			//print_r($buscarPreguntaActual->idAplicacion);
+			$idAplicacion = $buscarPreguntaActual->idAplicacion;
+			$se = $this->terman_model->verSerie($codigo);
+			$buscarPreguntaMaxima = $this->terman_model->verLimite($codigo,$se);
+			$buscarPreguntaMaxima = ($buscarPreguntaMaxima == $buscarPreguntaActual->pregunta) ? $buscarPreguntaMaxima+1 : $buscarPreguntaMaxima ;
+			$preguntas_restantes = intval($buscarPreguntaMaxima) - intval($buscarPreguntaActual->pregunta);
+			
+			for ($i = intval($buscarPreguntaActual->pregunta) ; $i <= intval($buscarPreguntaMaxima); $i++) {
+				$idReactivo = $this->terman_model->obtenerPreguntaTerma($codigo,$se,$i);
+				$idR = $idReactivo[0]->idReactivo;
+				$this->terman_model->insertarRespuesta($idR,$idAplicacion,0);
+				
+			}
+
+			$this->terman_model->actualizarPregunta($buscarPreguntaMaxima+1,$idAplicacion);
+			
+			print_r("Se agoto el tiempo");
+
+		}
+
     }
 ?>

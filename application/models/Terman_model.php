@@ -41,7 +41,7 @@
 			return $nombreEncuesta;
         }
         public function obtenerDatos($codigo){
-			$d = $this->db->select('encuestado.nombre,aplicacion.idAplicacion, aplicacion.codigo,aplicacion.finSesion,aplicacion.acabo')->
+			$d = $this->db->select('encuestado.nombre,aplicacion.idAplicacion, aplicacion.codigo,aplicacion.finSesion,aplicacion.acabo,aplicacion.pregunta')->
 					where(array('encuestado.idEncuestado = aplicacion.idEncuestado AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, encuestado')->
 					row();
@@ -117,7 +117,7 @@
 		}
 
 		public function verCodigoSesion($codigo){
-			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion')->
+			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion,pregunta')->
 					where(array('codigo =' => $codigo))->
 					get('aplicacion')->
 					result_array();
@@ -159,6 +159,16 @@
 			 );
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
+		}
+
+		//guardar pregunta individual 
+		public function obtenerPreguntaTerma($codigo,$serie,$index){
+			$d = $this->db->select('reactivo.idReactivo, reactivo.reactivo, reactivo.indice AS indiceR')->
+                    where(array('reactivo.indice = ' .$index .' 
+					AND aplicacion.codigo =' => $codigo,'reactivo.comentario =' => $serie))->
+					get('reactivo,aplicacion')->
+					result();
+			return $d;
 		}
     }
 ?>

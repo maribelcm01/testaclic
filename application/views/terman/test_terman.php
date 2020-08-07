@@ -95,7 +95,7 @@
 </div>
 <script>
     document.title = "Terman merril";
-    
+   
     $( document ).ready(function() {
 
         h = 0;
@@ -132,8 +132,6 @@
                 'duracion_en_segundos' : "<?=$duracion_en_segundos ?>"
             },
             success:function(data){
-                
-                    console.log(data);
                     $("#modelId").modal("hide");
                     contando = setInterval('reloj()',1000);
                 
@@ -159,6 +157,20 @@
                         $(".contenedor-cuestionario").html(
                             "<h2>No te preocupes estamos evaluando esta serie. En un momento continuamos.</h2>"
                         );
+                        $.ajax({
+                            //Codigo
+                            //consultar num pregunta esta & num pregunta max
+                            //actualizar siguiente serie o evaluar si es la ultima serie mandaral gracias 
+                            url: '/testalia/terman/fin_encuesta_por_cronometro/<?=$codigo ?>',
+                            type: 'POST',
+                            error: function() {
+                                alert('Something is wrong');
+                            },
+                            success: function(data) {
+                                console.log(data);
+                                window.location = "/testalia/terman/encuesta/<?=$codigo ?>";
+                            }
+                        });
                     }
                 }
                 else{
@@ -174,7 +186,7 @@
         var idAplicacion = $('input[name=idAplicacion]').val();
         var idReactivo = $('input[name=idReactivo]').val();
         var codigo = $('input[name=codigo]').val();
-        console.log(opcion);
+        //console.log(opcion);
         if(opcion == undefined){
             alert("No hay ningun valor");
         }else{
