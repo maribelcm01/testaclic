@@ -13,7 +13,8 @@
                 <h5><?=$ejemplo?></h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Comenzar Serie <?=$serie?></button>
+                <button type="button" onclick="crearCookieSerie();" class="btn btn-primary">Comenzar Serie <?=$serie?></button>
+                
             </div>
         </div>
     </div>
@@ -23,9 +24,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h4><b>Test de <?php echo $nombre?></b></h4><br>
+            <h5><b id="finaliza_encuesta"><?= $fecha_fin_sesion?></b></h5>
+
+        </div>
+        <div class="col-md-8">
             <h5><b><?php echo $reactivo?></b></h5>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6 contenedor-cuestionario">
             <form action="<?=base_url('ipv/encuesta_post')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post">
                 <table class="table">
                     <tbody>
@@ -46,6 +51,71 @@
 <script>
     document.title = "Terman merril";
     $( document ).ready(function() {
-    $('#modelId').modal('toggle')
-});
+        h = 0;
+        m = 0;
+        s = 0;
+        limite = 0;
+        console.log( <?= $showInstructions ?>);
+        if(<?=$showInstructions ?> === 1  && <?= $acabo_tiempo ?> != 1){
+            $('#modelId').modal('toggle');
+            contando = setInterval('reloj()',1000);
+        }else {
+             contando = setInterval('reloj()',1000);
+        }
+    });
+
+    function crearCookieSerie () {
+        console.log("click");
+        var d = new Date();
+        var finSesion = d.setTime(d.getTime() + (<?=$duracion_en_segundos ?> * 1000)); // un minuto 
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = "name=series;"+expires;
+        console.log(<?=$duracion_en_segundos ?>);
+        
+        $.ajax({
+            // cargamos url a nuestro contralador y método indicado
+            url: "/testalia/terman/crear_temporizador/<?=$codigo ?>",
+            type:"post",
+            dataType: 'json',
+            data:{ 
+                'finSesion' : finSesion,
+                'duracion_en_segundos' : "<?=$duracion_en_segundos ?>"
+            },
+            success:function(data){
+                
+                    console.log(data);
+                    $("#modelId").modal("hide");
+                    contando = setInterval('reloj()',1000);
+                
+            }
+        })
+        
+    }
+
+    function reloj() {
+        $.ajax({
+            // cargamos url a nuestro contralador y método indicado
+            url: "/testalia/terman/actualizar_contador/<?=$codigo ?>",
+            type:"post",
+            success:function(data){
+                if(data){
+                    console.log(data);
+                    if(parseInt(data) <= 0){
+                        //setInterval(reloj()');
+                        clearInterval(contando);
+                        //limpiamos pantalla avisamos y procesamos la info para evaluar si
+                        //existe una serie mas o es la ultima
+                        $(".contenedor-cuestionario").empty();
+                        $(".contenedor-cuestionario").html(
+                            "<h2>No te preocupes estamos evaluando esta serie. En un momento continuamos.</h2>"
+                        );
+                    }
+                }
+                else{
+                    console.log("error")
+                }
+            }
+        })
+
+    }
 </script>

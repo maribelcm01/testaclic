@@ -1,6 +1,6 @@
 <?php
     if (!defined('BASEPATH'))  exit('No direct script access allowed');
-
+	date_default_timezone_set('America/Mexico_City');
     class Terman extends CI_Controller{
         public function __construct(){
 			parent::__construct();
@@ -66,6 +66,15 @@
 		}
 		
 		public function encuesta($codigo){
+			$showInstructions = 1;
+			if(isset($_COOKIE['name']))
+			{ 
+				$showInstructions = 0;
+				// Caduca en un año 
+				// setcookie('contador', $_COOKIE['contador'] + 1, time() + 365 * 24 * 60 * 60); 
+				// $mensaje = 'Número de visitas: ' . $_COOKIE['contador']; 
+			} 
+
 			$a = $this->terman_model->obtenerDatos($codigo);
 			$numero = array('','I','II','III','IV','V','VI','VII','VIII','IX','X');
 			$estado = $this->terman_model->verEstado($codigo);
@@ -89,11 +98,43 @@
 				'instruccion' => $subtest->instruccion,
 				'ejemplo' => $subtest->ejemplo,
 				'reactivo' => $datosPregunta[0]->reactivo,
-				'datos' => $datosPregunta
+				'datos' => $datosPregunta,
+				'showInstructions' => $showInstructions,
+				'duracion_en_segundos' => $subtest->tiempo,
+				'fecha_fin_sesion' => date($a->finSesion),
+				'acabo_tiempo' => $a->acabo
 			);
 			$this->load->view('layout/header');
 			$this->load->view('terman/test_terman',$data);
 			$this->load->view('layout/footer');
 		}
+
+		public function actualizar_contador($codigo){
+			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
+			$contador = $idAplicacion[0]['sesion']-1;
+			$contador = ($contador <= 0) ? 0 : $contador;
+
+			if ($this->input->is_ajax_request() && $idAplicacion) {
+			
+				
+				$this->terman_model->actualizarPregunta($codigo,$contador);
+			}
+
+			print_r($contador);
+		}
+
+		public function crear_temporizador($codigo){
+			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
+			$finSesion = $_POST['finSesion'] / 1000;
+			$finSesion = date("Y-m-d H:i:s ", $finSesion);
+
+			if ($this->input->is_ajax_request() && $idAplicacion) {
+			 	$this->terman_model->guardarFinSesion($codigo,$finSesion,$_POST['duracion_en_segundos']);
+			}
+			print_r(true);
+
+		}
+		
+
     }
 ?>

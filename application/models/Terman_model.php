@@ -41,7 +41,7 @@
 			return $nombreEncuesta;
         }
         public function obtenerDatos($codigo){
-			$d = $this->db->select('encuestado.nombre,aplicacion.idAplicacion, aplicacion.codigo')->
+			$d = $this->db->select('encuestado.nombre,aplicacion.idAplicacion, aplicacion.codigo,aplicacion.finSesion,aplicacion.acabo')->
 					where(array('encuestado.idEncuestado = aplicacion.idEncuestado AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, encuestado')->
 					row();
@@ -67,6 +67,34 @@
 					get('reactivo,respuesta,aplicacion')->
 					result();
 			return $d;
+		}
+
+		public function verCodigoSesion($codigo){
+			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion')->
+					where(array('codigo =' => $codigo))->
+					get('aplicacion')->
+					result_array();
+					
+			return $p;
+        }
+		public function actualizarPregunta($codigo,$contador){
+			$data = array(
+				'sesion' => $contador,
+				'acabo' => ($contador == 0) ? 1 : 0
+			 );
+			$this->db->where('codigo', $codigo);
+			$this->db->update('aplicacion', $data);	
+			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
+		}
+
+		public function guardarFinSesion($codigo,$finSesion,$duracion_en_segundos){
+			$data = array(
+				'finSesion' => strval($finSesion),
+				'sesion'  => $duracion_en_segundos
+			 );
+			$this->db->where('codigo', $codigo);
+			$this->db->update('aplicacion', $data);	
+			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
 		}
     }
 ?>
