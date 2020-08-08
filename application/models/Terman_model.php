@@ -1,10 +1,8 @@
 <?php
     class Terman_model extends CI_Model{
-		
 		function __construct(){
 			$this->load->database();
 		}
-
 		public function validarCodigo($codigo){
 			$c = $this->db->select('codigo')->
 					where('codigo' , $codigo)->
@@ -12,7 +10,6 @@
 					row();
 			return $c;
 		}
-
 		public function verEstado($codigo){
 			$e = $this->db->select('estado')->
 					where(array('codigo'=>$codigo))->
@@ -21,17 +18,14 @@
 			$estado = $e[0]['estado'];
 			return $estado;
         }
-
         public function verIdEncuesta($codigo){
 			$p = $this->db->select('idEncuesta')->
 					where(array('codigo =' => $codigo))->
 					get('aplicacion')->
-					result_array();
-					
+					result_array();		
 			$idEncuesta = (count($p) > 0) ? $p[0]['idEncuesta'] : [];
 			return $idEncuesta;
         }
-        
         public function verNombreEncuesta($idEncuesta){
 			$p = $this->db->select('encuesta.nombre')->
 					where('aplicacion.idEncuesta = encuesta.idEncuesta AND aplicacion.idEncuesta = '.$idEncuesta)->
@@ -115,7 +109,6 @@
 					result();
 			return $d;
 		}
-
 		public function verCodigoSesion($codigo){
 			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion,pregunta')->
 					where(array('codigo =' => $codigo))->
@@ -133,7 +126,6 @@
 			$this->db->update('aplicacion', $data);	
 			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
 		}
-
 		public function guardarFinSesion($codigo,$finSesion,$duracion_en_segundos){
 			$data = array(
 				'finSesion' => strval($finSesion),
@@ -147,11 +139,9 @@
 			$this->db->query("INSERT INTO aplicacion_terman VALUES($idReactivo,$idAplicacion,$valor)
 					ON DUPLICATE KEY UPDATE valor = $valor;");
 		}
-
 		public function actualizarPregunta($pregunta,$idAplicacion){
 			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
 		}
-
 		public function estadoFecha($idAplicacion){
 			$data = array(
 				'fechaConclusion' => date('Y-m-d'),
@@ -160,7 +150,6 @@
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
 		}
-
 		//guardar pregunta individual 
 		public function obtenerPreguntaTerma($codigo,$serie,$index){
 			$d = $this->db->select('reactivo.idReactivo, reactivo.reactivo, reactivo.indice AS indiceR')->

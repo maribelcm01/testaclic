@@ -7,7 +7,6 @@
 			$this->load->library(array('form_validation','session'));
 			$this->load->model('terman_model');
 		}
-
         public function index() {
             $data = array('mensaje' => '');
             $this->load->view('layout/header');
@@ -64,14 +63,12 @@
 				}
 			}
 		}
-		
 		public function encuesta($codigo){
 			$showInstructions = 1;
 			if(isset($_COOKIE['name']))
 			{ 
 				$showInstructions = 0;
 			} 
-
 			$se = $this->terman_model->verSerie($codigo);
 			$a = $this->terman_model->obtenerDatos($codigo);
 			$idAplicacion = $a->idAplicacion;
@@ -85,7 +82,17 @@
 				$se = $numero[1];
 				$this->terman_model->cambiarSerie($codigo,$se);
 			}else{
-				if($se != 'XI'){
+				if($se == 'XI'){
+					$this->terman_model->estadoFecha($idAplicacion);
+					$datos = $this->terman_model->obtenerDatos($codigo);
+					$data = array(
+						'nombre' => $datos->nombre,
+						'codigo' => $datos->codigo
+					);
+					$this->load->view('layout/header');
+					$this->load->view('terman/agradecimiento',$data);
+					$this->load->view('layout/footer');
+				}else{
 					if($pregunta > $limite){
 						$this->terman_model->cambiarPregunta($codigo);
 						$aux = array_search($se, $numero);
@@ -96,53 +103,40 @@
 						$this->terman_model->actualizarPreguntaSesion($codigo,1); //reiniciamos sesion 0 & contador a 0
 						exit;
 					}
-				}else{
-					$this->terman_model->estadoFecha($idAplicacion);
-					$datos = $this->terman_model->obtenerDatos($codigo);
+					if($se == 'I' || $se == 'II' || $se == 'IV' || $se == 'VII' ||$se == 'IX'){
+						$datosRespuesta = $this->terman_model->obtenerRespuesta($codigo,$se);
+					}
+					if($se == 'III'){ $datosRespuesta[] = array('opc1' => '0', 'opc2' => '1'); }
+					if($se == 'VI'){ $datosRespuesta[] = array('opc1' => 'SI', 'opc2' => 'NO'); }
+					if($se == 'VIII'){ $datosRespuesta[] = array('opc1' => 'V', 'opc2' => 'F'); }
+					
+					$subtest = $this->terman_model->datosST($se);
+					$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$se);
+					/* $respuesta = $this->terman_model->verRespuesta($se,$pregunta); */
 					$data = array(
-						'nombre' => $datos->nombre,
-						'codigo' => $datos->codigo
+						'nombre' => $a->nombre,
+						'codigo' => $a->codigo,
+						'idAplicacion' => $a->idAplicacion,
+						'serie' => $subtest->serie,
+						'instruccion' => $subtest->instruccion,
+						'ejemplo' => $subtest->ejemplo,
+						'idReactivo' => $datosPregunta[0]->idReactivo,
+						'reactivo' => $datosPregunta[0]->reactivo,
+						'showInstructions' => $showInstructions,
+						'duracion_en_segundos' => $subtest->tiempo,
+						'fecha_fin_sesion' => date("d-m-Y   H:m:s",strtotime($a->finSesion)),
+						'acabo_tiempo' => $a->acabo,
+						'pregunta' => $pregunta,
+						'limite' => $limite,
+						'indiceR' => $datosPregunta[0]->indiceR,
+						'datos' => $datosRespuesta
 					);
 					$this->load->view('layout/header');
-					$this->load->view('zavic/agradecimiento',$data);
+					$this->load->view('terman/test_terman',$data);
 					$this->load->view('layout/footer');
 				}
 			}
-			if($se == 'I' || $se == 'II' || $se == 'IV' || $se == 'VII' ||$se == 'IX'){
-				$datosRespuesta = $this->terman_model->obtenerRespuesta($codigo,$se);
-			}
-			if($se == 'III'){ $datosRespuesta[] = array('opc1' => '0', 'opc2' => '1'); }
-			if($se == 'VI'){ $datosRespuesta[] = array('opc1' => 'Si', 'opc2' => 'No'); }
-			if($se == 'VIII'){ $datosRespuesta[] = array('opc1' => 'V', 'opc2' => 'F'); }
-			
-			$subtest = $this->terman_model->datosST($se);
-			$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$se);
-			$respuesta = $this->terman_model->verRespuesta($se,$pregunta);
-			$data = array(
-				'nombre' => $a->nombre,
-				'codigo' => $a->codigo,
-				'idAplicacion' => $a->idAplicacion,
-				'serie' => $subtest->serie,
-				'instruccion' => $subtest->instruccion,
-				'ejemplo' => $subtest->ejemplo,
-				'idReactivo' => $datosPregunta[0]->idReactivo,
-				'reactivo' => $datosPregunta[0]->reactivo,
-				//'datos' => $datosPregunta,
-				'showInstructions' => $showInstructions,
-				'duracion_en_segundos' => $subtest->tiempo,
-				'fecha_fin_sesion' => date("d-m-Y   H:m:s",strtotime($a->finSesion)),
-				'acabo_tiempo' => $a->acabo,
-				'pregunta' => $pregunta,
-				'respuesta' => $respuesta,
-				'limite' => $limite,
-				'indiceR' => $datosPregunta[0]->indiceR,
-				'datos' => $datosRespuesta
-			);
-			$this->load->view('layout/header');
-			$this->load->view('terman/test_terman',$data);
-			$this->load->view('layout/footer');
 		}
-
 		public function encuesta_post($codigo){
 			$opcion = $this->input->post('opcion');
 			$idReactivo = $this->input->post('idReactivo');
@@ -159,54 +153,39 @@
 			$this->terman_model->actualizarPregunta($pregunta,$idAplicacion);
 			print_r($respuesta);
 		}
-
 		public function actualizar_contador($codigo){
 			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
 			$contador = $idAplicacion[0]['sesion']-1;
 			$contador = ($contador <= 0) ? 0 : $contador;
-
 			if ($this->input->is_ajax_request() && $idAplicacion) {
 				$this->terman_model->actualizarPreguntaSesion($codigo,$contador);
 			}
-
 			print_r($contador);
 		}
-
 		public function crear_temporizador($codigo){
 			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
 			$finSesion = $_POST['finSesion'] / 1000;
 			$finSesion = date("Y-m-d H:i:s ", $finSesion);
-
 			if ($this->input->is_ajax_request() && $idAplicacion) {
 			 	$this->terman_model->guardarFinSesion($codigo,$finSesion,$_POST['duracion_en_segundos']);
 			}
 			print_r($_POST['finSesion']);
-
 		}
-
 		//finalizar encuesta de serie por cronometro en 0
-
 		public function fin_encuesta_por_cronometro($codigo){
 			$buscarPreguntaActual = $this->terman_model->obtenerDatos($codigo);
-			//print_r($buscarPreguntaActual->idAplicacion);
 			$idAplicacion = $buscarPreguntaActual->idAplicacion;
-			$se = $this->terman_model->verSerie($codigo);
-			$buscarPreguntaMaxima = $this->terman_model->verLimite($codigo,$se);
+			$serie = $this->terman_model->verSerie($codigo);
+			$buscarPreguntaMaxima = $this->terman_model->verLimite($codigo,$serie);
 			$buscarPreguntaMaxima = ($buscarPreguntaMaxima == $buscarPreguntaActual->pregunta) ? $buscarPreguntaMaxima+1 : $buscarPreguntaMaxima ;
 			$preguntas_restantes = intval($buscarPreguntaMaxima) - intval($buscarPreguntaActual->pregunta);
-			
 			for ($i = intval($buscarPreguntaActual->pregunta) ; $i <= intval($buscarPreguntaMaxima); $i++) {
-				$idReactivo = $this->terman_model->obtenerPreguntaTerma($codigo,$se,$i);
-				$idR = $idReactivo[0]->idReactivo;
-				$this->terman_model->insertarRespuesta($idR,$idAplicacion,0);
-				
+				$x = $this->terman_model->obtenerPreguntaTerma($codigo,$serie,$i);
+				$idReactivo = $x[0]->idReactivo;
+				$this->terman_model->insertarRespuesta($idReactivo,$idAplicacion,0);
 			}
-
 			$this->terman_model->actualizarPregunta($buscarPreguntaMaxima+1,$idAplicacion);
-			
 			print_r("Se agoto el tiempo");
-
 		}
-
     }
 ?>
