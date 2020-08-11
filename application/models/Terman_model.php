@@ -114,16 +114,17 @@
 					where(array('codigo =' => $codigo))->
 					get('aplicacion')->
 					result_array();
-					
 			return $p;
         }
 		public function actualizarPreguntaSesion($codigo,$contador){
-			$data = array(
-				'sesion' => $contador,
-				'acabo' => ($contador == 0) ? 1 : 0
-			 );
-			$this->db->where('codigo', $codigo);
-			$this->db->update('aplicacion', $data);	
+			if($contador != NULL){
+				$data = array(
+					'sesion' => $contador,
+					'acabo' => ($contador == 0) ? 1 : 0
+				);
+				$this->db->where('codigo', $codigo);
+				$this->db->update('aplicacion', $data);	
+			}
 			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
 		}
 		public function guardarFinSesion($codigo,$finSesion,$duracion_en_segundos){

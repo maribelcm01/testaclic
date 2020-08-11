@@ -95,13 +95,16 @@
 				}else{
 					if($pregunta > $limite){
 						$this->terman_model->cambiarPregunta($codigo);
+						$pregunta = $this->terman_model->verPregunta($codigo);;
 						$aux = array_search($se, $numero);
 						$aux = $aux+1;
 						$se = $numero[$aux];
+						$limite = $this->terman_model->verLimite($codigo,$se);
 						$this->terman_model->cambiarSerie($codigo,$se);
 						setcookie('name', '', time() - 1000);
-						$this->terman_model->actualizarPreguntaSesion($codigo,1); //reiniciamos sesion 0 & contador a 0
-						exit;
+						$this->terman_model->actualizarPreguntaSesion($codigo,null); //reiniciamos sesion 0 & contador a 0
+						//exit;
+						$showInstructions = 1;
 					}
 					if($se == 'I' || $se == 'II' || $se == 'IV' || $se == 'VII' ||$se == 'IX'){
 						$datosRespuesta = $this->terman_model->obtenerRespuesta($codigo,$se);
@@ -112,6 +115,7 @@
 					
 					$subtest = $this->terman_model->datosST($se);
 					$datosPregunta = $this->terman_model->obtenerPregunta($codigo,$se);
+					//print_r($datosPregunta);exit;
 					/* $respuesta = $this->terman_model->verRespuesta($se,$pregunta); */
 					$data = array(
 						'nombre' => $a->nombre,
@@ -124,7 +128,7 @@
 						'reactivo' => $datosPregunta[0]->reactivo,
 						'showInstructions' => $showInstructions,
 						'duracion_en_segundos' => $subtest->tiempo,
-						'fecha_fin_sesion' => date("d-m-Y   H:m:s",strtotime($a->finSesion)),
+						'fecha_fin_sesion' => date("H:i:s",strtotime($a->finSesion)),
 						'acabo_tiempo' => $a->acabo,
 						'pregunta' => $pregunta,
 						'limite' => $limite,
@@ -154,13 +158,11 @@
 			print_r($respuesta);
 		}
 		public function actualizar_contador($codigo){
-			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
-			$contador = $idAplicacion[0]['sesion']-1;
-			$contador = ($contador <= 0) ? 0 : $contador;
-			if ($this->input->is_ajax_request() && $idAplicacion) {
-				$this->terman_model->actualizarPreguntaSesion($codigo,$contador);
-			}
-			print_r($contador);
+			$x = $this->terman_model->verCodigoSesion($codigo);
+			$d1 = new DateTime($x[0]['finSesion']);
+			$d2 = new DateTime(date('Y-m-d H:i:s'));
+			$contador = $d2->diff($d1);
+			print_r(json_encode($contador));
 		}
 		public function crear_temporizador($codigo){
 			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);

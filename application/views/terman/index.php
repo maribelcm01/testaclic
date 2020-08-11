@@ -7,12 +7,15 @@
             <ul>
                 <li><h5><b>La encuesta consta de 10 series. Una vez iniciada la serie debe concluirla, de lo 
                 contrario podría afectar su calificación.</b></h5></li>
+                <li><h5><b>Lee atentamente las instrucciones para cada serie. El tiempo empieza a correr después
+                    de dar click a "Comenzar Serie".
+                </b></h5></li>
                 <li><h5><b>Evita analizar conscientemente cada pregunta/respuesta, contesta lo primero que te venga a
                     la mente, porque lo rápido y espontáneo suele ser lo más sincero.</b></h5></li>
-                <li><h5><b>Asegúrate de tener una conexión estable y disponer de aproximadamente 15 minutos sin que te interrumpan.</b></h5></li>
+                <li><h5><b>Asegúrate de tener una conexión estable y disponer de aproximadamente 27 minutos sin que te interrumpan.</b></h5></li>
             </ul>
         </div>
-    </div><br>
+    </div>
     <div>
         <form action="<?=base_url('terman/encuesta')?>/<?=$codigo?>" method="post">
             <button type="submit" name="submit" class="btn btn-dark"><h5><b>Comenzar</b></h5></button>

@@ -16,11 +16,11 @@
     </div>
 </div>
 <div class="container" style="text-align:center;background-color:#b5dffb;padding:30px;margin-top:25px;">
-    <h3 style="padding-top:30px;"><b>Encuesta de <?=$nombre?></b></h3>
+    <h3><b>Encuesta de <?=$nombre?></b></h3>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h5><b id="finaliza_encuesta"><?= $fecha_fin_sesion?></b></h5>
-        </div><br><br><br>
+            <h5><b id="finaliza_encuesta">La Serie <?=$serie?> finaliza en <label id="reloj_usuario"></label></b></h5>
+        </div><br><br>
         <div class="col-md-8">
             <h4><b><?php echo $reactivo?></b></h4>
         </div>
@@ -29,22 +29,23 @@
                 <tbody>
                     <?php if($serie == 'I' || $serie == 'II' || $serie == 'VII' || $serie == 'IX'):?>
                         <?php foreach($datos as $item):?>
-                        <tr>
-                            <td>
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary btn-lg">
-                                        <input type="radio" name="opcion" value="<?php echo $item->indice?>" required/>
-                                        <a><?php echo $item->indice?></a>
-                                    </label>
-                                </div>
-                            </td>
-                            <td>
-                                <h5><b><?php echo $item->respuesta?></b></h5>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-primary btn-lg">
+                                            <input type="radio" name="opcion" value="<?php echo $item->indice?>" required/>
+                                            <a><?php echo $item->indice?></a>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5><b><?php echo $item->respuesta?></b></h5>
+                                </td>
+                            </tr>
                         <?php endforeach;?>
                     <?php endif;?>
                     <?php if($serie == 'III' || $serie == 'VI' || $serie == 'VIII'):?>
+                        <br>
                         <?php foreach($datos as $item):?>
                             <tr>
                                 <td>
@@ -62,6 +63,7 @@
                                             <a><?php echo $item['opc2']?></a> 
                                         </label>
                                     </div>
+                                    <br>
                                 </td>
                             </tr>
                         <?php endforeach;?>
@@ -78,45 +80,53 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <b><?php echo $item->respuesta?></b>
+                                    <h5><b><?php echo $item->respuesta?></b></h5>
                                 </td>
                             </tr>
                         <?php endforeach;?>
                     <?php endif;?>
                     <?php if($serie == 'V'):?>
+                        <br>
                         <div class="row justify-content-center">
                             <div class="col-md-3">
-                                <input type="number" class="form-control" name="respuesta">
+                                <input type="number" min="0" class="form-control" name="respuesta" required>
                             </div>
                         </div>
+                        <br>
                     <?php endif;?>
                     <?php if($serie == 'X'):?>
-                    <br>
+                        <br>
                         <div class="row justify-content-center">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="campo1">
+                                <input type="text" class="form-control" name="campo1" required>
                             </div>
                             <i class="fas fa-minus"></i>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="campo2">
+                                <input type="text" class="form-control" name="campo2" required>
                             </div>
                         </div>
+                        <br>
                     <?php endif;?>
                 </tbody>
             </table>
-            <input type="text" value="<?php echo $pregunta?>" disabled>
-            <input type="text" value="<?php echo $limite?>"disabled>
-            <button class="btn btn-primary" onclick="insertar()"><i class="fas fa-angle-double-right"></i></button>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <?php $style = round((($pregunta-1) * 100) / $limite)?>
+            <div class="progress" style="height:50px;">
+                <div class="progress-bar bg-dark progress-bar-striped" style="width:<?=$style?>%;"><?=$style?>%</div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" onclick="insertar()"><i class="fas fa-angle-double-right"></i></button>                
+        </div>
+    </div>
+    <h4><b><?=$pregunta?> / <?=$limite?></b></h4>
 </div>
 <script>
     document.title = "Terman merril";
     $( document ).ready(function() {
-        h = 0;
-        m = 0;
-        s = 0;
-        limite = 0;
         console.log( <?= $showInstructions ?>);
         if(<?=$showInstructions ?> === 1  && <?= $acabo_tiempo ?> != 1){
             $('#modelId').modal({backdrop: 'static', keyboard: false});
@@ -157,9 +167,11 @@
             type:"post",
             success:function(data){
                 if(data){
-                    console.log(data);
-                    if(parseInt(data) <= 0){
-                        //setInterval(reloj()');
+                    var cronometro = JSON.parse(data);
+                    $("#reloj_usuario").text(cronometro.i+':'+cronometro.s);
+                    console.log(cronometro.i+':'+cronometro.s);
+                    if(parseInt(cronometro.i) <= 0 && parseInt(cronometro.s) <= 0){
+                        //setInterval(cronometro()');
                         clearInterval(contando);
                         //limpiamos pantalla avisamos y procesamos la info para evaluar si
                         //existe una serie mas o es la ultima
@@ -196,7 +208,7 @@
         var idReactivo = <?= $idReactivo ?>;
         var codigo = '<?= $codigo ?>';
         var opcion;
-        if(serie == 'I' || serie == 'II' || serie == 'III' || serie == 'VI' || serie == 'VII' || serie == 'VIII' || serie == 'IX'){
+        if(serie == 'I'||serie == 'II'||serie=='III'||serie == 'VI'||serie == 'VII'||serie == 'VIII'||serie == 'IX'){
             opcion = $('input[name=opcion]:checked').val();
         }
         if(serie == 'IV'){
@@ -208,16 +220,20 @@
             opcion = arr[0]+' - '+arr[1];
         }
         if(serie == 'V'){
-            opcion = $('input[name=respuesta]').val();
+            if ($('input[name=respuesta]').val().length > 0) {
+                opcion = $('input[name=respuesta]').val();
+            }
             //console.log(opcion);
         }if(serie == 'X'){
-            c1 = $('input[name=campo1]').val();
-            c2 = $('input[name=campo2]').val();
-            opcion = c1+' - '+c2;
+            if ($('input[name=campo1]').val().length > 0 && $('input[name=campo2]').val().length > 0) {
+                c1 = $('input[name=campo1]').val();
+                c2 = $('input[name=campo2]').val();
+                opcion = c1+' - '+c2;
+            }
             //console.log(opcion);
         }
         if(opcion == undefined){
-            alert("No hay ningun valor");
+            alert("No hay ninguna respuesta para insertar");
         }else{
             $.ajax({
                 url: '/testalia/terman/encuesta_post/'+codigo,
