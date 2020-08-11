@@ -146,7 +146,7 @@
         console.log(<?=$duracion_en_segundos ?>);
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testalia/terman/crear_temporizador/<?=$codigo ?>",
+            url: "/testaclic/terman/crear_temporizador/<?=$codigo ?>",
             type:"post",
             dataType: 'json',
             data:{ 
@@ -163,7 +163,7 @@
     function reloj() {
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testalia/terman/actualizar_contador/<?=$codigo ?>",
+            url: "/testaclic/terman/actualizar_contador/<?=$codigo ?>",
             type:"post",
             success:function(data){
                 if(data){
@@ -183,14 +183,14 @@
                             //Codigo
                             //consultar num pregunta esta & num pregunta max
                             //actualizar siguiente serie o evaluar si es la ultima serie mandaral gracias 
-                            url: '/testalia/terman/fin_encuesta_por_cronometro/<?=$codigo ?>',
+                            url: '/testaclic/terman/fin_encuesta_por_cronometro/<?=$codigo ?>',
                             type: 'POST',
                             error: function() {
                                 alert('Something is wrong');
                             },
                             success: function(data) {
                                 console.log(data);
-                                window.location = "/testalia/terman/encuesta/<?=$codigo ?>";
+                                window.location = "/testaclic/terman/encuesta/<?=$codigo ?>";
                             }
                         });
                     }
@@ -236,7 +236,7 @@
             alert("No hay ninguna respuesta para insertar");
         }else{
             $.ajax({
-                url: '/testalia/terman/encuesta_post/'+codigo,
+                url: '/testaclic/terman/encuesta_post/'+codigo,
                 type: 'POST',
                 data: {
                         idReactivo: idReactivo,
@@ -247,7 +247,7 @@
                     alert('Something is wrong');
                 },
                 success: function(data) {
-                window.location = "/testalia/terman/encuesta/"+codigo;
+                window.location = "/testaclic/terman/encuesta/"+codigo;
                 }
             });
         }

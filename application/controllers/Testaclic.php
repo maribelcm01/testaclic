@@ -1,5 +1,5 @@
 <?php 
-	class Testalia extends CI_Controller{
+	class Testaclic extends CI_Controller{
 			
 		public function __construct(){
 			parent::__construct();

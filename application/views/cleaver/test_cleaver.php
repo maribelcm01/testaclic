@@ -165,7 +165,7 @@
             //Cambiar a type: POST si necesario
             type: "POST",
             // URL a la que se enviará la solicitud Ajax
-            url: "/testalia/cleaver/guardar_respuesta/"+codigo+"/"+is_back,
+            url: "/testaclic/cleaver/guardar_respuesta/"+codigo+"/"+is_back,
             dataType: 'json',
             success : function(data) { 
                 $(".alert-save").css("display","none");
@@ -174,12 +174,12 @@
                 if(is_back == 'true'){
                     back = (back*1)+1;
                     if(back == pregunta){
-                        window.location = "/testalia/cleaver/encuesta/"+codigo;
+                        window.location = "/testaclic/cleaver/encuesta/"+codigo;
                     }else{
-                        window.location = "/testalia/cleaver/encuesta/"+codigo+"?back="+back;
+                        window.location = "/testaclic/cleaver/encuesta/"+codigo+"?back="+back;
                     }
                 }else{
-                    window.location = "/testalia/cleaver/encuesta/"+codigo; 
+                    window.location = "/testaclic/cleaver/encuesta/"+codigo; 
                 }
             },
             error : function(error) {
