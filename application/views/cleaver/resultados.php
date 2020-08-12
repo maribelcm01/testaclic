@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row m-4">
         <div class="col-md-2">
-            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" onclick="Export2Doc('exportContent', '<?php echo $nombre?>');">Guardar como .doc</button><br>
+            <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" onclick="Export2Doc('exportContent', '<?= $nombre?>');">Guardar como .doc</button><br>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success" style="margin-top:10px;width:100px" data-toggle="modal" data-target=".modal-graficas">Gráficas</button>
             <!-- Modal -->
@@ -59,13 +59,13 @@
             <div style="margin-top:10px" id="collapseExample" class="collapse">
                 <ul style= "list-style-type: none">
                     <?php foreach($datos as $key):?>
-                        <li><b><?php echo $key;?></b></li>
+                        <li><b><?= $key;?></b></li>
                     <?php endforeach; ?>
                 </ul> 
             </div>
         </div>
         <div class="col-md-10" id="exportContent">
-            <h4><?php echo $nombre?></h4>
+            <h4><?= $nombre?></h4>
             <table bordercolor="black" border="1" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
@@ -76,8 +76,8 @@
                 <tbody>
                     <?php foreach($resultados as $key => $value): ?>
                         <tr>
-                            <td align="center" valign="top"><?php echo $value->interpretacion ?></td>
-                            <td style="text-align:justify"><?php echo $value->explicacion ?></td>
+                            <td align="center" valign="top"><?= $value->interpretacion ?></td>
+                            <td style="text-align:justify"><?= $value->explicacion ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -111,10 +111,10 @@
             name: 'Total',
             color: '#35C5EB',
             data: [
-                <?php echo $DTotal?>,
-                <?php echo $ITotal?>,
-                <?php echo $STotal?>,
-                <?php echo $CTotal?>
+                <?= $DTotal?>,
+                <?= $ITotal?>,
+                <?= $STotal?>,
+                <?= $CTotal?>
             ]
         }],
     });
@@ -142,10 +142,10 @@
             name: 'Más',
             color: '#EB8235',
             data: [
-                <?php echo $DMas?>,
-                <?php echo $IMas?>,
-                <?php echo $SMas?>,
-                <?php echo $CMas?>
+                <?= $DMas?>,
+                <?= $IMas?>,
+                <?= $SMas?>,
+                <?= $CMas?>
             ]
         }],
     });
@@ -173,10 +173,10 @@
             name: 'Menos',
             color: '#EB35D2',
             data: [
-                <?php echo $DMenos?>,
-                <?php echo $IMenos?>,
-                <?php echo $SMenos?>,
-                <?php echo $CMenos?>
+                <?= $DMenos?>,
+                <?= $IMenos?>,
+                <?= $SMenos?>,
+                <?= $CMenos?>
             ]
         }],
     });

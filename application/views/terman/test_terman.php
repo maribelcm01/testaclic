@@ -22,7 +22,7 @@
             <h5><b id="finaliza_encuesta">La Serie <?=$serie?> finaliza en <label id="reloj_usuario"></label></b></h5>
         </div><br><br>
         <div class="col-md-8">
-            <h4><b><?php echo $reactivo?></b></h4>
+            <h4><b><?= $reactivo?></b></h4>
         </div>
         <div class="col-md-6 contenedor-cuestionario">
             <table class="table">
@@ -33,13 +33,13 @@
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?php echo $item->indice?>" required/>
-                                            <a><?php echo $item->indice?></a>
+                                            <input type="radio" name="opcion" value="<?= $item->indice?>" required/>
+                                            <a><?= $item->indice?></a>
                                         </label>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5><b><?php echo $item->respuesta?></b></h5>
+                                    <h5><b><?= $item->respuesta?></b></h5>
                                 </td>
                             </tr>
                         <?php endforeach;?>
@@ -51,16 +51,16 @@
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?php echo $item['opc1']?>">
-                                            <a><?php echo $item['opc1']?></a> 
+                                            <input type="radio" name="opcion" value="<?= $item['opc1']?>">
+                                            <a><?= $item['opc1']?></a> 
                                         </label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?php echo $item['opc2']?>">
-                                            <a><?php echo $item['opc2']?></a> 
+                                            <input type="radio" name="opcion" value="<?= $item['opc2']?>">
+                                            <a><?= $item['opc2']?></a> 
                                         </label>
                                     </div>
                                     <br>
@@ -74,13 +74,13 @@
                                 <td>
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary">
-                                            <a><?php echo $item->indice?></a>
-                                            <input type="checkbox" name="opciones" value="<?php echo $item->indice?>"/>
+                                            <a><?= $item->indice?></a>
+                                            <input type="checkbox" name="opciones" value="<?= $item->indice?>"/>
                                         </label>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5><b><?php echo $item->respuesta?></b></h5>
+                                    <h5><b><?= $item->respuesta?></b></h5>
                                 </td>
                             </tr>
                         <?php endforeach;?>

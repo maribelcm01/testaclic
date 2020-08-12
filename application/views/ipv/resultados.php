@@ -50,11 +50,11 @@
                             <tbody>
                             <?php foreach($resultado as $value): ?>
                                 <tr>
-                                    <td><?php echo $value['interpretacion'] ?></td>
-                                    <td><?php echo $value['enfoque'] ?></td>
-                                    <td><?php echo $value['PD'] ?></td>
-                                    <td><?php echo $value['PT'] ?></td>
-                                    <td><?php echo $value['Escala'] ?></td>
+                                    <td><?= $value['interpretacion'] ?></td>
+                                    <td><?= $value['enfoque'] ?></td>
+                                    <td><?= $value['PD'] ?></td>
+                                    <td><?= $value['PT'] ?></td>
+                                    <td><?= $value['Escala'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
 
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="col-md-10" id="exportContent">
-            <h4><?php echo $nombre?></h4>
+            <h4><?= $nombre?></h4>
             <table bordercolor="black" border="1" cellspacing="0">
                 <thead class="thead-dark">
                     <tr>
@@ -80,8 +80,8 @@
                 <tbody>
                     <?php foreach($consulta as $key => $value): ?>
                         <tr>
-                            <td align="center" valign="top"><?php echo $value->interpretacion ?></td>
-                            <td style="text-align:justify"><?php echo $value->descripcion ?></td>
+                            <td align="center" valign="top"><?= $value->interpretacion ?></td>
+                            <td style="text-align:justify"><?= $value->descripcion ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -118,18 +118,18 @@
             name: '',
             color: '#35C5EB',
             data: [
-                <?=$resultado[0]['PT'] ?>,
-                <?=$resultado[1]['PT'] ?>,
-                <?=$resultado[2]['PT'] ?>,
-                <?=$resultado[3]['PT'] ?>,
-                <?=$resultado[4]['PT'] ?>,
-                <?=$resultado[5]['PT'] ?>,
-                <?=$resultado[6]['PT'] ?>,
-                <?=$resultado[7]['PT'] ?>,
-                <?=$resultado[8]['PT'] ?>,
-                <?=$resultado[9]['PT'] ?>,
-                <?=$resultado[10]['PT'] ?>,
-                <?=$resultado[11]['PT'] ?>
+                <?= $resultado[0]['PT'] ?>,
+                <?= $resultado[1]['PT'] ?>,
+                <?= $resultado[2]['PT'] ?>,
+                <?= $resultado[3]['PT'] ?>,
+                <?= $resultado[4]['PT'] ?>,
+                <?= $resultado[5]['PT'] ?>,
+                <?= $resultado[6]['PT'] ?>,
+                <?= $resultado[7]['PT'] ?>,
+                <?= $resultado[8]['PT'] ?>,
+                <?= $resultado[9]['PT'] ?>,
+                <?= $resultado[10]['PT'] ?>,
+                <?= $resultado[11]['PT'] ?>
             ]
         }],
     });

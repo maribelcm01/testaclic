@@ -1,5 +1,5 @@
 <div class="container" style="text-align:center; background-color:#b5dffb; margin-top:40px; padding:30px; size:720px;">
-    <h1><b>Hola <?php echo $nombre ?></b></h1><br>
+    <h1><b>Hola <?= $nombre ?></b></h1><br>
     <h2><b>¡Te damos la bienvenida!</b></h2><br>
     <div class="row justify-content-center" style="text-align:justify;">
         <div class="col-md-8">

@@ -13,54 +13,54 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white">
-                        <td><h5><b><?php echo $palabra1?></b></h5></td>
+                        <td><h5><b><?= $palabra1?></b></h5></td>
                         <td>
                             <div data-level="1" data-side="left" class = "<?= ($mas1 != null && $mas1 == 1) ? 'cmas' : '' ?> checks mas">
-                                <input class="isHidden get-data lf-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio1" value="1" <?= ($mas1 != null && $mas1 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden get-data lf-level-1" data-reactivo="<?= $idReactivo1 ?>" type="radio" name="radio1" value="1" <?= ($mas1 != null && $mas1 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                         <td>
                             <div data-level="1" data-side="right" class = "<?= ($menos1 != null && $menos1 == 1) ? 'cmenos' : '' ?> checks menos">
-                                <input class="isHidden rg-level-1" data-reactivo="<?php echo $idReactivo1 ?>" type="radio" name="radio2" value="0" <?= ($menos1 != null && $menos1 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden rg-level-1" data-reactivo="<?= $idReactivo1 ?>" type="radio" name="radio2" value="0" <?= ($menos1 != null && $menos1 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><b><?php echo $palabra2?></b></h5></td>
+                        <td><h5><b><?= $palabra2?></b></h5></td>
                         <td>
                             <div data-level="2" data-side="left" class = "<?= ($mas2 != null && $mas2 == 1) ? 'cmas' : '' ?> checks mas">
-                                <input class="isHidden get-data lf-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio1" value="1" <?= ($mas2 != null && $mas2 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden get-data lf-level-2" data-reactivo="<?= $idReactivo2 ?>" type="radio" name="radio1" value="1" <?= ($mas2 != null && $mas2 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                         <td>
                             <div data-level="2" data-side="right" class = "<?= ($menos2 != null && $menos2 == 1) ? 'cmenos' : '' ?> checks menos">
-                                <input class="isHidden rg-level-2" data-reactivo="<?php echo $idReactivo2 ?>" type="radio" name="radio2" value="0" <?= ($menos2 != null && $menos2 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden rg-level-2" data-reactivo="<?= $idReactivo2 ?>" type="radio" name="radio2" value="0" <?= ($menos2 != null && $menos2 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><b><?php echo $palabra3?></b></h5></td>
+                        <td><h5><b><?= $palabra3?></b></h5></td>
                         <td>
                             <div data-level="3" data-side="left" class = "<?= ($mas3 != null && $mas3 == 1) ? 'cmas' : '' ?> checks mas">
-                                <input class="isHidden get-data lf-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio1" value="1" <?= ($mas3 != null && $mas3 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden get-data lf-level-3" data-reactivo="<?= $idReactivo3 ?>" type="radio" name="radio1" value="1" <?= ($mas3 != null && $mas3 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                         <td>
                             <div data-level="3" data-side="right" class = "<?= ($menos3 != null && $menos3 == 1) ? 'cmenos' : '' ?> checks menos">
-                                <input class="isHidden rg-level-3" data-reactivo="<?php echo $idReactivo3 ?>" type="radio" name="radio2" value="0" <?= ($menos3 != null && $menos3 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden rg-level-3" data-reactivo="<?= $idReactivo3 ?>" type="radio" name="radio2" value="0" <?= ($menos3 != null && $menos3 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                     </tr>
                     <tr class="bg-white">
-                        <td><h5><b><?php echo $palabra4?></b></h5></td>
+                        <td><h5><b><?= $palabra4?></b></h5></td>
                         <td>
                             <div data-level="4" data-side="left" class = "<?= ($mas4 != null && $mas4 == 1) ? 'cmas' : '' ?> checks mas">
-                                <input class="isHidden get-data lf-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio1" value="1" <?= ($mas4 != null && $mas4 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden get-data lf-level-4" data-reactivo="<?= $idReactivo4 ?>" type="radio" name="radio1" value="1" <?= ($mas4 != null && $mas4 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                         <td>
                             <div data-level="4" data-side="right" class = "<?= ($menos4 != null && $menos4 == 1) ? 'cmenos' : '' ?> checks menos">
-                                <input class="isHidden rg-level-4" data-reactivo="<?php echo $idReactivo4 ?>" type="radio" name="radio2" value="0" <?= ($menos4 != null && $menos4 == 1) ? 'checked' : '' ?>/>
+                                <input class="isHidden rg-level-4" data-reactivo="<?= $idReactivo4 ?>" type="radio" name="radio2" value="0" <?= ($menos4 != null && $menos4 == 1) ? 'checked' : '' ?>/>
                             </div>
                         </td>
                     </tr>
@@ -85,8 +85,6 @@
         </div>
     </div>
     <h4><b><?=$pregunta?> / <?=$mayor?></b></h4>
-    <input type="hidden" id="codigo" value="<?php echo $codigo?>">
-    <input type="hidden" id="pregunta" value="<?php echo $pregunta?>">
 </div>
 <script>
     document.title = 'Cleaver';
@@ -148,8 +146,8 @@
     }
     //ajax para enviar la respuesta
     function enviarRespuesta (datos,datos_nulos){
-        var codigo = document.getElementById("codigo").value;
-        var pregunta = document.getElementById("pregunta").value;
+        var codigo = '<?= $codigo?>';
+        var pregunta = '<?= $pregunta?>';
         var urlparams = new URLSearchParams(window.location.search);
         var back = urlparams.get('back');
         var aux = datos+datos_nulos;

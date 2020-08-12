@@ -1,5 +1,5 @@
 <div class="container" style="text-align:center; background-color:#b5dffb; margin-top:20px; padding:30px;">
-    <h2><b>Hola <?php echo $nombre ?></b></h2><br>
+    <h2><b>Hola <?= $nombre ?></b></h2><br>
     <h3><b>¡Te damos la bienvenida!</b></h3><br>
     <div class="row justify-content-center" style="text-align:justify;">
         <div class="col-md-8">
@@ -13,7 +13,7 @@
         </div>
     </div><br>
     <div>
-        <form action="<?=base_url('vida/encuesta')?>/<?=$codigo?>" method="post">
+        <form action="<?=base_url('vida/encuesta')?>/<?= $codigo?>" method="post">
             <button type="submit" name="submit" class="btn btn-dark"><h5><b>Comenzar</b></h5></button>
         </form>
     </div>

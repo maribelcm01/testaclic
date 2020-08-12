@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row m-4 justify-content-center">
         <div class=" col-md-6">
-            <form action="<?php echo base_url() ?>reactivo/guardar_postOpc/<?php echo $idEncuesta?>/<?php echo $idReactivo?>" method="post">
+            <form action="<?= base_url() ?>reactivo/guardar_postOpc/<?= $idEncuesta?>/<?= $idReactivo?>" method="post">
                 <div class="form-group">
-                    <input type="text" name="indice" class="form-control" placeholder="Opción" value="<?php echo $indice?>" required>
-                    <input type="text" name="respuesta" class="form-control" placeholder="Nueva Opción" value="<?php echo $respuesta?>" required>
+                    <input type="text" name="indice" class="form-control" placeholder="Opción" value="<?= $indice?>" required>
+                    <input type="text" name="respuesta" class="form-control" placeholder="Nueva Opción" value="<?= $respuesta?>" required>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">Guardar</button>
-                    <!-- <a class="btn btn-danger" href="<?php echo base_url()?>reactivo/index/<?php echo $idEncuesta?>"><i class="fas fa-times-circle"></i>Cancelar</a>
+                    <!-- <a class="btn btn-danger" href="<?= base_url()?>reactivo/index/<?= $idEncuesta?>"><i class="fas fa-times-circle"></i>Cancelar</a>
                  --></div>
             </form>
         </div>
@@ -27,10 +27,10 @@
                     <tbody>
                         <?php foreach($respuestas as $item): ?>
                             <tr>
-                                <td><?php echo $item->indice ?></td>
-                                <td><?php echo $item->respuesta ?></td>
+                                <td><?= $item->indice ?></td>
+                                <td><?= $item->respuesta ?></td>
                                 <td>
-                                    <a class="btn btn-primary" href="<?php echo base_url() ?>reactivo/guardarOpc/<?php echo $idEncuesta?>/<?php echo $idReactivo?>/<?php echo $item->indice?>">
+                                    <a class="btn btn-primary" href="<?= base_url() ?>reactivo/guardarOpc/<?= $idEncuesta?>/<?= $idReactivo?>/<?= $item->indice?>">
                                         <i class="fas fa-edit"></i>Editar
                                     </a>
 							    </td>

@@ -4,7 +4,7 @@
             <h2>Lista de Encuestas</h2>
         </div>
         <div class="col-md-2">
-			<a class="btn btn-success" href="<?php echo base_url() ?>encuesta/guardar"><i class="fas fa-plus"></i> Registro </a>
+			<a class="btn btn-success" href="<?= base_url() ?>encuesta/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
@@ -21,13 +21,13 @@
 		    	<tbody>
 		       	<?php foreach($encuesta as $item): ?>
 		          	<tr>
-		             	<td> <?php echo $item->nombre ?> </td>
+		             	<td> <?= $item->nombre ?> </td>
 		             	<td> 
-							<a class="btn btn-primary" href="<?php echo base_url() ?>encuesta/guardar/<?php echo $item->idEncuesta ?>"><i class="fas fa-edit"></i>Editar</a>
-							<a class="btn btn-dark" href="<?php echo base_url() ?>reactivo/index/<?php echo $item->idEncuesta ?>">Reactivos</a>
-							<a class="btn <?= ($item->estado == 1) ? 'btn-success' : 'btn-secondary' ?>" href="<?php echo base_url() ?>/encuesta/cambiarEstado/<?php echo $item->idEncuesta?>"><?= ($item->estado == 1) ? 'Activo' : 'Inactivo' ?></a>
-							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuesta/eliminar/<?php echo $item->idEncuesta ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
-							<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuesta/ver/<?php echo $item->idEncuesta ?>"> Ver </a>-->
+							<a class="btn btn-primary" href="<?= base_url() ?>encuesta/guardar/<?= $item->idEncuesta ?>"><i class="fas fa-edit"></i>Editar</a>
+							<a class="btn btn-dark" href="<?= base_url() ?>reactivo/index/<?= $item->idEncuesta ?>">Reactivos</a>
+							<a class="btn <?= ($item->estado == 1) ? 'btn-success' : 'btn-secondary' ?>" href="<?= base_url() ?>/encuesta/cambiarEstado/<?= $item->idEncuesta?>"><?= ($item->estado == 1) ? 'Activo' : 'Inactivo' ?></a>
+							<!-- <a class="btn btn-danger eliminar_alert" href="<?= base_url() ?>encuesta/eliminar/<?= $item->idEncuesta ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
+							<!--<a class="btn btn-info" href="<?= base_url() ?>encuesta/ver/<?= $item->idEncuesta ?>"> Ver </a>-->
 		             	</td>
 		          	</tr>
 		       	<?php endforeach; ?>

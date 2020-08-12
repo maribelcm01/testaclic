@@ -41,35 +41,35 @@
             colorByPoint: true,
             data: [{
                 name: "Moral",
-                y: <?php echo $Moral?>,
+                y: <?= $Moral?>,
                 drilldown: "Moral"
             }, {
                 name: "Legalidad",
-                y: <?php echo $Legal?>,
+                y: <?= $Legal?>,
                 drilldown: "Legalidad"
             }, {
                 name: "Indiferencia",
-                y: <?php echo $Indif?>,
+                y: <?= $Indif?>,
                 drilldown: "Indiferencia"
             }, {
                 name: "Corrupto",
-                y: <?php echo $Corru?>,
+                y: <?= $Corru?>,
                 drilldown: "Corrupto"
             }, {
                 name: "Económico",
-                y: <?php echo $Econo?>,
+                y: <?= $Econo?>,
                 drilldown: "Económico"
             }, {
                 name: "Político",
-                y: <?php echo $Polit?>,
+                y: <?= $Polit?>,
                 drilldown: "Político"
             }, {
                 name: "Social",
-                y: <?php echo $Socia?>,
+                y: <?= $Socia?>,
                 drilldown: "Social"
             }, {
                 name: "Religioso",
-                y: <?php echo $Relig?>,
+                y: <?= $Relig?>,
                 drilldown: "Religioso"
             }]
         }]
@@ -107,16 +107,16 @@
             colorByPoint: true,
             data: [{
                 name: 'Moral',
-                y: <?php echo $Moral?>
+                y: <?= $Moral?>
             }, {
                 name: 'Legalidad',
-                y: <?php echo $Legal?>
+                y: <?= $Legal?>
             }, {
                 name: 'Indiferencia',
-                y: <?php echo $Indif?>
+                y: <?= $Indif?>
             }, {
                 name: 'Corrupto',
-                y: <?php echo $Corru?>
+                y: <?= $Corru?>
             }]
         }]
     });
@@ -153,16 +153,16 @@
             colorByPoint: true,
             data: [{
                 name: 'Económico',
-                y: <?php echo $Econo?>
+                y: <?= $Econo?>
             }, {
                 name: 'Político',
-                y: <?php echo $Polit?>
+                y: <?= $Polit?>
             }, {
                 name: 'Social',
-                y: <?php echo $Socia?>
+                y: <?= $Socia?>
             }, {
                 name: 'Religioso',
-                y: <?php echo $Relig?>
+                y: <?= $Relig?>
             }]
         }]
     });

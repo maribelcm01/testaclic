@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i> Usuario <?php echo $this->session->nombre?>
+                    <i class="fas fa-user"></i> Usuario <?= $this->session->nombre?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<?=base_url('login/logout')?>"><i class="fas fa-arrow-left"></i> Cerrar Sesión</a>    

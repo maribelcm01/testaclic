@@ -1,7 +1,7 @@
 <div class="container" style="text-align:center;background-color:#b5dffb;margin-top:30px;padding:30px;">
     <h4><b>Encuesta de <?=$nombre?></b></h4><br><br>
 	<h2>
-		<b><?php echo $reactivo ?></b>
+		<b><?= $reactivo ?></b>
 		<?php if($comentario != null):?> 
 			<sup>
 				<i data-toggle="mensaje" title="<?=$comentario?>" class="far fa-question-circle" data-placement="right"></i>
@@ -21,7 +21,7 @@
 				<button style="height:50px; width:120px;" class="btn <?= ($valor_reactivo != null && $valor_reactivo == 2) ? 'btn-warning' : 'btn-dark' ?>" required type="submit" name="valor" value="2"><b>Casi Siempre</b></button>               
 			</div>
 		</div>
-		<input type="hidden" name="idReactivo" value="<?php echo $idReactivo?>">
+		<input type="hidden" name="idReactivo" value="<?= $idReactivo?>">
 	</form><br><br>
 	<div class="row justify-content-center">
 		<div class="col-md-1">

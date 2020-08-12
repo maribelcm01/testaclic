@@ -1,7 +1,7 @@
 <div class="container" style="text-align:center; margin-top: 40px;">
     <h2>Encuesta IPV</h2>
     <h4>Ingresa el código de evaluación que recibiste:</h4>
-    <p><?php echo $mensaje?></p>
+    <p><?= $mensaje?></p>
     <div class="row justify-content-center">
         <form action="<?=base_url('ipv/validar')?>" method="post">
             <div class="form-group">

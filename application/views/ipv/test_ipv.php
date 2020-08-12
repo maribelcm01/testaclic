@@ -1,8 +1,8 @@
 <div class="container" style="text-align:center; background-color:#b5dffb; margin-top:40px; padding:30px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h4><b>Test de <?php echo $nombre?></b></h4><br>
-            <h5><b><?php echo $reactivo?></b></h5>
+            <h4><b>Test de <?= $nombre?></b></h4><br>
+            <h5><b><?= $reactivo?></b></h5>
         </div>
         <div class="col-md-5">
             <form action="<?=base_url('ipv/encuesta_post')?>/<?=$codigo?><?= isset($_GET['back']) ? '?back='.$_GET['back'].'' : '' ?>" method="post">
@@ -11,14 +11,14 @@
                         <?php foreach($datos as $item):?>
                         <tr>
                             <td>
-                                <button type="submit" class="btn <?= ($opc != null && $opc == $item->indice) ? 'btn-warning' : 'btn-secondary' ?>" name="opcion" value="<?php echo $item->indice?>"><?php echo $item->indice?></button>
+                                <button type="submit" class="btn <?= ($opc != null && $opc == $item->indice) ? 'btn-warning' : 'btn-secondary' ?>" name="opcion" value="<?= $item->indice?>"><?= $item->indice?></button>
                             </td>
-                            <td><b><?php echo $item->respuesta?></b></td>
+                            <td><b><?= $item->respuesta?></b></td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
                 </table>
-                <input type="hidden" name="idReactivo" value="<?php echo $idReactivo?>">
+                <input type="hidden" name="idReactivo" value="<?= $idReactivo?>">
             </form>
         </div>
     </div>

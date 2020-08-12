@@ -4,7 +4,7 @@
             <h2>Lista de Encuestados</h2>
         </div>
         <div class="col-md-2">
-			<a class="btn btn-success" href="<?php echo base_url() ?>encuestado/guardar"><i class="fas fa-plus"></i> Registro </a>
+			<a class="btn btn-success" href="<?= base_url() ?>encuestado/guardar"><i class="fas fa-plus"></i> Registro </a>
 		</div>
 	</div>
 
@@ -23,13 +23,13 @@
 		    	<tbody>
 		       		<?php foreach($encuestado as $item): ?>
 		          	<tr>
-		             	<td> <?php echo $item->nombre ?> </td>
-		             	<td> <?php echo $item->telefono ?> </td>
-		             	<td> <?php echo $item->email ?> </td>
+		             	<td> <?= $item->nombre ?> </td>
+		             	<td> <?= $item->telefono ?> </td>
+		             	<td> <?= $item->email ?> </td>
 		             	<td> 
-							<a class="btn btn-primary" href="<?php echo base_url() ?>encuestado/guardar/<?php echo $item->idEncuestado ?>"><i class="fas fa-edit"></i>Editar </a>
-							<!-- <a class="btn btn-danger eliminar_alert" href="<?php echo base_url() ?>encuestado/eliminar/<?php echo $item->idEncuestado ?>"><i class="fas fa-times-circle"></i>Borrar </a>  -->
-							<!--<a class="btn btn-info" href="<?php echo base_url() ?>encuestado/ver/<?php echo $item->idEncuestado ?>"> Ver </a>-->
+							<a class="btn btn-primary" href="<?= base_url() ?>encuestado/guardar/<?= $item->idEncuestado ?>"><i class="fas fa-edit"></i>Editar </a>
+							<!-- <a class="btn btn-danger eliminar_alert" href="<?= base_url() ?>encuestado/eliminar/<?= $item->idEncuestado ?>"><i class="fas fa-times-circle"></i>Borrar </a>  -->
+							<!--<a class="btn btn-info" href="<?= base_url() ?>encuestado/ver/<?= $item->idEncuestado ?>"> Ver </a>-->
 		             	</td>
 		          	</tr>
 		       		<?php endforeach; ?>
