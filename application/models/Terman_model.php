@@ -64,14 +64,6 @@
 			$pregunta = $l[0]['pregunta'];
 			return $pregunta;
 		}
-		public function verRespuesta($serie,$pregunta){
-			$l = $this->db->select('respuesta')->
-					where(array('serie =' => $serie, 'numero_pregunta =' => $pregunta))->
-					get('hoja_respuestas')->
-					result_array();
-			$respuesta = $l[0]['respuesta'];
-			return $respuesta;
-		}
 		public function verLimite($codigo,$serie){
 			$l = $this->db->select_max('reactivo.indice')->
 					where(array('aplicacion.idEncuesta = encuesta.idEncuesta AND
@@ -92,6 +84,17 @@
 			$this->db->where('codigo',$codigo);
 			$this->db->update('aplicacion',$data);
 		}
+		public function busca_menor_mayor($idEncuesta){
+			$this->db->select('indice');
+			$this->db->from('reactivo');
+			$this->db->order_by('indice','asc');
+			$this->db->where('idEncuesta',$idEncuesta);
+			$query=$this->db->get();
+			$row=$query->result_array();
+			$first = $row[0];
+			$last = $row[count($row)-1];
+			return [$first,$last];
+		}
 		public function obtenerPregunta($codigo,$serie){
 			$d = $this->db->select('reactivo.idReactivo, reactivo.reactivo, reactivo.indice AS indiceR')->
                     where(array('reactivo.indice = aplicacion.pregunta
@@ -100,8 +103,16 @@
 					result();
 			return $d;
 		}
+		public function obtenerPreguntaBack($codigo,$serie,$pregunta){
+			$d = $this->db->select('reactivo.idReactivo, reactivo.reactivo, reactivo.indice AS indiceR')->
+                    where(array('reactivo.indice = ' => $pregunta,
+					'aplicacion.codigo =' => $codigo,'reactivo.comentario =' => $serie))->
+					get('reactivo,aplicacion')->
+					result();
+			return $d;
+		}
 		public function obtenerRespuesta($codigo,$serie){
-			$d = $this->db->select('respuesta.respuesta, respuesta.indice,')->
+			$d = $this->db->select('respuesta.respuesta, respuesta.indice')->
                     where(array('reactivo.indice = aplicacion.pregunta
 					AND respuesta.idReactivo = reactivo.idReactivo AND aplicacion.codigo =' => $codigo,
 					'reactivo.comentario =' => $serie))->
@@ -109,8 +120,27 @@
 					result();
 			return $d;
 		}
+		public function obtenerRespuestaBack($codigo,$serie,$pregunta){
+			$d = $this->db->select('respuesta.respuesta, respuesta.indice')->
+                    where(array('respuesta.idReactivo = reactivo.idReactivo
+					AND aplicacion.codigo =' => $codigo,'reactivo.comentario =' => $serie,
+					'reactivo.indice = ' => $pregunta))->
+					get('reactivo,respuesta,aplicacion')->
+					result();
+			return $d;
+		}
+		public function verSeleccion($codigo,$serie,$pregunta){
+			$d = $this->db->select('aplicacion_terman.respuesta')->
+                    where(array('reactivo.idReactivo = aplicacion_terman.idReactivo
+					AND aplicacion.codigo =' => $codigo,'reactivo.comentario =' => $serie,
+					'reactivo.indice = ' => $pregunta))->
+					get('reactivo,aplicacion,aplicacion_terman')->
+					result_array();
+					$indice = $d[0]['respuesta'];
+			return $indice;
+		}
 		public function verCodigoSesion($codigo){
-			$p = $this->db->select('idEncuesta,codigo,idAplicacion,sesion,finSesion,pregunta')->
+			$p = $this->db->select('idEncuesta,codigo,idAplicacion,finSesion,pregunta')->
 					where(array('codigo =' => $codigo))->
 					get('aplicacion')->
 					result_array();
@@ -119,26 +149,22 @@
 		public function actualizarPreguntaSesion($codigo,$contador){
 			if($contador != NULL){
 				$data = array(
-					'sesion' => $contador,
 					'acabo' => ($contador == 0) ? 1 : 0
 				);
 				$this->db->where('codigo', $codigo);
 				$this->db->update('aplicacion', $data);	
 			}
-			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
 		}
 		public function guardarFinSesion($codigo,$finSesion,$duracion_en_segundos){
 			$data = array(
 				'finSesion' => strval($finSesion),
-				'sesion'  => $duracion_en_segundos
 			 );
 			$this->db->where('codigo', $codigo);
-			$this->db->update('aplicacion', $data);	
-			//$this->db->query("UPDATE aplicacion SET sesion = $contador WHERE codigo = $codigo;");
+			$this->db->update('aplicacion', $data);
 		}
-		public function insertarRespuesta($idReactivo,$idAplicacion,$valor){
-			$this->db->query("INSERT INTO aplicacion_terman VALUES($idReactivo,$idAplicacion,$valor)
-					ON DUPLICATE KEY UPDATE valor = $valor;");
+		public function insertarRespuesta($idReactivo,$idAplicacion,$respuesta){
+			$this->db->query("INSERT INTO aplicacion_terman VALUES($idReactivo,$idAplicacion,$respuesta)
+					ON DUPLICATE KEY UPDATE respuesta = $respuesta;");
 		}
 		public function actualizarPregunta($pregunta,$idAplicacion){
 			$this->db->query("UPDATE aplicacion SET pregunta = $pregunta WHERE idAplicacion = $idAplicacion;");
@@ -146,7 +172,8 @@
 		public function estadoFecha($idAplicacion){
 			$data = array(
 				'fechaConclusion' => date('Y-m-d'),
-				'estado' => 'Finalizado'
+				'estado' => 'Finalizado',
+				'finSesion' => NULL
 			 );
 			$this->db->where('idAplicacion', $idAplicacion);
 			$this->db->update('aplicacion', $data);	
@@ -159,6 +186,18 @@
 					get('reactivo,aplicacion')->
 					result();
 			return $d;
+		}
+		public function verRespuesta($codigo,$serie,$pregunta){
+			$l = $this->db->select('hoja_respuestas.respuesta AS correcto,aplicacion_terman.respuesta')->
+					where(array('aplicacion_terman.idReactivo = reactivo.idReactivo AND
+					aplicacion.idAplicacion = aplicacion_terman.idAplicacion AND
+					hoja_respuestas.serie = reactivo.comentario AND reactivo.indice = hoja_respuestas.numero_pregunta
+					AND reactivo.comentario =' => $serie, 'reactivo.indice =' => $pregunta,
+					'aplicacion.codigo = ' => $codigo))->
+					get('hoja_respuestas,aplicacion_terman,reactivo,aplicacion')->
+					result();
+			/* $respuesta = $l[0]['respuesta']; */
+			return $l;
 		}
     }
 ?>

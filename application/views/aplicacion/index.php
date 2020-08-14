@@ -43,6 +43,9 @@
 							<?php if($item->nomEncuesta == "IPV" && $item->estado == "Finalizado"):?>
 								<a class="btn btn-success" href="<?= base_url() ?>ipv/resultados/<?= $item->codigo ?>">Resultados</a>
 				   			<?php endif;?>
+							<?php if($item->nomEncuesta == "Terman merril" && $item->estado == "Finalizado"):?>
+								<a class="btn btn-success" href="<?= base_url() ?>terman/resultados/<?= $item->codigo ?>">Resultados</a>
+				   			<?php endif;?>
 							<!-- <a class="btn btn-danger eliminar_alert" href="<?= base_url() ?>aplicacion/eliminar/<?= $item->idAplicacion ?>"><i class="fas fa-times-circle"></i>Borrar</a>  -->
 							<!--<a class="btn btn-info" href="<?= base_url() ?>aplicacion/ver/<?= $item->idAplicacion ?>"> Ver </a>-->
 		             	</td>

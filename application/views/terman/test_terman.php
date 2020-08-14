@@ -3,10 +3,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Serie <?=$serie?></h5>
+                <h5 class="modal-title">Serie <?= $serie?></h5>
             </div>
             <div class="modal-body">
-                <h5><b>Instrucciones: <?=$instruccion?></b></h5>
+                <h5><b>Instrucciones: <?= $instruccion?></b></h5>
                 <h5><?=$ejemplo?></h5>
             </div>
             <div class="modal-footer">
@@ -16,10 +16,10 @@
     </div>
 </div>
 <div class="container" style="text-align:center;background-color:#b5dffb;padding:30px;margin-top:25px;">
-    <h3><b>Encuesta de <?=$nombre?></b></h3>
+    <h3><b>Encuesta de <?= $nombre?></b></h3>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h5><b id="finaliza_encuesta">La Serie <?=$serie?> finaliza en <label id="reloj_usuario"></label></b></h5>
+            <h5><b id="finaliza_encuesta">La Serie <?= $serie?> finaliza en <label id="reloj_usuario"></label></b></h5>
         </div><br><br>
         <div class="col-md-8">
             <h4><b><?= $reactivo?></b></h4>
@@ -33,7 +33,7 @@
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?= $item->indice?>" required/>
+                                            <input type="radio" name="opcion" value="<?= $item->indice?>" <?= ($respuesta != null && $respuesta == $item->indice) ? 'checked' : ''?>/>
                                             <a><?= $item->indice?></a>
                                         </label>
                                     </div>
@@ -51,7 +51,7 @@
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?= $item['opc1']?>">
+                                            <input type="radio" name="opcion" value="<?= $item['opc1']?>" <?= ($respuesta != null && $respuesta == $item['opc1']) ? 'checked' : ''?>>
                                             <a><?= $item['opc1']?></a> 
                                         </label>
                                     </div>
@@ -59,7 +59,7 @@
                                 <td>
                                     <div class="btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-primary btn-lg">
-                                            <input type="radio" name="opcion" value="<?= $item['opc2']?>">
+                                            <input type="radio" name="opcion" value="<?= $item['opc2']?>" <?= ($respuesta != null && $respuesta == $item['opc2']) ? 'checked' : ''?>>
                                             <a><?= $item['opc2']?></a> 
                                         </label>
                                     </div>
@@ -75,7 +75,7 @@
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary">
                                             <a><?= $item->indice?></a>
-                                            <input type="checkbox" name="opciones" value="<?= $item->indice?>"/>
+                                            <input type="checkbox" name="opciones" value="<?= $item->indice?>" <?= (($respuesta != null && $respuesta[0] == $item->indice) || ($respuesta != null && $respuesta[4] == $item->indice)) ? 'checked' : ''?>/>
                                         </label>
                                     </div>
                                 </td>
@@ -89,7 +89,7 @@
                         <br>
                         <div class="row justify-content-center">
                             <div class="col-md-3">
-                                <input type="number" min="0" class="form-control" name="respuesta" required>
+                                <input type="number" min="0" class="form-control" name="respuesta" value="<?= $respuesta ?>">
                             </div>
                         </div>
                         <br>
@@ -98,11 +98,11 @@
                         <br>
                         <div class="row justify-content-center">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="campo1" required>
+                                <input type="text" class="form-control" name="campo1" value="<?= ($respuesta != null) ? $respuesta[0] : ''?>">
                             </div>
                             <i class="fas fa-minus"></i>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="campo2" required>
+                                <input type="text" class="form-control" name="campo2" value="<?= ($respuesta != null) ? $respuesta[1] : ''?>">
                             </div>
                         </div>
                         <br>
@@ -112,8 +112,13 @@
         </div>
     </div>
     <div class="row justify-content-center">
+        <div class="col-md-1" style="text-align:center;">
+            <?php if($menor != $pregunta):?>
+                <button type="button" class="btn btn-primary" onclick="location.href='<?= base_url('terman/encuesta');?>/<?=$codigo?>?back=<?=($pregunta-1)?>'"><i class="fas fa-angle-double-left"></i></button>
+            <?php endif;?>
+        </div>
         <div class="col-md-6">
-            <?php $style = round((($pregunta-1) * 100) / $limite)?>
+            <?php $style = round((($progreso-1) * 100) / $limite)?>
             <div class="progress" style="height:50px;">
                 <div class="progress-bar bg-dark progress-bar-striped" style="width:<?=$style?>%;"><?=$style?>%</div>
             </div>
@@ -122,7 +127,7 @@
             <button class="btn btn-primary" onclick="insertar()"><i class="fas fa-angle-double-right"></i></button>                
         </div>
     </div>
-    <h4><b><?=$pregunta?> / <?=$limite?></b></h4>
+    <h4><b><?= $pregunta?> / <?= $limite?></b></h4>
 </div>
 <script>
     document.title = "Terman merril";
@@ -140,18 +145,18 @@
     function crearCookieSerie () {
         console.log("click");
         var d = new Date();
-        var finSesion = d.setTime(d.getTime() + (<?=$duracion_en_segundos ?> * 1000)); // un minuto 
+        var finSesion = d.setTime(d.getTime() + (<?= $duracion_en_segundos ?> * 1000)); // un minuto 
         var expires = "expires=" + d.toUTCString();
         document.cookie = "name=series;"+expires;
-        console.log(<?=$duracion_en_segundos ?>);
+        console.log(<?= $duracion_en_segundos ?>);
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testaclic/terman/crear_temporizador/<?=$codigo ?>",
+            url: "/testaclic/terman/crear_temporizador/<?= $codigo ?>",
             type:"post",
             dataType: 'json',
             data:{ 
                 'finSesion' : finSesion,
-                'duracion_en_segundos' : "<?=$duracion_en_segundos ?>"
+                'duracion_en_segundos' : "<?= $duracion_en_segundos ?>"
             },
             success:function(data){
                 $("#modelId").modal("hide");
@@ -163,7 +168,7 @@
     function reloj() {
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testaclic/terman/actualizar_contador/<?=$codigo ?>",
+            url: "/testaclic/terman/actualizar_contador/<?= $codigo ?>",
             type:"post",
             success:function(data){
                 if(data){
@@ -204,9 +209,13 @@
 
     function insertar(){
         var serie = '<?= $serie ?>';
+        var pregunta = '<?= $pregunta ?>';
         var idAplicacion = <?= $idAplicacion ?>;
         var idReactivo = <?= $idReactivo ?>;
         var codigo = '<?= $codigo ?>';
+        var urlparams = new URLSearchParams(window.location.search);
+        var back = urlparams.get('back');
+        var is_back = (back != null) ? 'true' : 'false';
         var opcion;
         if(serie == 'I'||serie == 'II'||serie=='III'||serie == 'VI'||serie == 'VII'||serie == 'VIII'||serie == 'IX'){
             opcion = $('input[name=opcion]:checked').val();
@@ -236,7 +245,7 @@
             alert("No hay ninguna respuesta para insertar");
         }else{
             $.ajax({
-                url: '/testaclic/terman/encuesta_post/'+codigo,
+                url: '/testaclic/terman/encuesta_post/'+codigo+"/"+is_back,
                 type: 'POST',
                 data: {
                         idReactivo: idReactivo,
@@ -247,7 +256,16 @@
                     alert('Something is wrong');
                 },
                 success: function(data) {
-                window.location = "/testaclic/terman/encuesta/"+codigo;
+                    if(is_back == 'true'){
+                    back = (back*1)+1;
+                    if(back == pregunta){
+                        window.location = "/testaclic/terman/encuesta/"+codigo;
+                    }else{
+                        window.location = "/testaclic/terman/encuesta/"+codigo+"?back="+back;
+                    }
+                    }else{
+                        window.location = "/testaclic/terman/encuesta/"+codigo; 
+                    }
                 }
             });
         }

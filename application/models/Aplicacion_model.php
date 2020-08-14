@@ -13,7 +13,6 @@
                'fechaCreacion' => date('Y-m-d'),
                'estado' => 'Pendiente',
                'pregunta' => intval(1),
-               'sesion' => intval(0),
                'finSesion' => NULL,
                'acabo' => intval(0),
                'serie' => 'I'
