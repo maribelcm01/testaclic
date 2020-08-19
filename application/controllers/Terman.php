@@ -64,13 +64,13 @@
 		}
 		public function encuesta($codigo){
 			$showInstructions = 1;
-			if(isset($_COOKIE['name']))
-			{ 
+			if(isset($_COOKIE['name'])){ 
 				$showInstructions = 0;
 			} 
 			$serie = $this->terman_model->verSerie($codigo);
 			$a = $this->terman_model->obtenerDatos($codigo);
 			$idAplicacion = $a->idAplicacion;
+			$acabo = $a->acabo;
 			$pregunta = $this->terman_model->verPregunta($codigo);
 			$limite = $this->terman_model->verLimite($codigo,$serie);
 			$numero = array('I','II','III','IV','V','VI','VII','VIII','IX','X','XI');
@@ -94,15 +94,18 @@
 			}else{
 				if($pregunta > $limite){
 					$this->terman_model->cambiarPregunta($codigo);
-					$pregunta = $this->terman_model->verPregunta($codigo);;
+					$this->terman_model->actualizarPreguntaSesion($codigo,0); //contador a 0
+					setcookie('name', '', time() - 1000);
+					$showInstructions = 1;
+					$pregunta = $this->terman_model->verPregunta($codigo);
+					$progreso = $this->terman_model->verPregunta($codigo);
 					$aux = array_search($serie, $numero);
 					$aux = $aux+1;
 					$serie = $numero[$aux];
 					$limite = $this->terman_model->verLimite($codigo,$serie);
 					$this->terman_model->cambiarSerie($codigo,$serie);
-					setcookie('name', '', time() - 1000);
-					$this->terman_model->actualizarPreguntaSesion($codigo,null); //reiniciamos sesion 0 & contador a 0
-					$showInstructions = 1;
+					$a = $this->terman_model->obtenerDatos($codigo);
+					$acabo = $a->acabo;
 					if($serie == 'XI'){
 						$this->terman_model->estadoFecha($idAplicacion);
 						redirect(base_url('terman/encuesta/'.$codigo));
@@ -166,7 +169,7 @@
 					'showInstructions' => $showInstructions,
 					'duracion_en_segundos' => $subtest->tiempo,
 					'fecha_fin_sesion' => date("H:i:s",strtotime($a->finSesion)),
-					'acabo_tiempo' => $a->acabo,
+					'acabo_tiempo' => $acabo,
 					'pregunta' => $pregunta,
 					'progreso' => $progreso,
 					'limite' => $limite,
@@ -204,11 +207,12 @@
 		}
 
 		public function crear_temporizador($codigo){
+			$this->terman_model->actualizarPreguntaSesion($codigo,1);
 			$idAplicacion = $this->terman_model->verCodigoSesion($codigo);
 			$finSesion = $_POST['finSesion'] / 1000;
 			$finSesion = date("Y-m-d H:i:s ", $finSesion);
 			if ($this->input->is_ajax_request() && $idAplicacion) {
-			 	$this->terman_model->guardarFinSesion($codigo,$finSesion,$_POST['duracion_en_segundos']);
+			 	$this->terman_model->guardarFinSesion($codigo,$finSesion);
 			}
 			print_r($_POST['finSesion']);
 		}
@@ -223,9 +227,10 @@
 			for ($i = intval($buscarPreguntaActual->pregunta) ; $i <= intval($buscarPreguntaMaxima); $i++) {
 				$x = $this->terman_model->obtenerPreguntaTerma($codigo,$serie,$i);
 				$idReactivo = $x[0]->idReactivo;
-				$this->terman_model->insertarRespuesta($idReactivo,$idAplicacion,NULL);
+				$this->terman_model->insertarRespuesta($idReactivo,$idAplicacion,"'X'");
 			}
 			$this->terman_model->actualizarPregunta($buscarPreguntaMaxima+1,$idAplicacion);
+			$this->terman_model->actualizarPreguntaSesion($codigo,0);
 			print_r("Se agoto el tiempo");
 		}
 

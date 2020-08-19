@@ -147,17 +147,13 @@
 			return $p;
         }
 		public function actualizarPreguntaSesion($codigo,$contador){
-			if($contador != NULL){
-				$data = array(
-					'acabo' => ($contador == 0) ? 1 : 0
-				);
-				$this->db->where('codigo', $codigo);
-				$this->db->update('aplicacion', $data);	
-			}
+			$data = array( 'acabo' => $contador );
+			$this->db->where('codigo', $codigo);
+			$this->db->update('aplicacion', $data);
 		}
-		public function guardarFinSesion($codigo,$finSesion,$duracion_en_segundos){
+		public function guardarFinSesion($codigo,$finSesion){
 			$data = array(
-				'finSesion' => strval($finSesion),
+				'finSesion' => strval($finSesion)
 			 );
 			$this->db->where('codigo', $codigo);
 			$this->db->update('aplicacion', $data);

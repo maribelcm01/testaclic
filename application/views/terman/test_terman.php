@@ -132,7 +132,7 @@
 <script>
     document.title = "Terman merril";
     $( document ).ready(function() {
-        console.log( <?= $showInstructions ?>);
+        console.log('showInstructions = '+<?= $showInstructions ?>+'\nacabo_tiempo = '+<?= $acabo_tiempo ?>);
         if(<?=$showInstructions ?> === 1  && <?= $acabo_tiempo ?> != 1){
             $('#modelId').modal({backdrop: 'static', keyboard: false});
             $("#modelId").modal('toggle');
@@ -151,12 +151,11 @@
         console.log(<?= $duracion_en_segundos ?>);
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testaclic/terman/crear_temporizador/<?= $codigo ?>",
-            type:"post",
+            url: "<?=base_url()?>/terman/crear_temporizador/<?= $codigo ?>",
+            type: 'POST',
             dataType: 'json',
             data:{ 
-                'finSesion' : finSesion,
-                'duracion_en_segundos' : "<?= $duracion_en_segundos ?>"
+                'finSesion' : finSesion
             },
             success:function(data){
                 $("#modelId").modal("hide");
@@ -168,15 +167,14 @@
     function reloj() {
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
-            url: "/testaclic/terman/actualizar_contador/<?= $codigo ?>",
-            type:"post",
+            url: "<?=base_url()?>/terman/actualizar_contador/<?= $codigo ?>",
+            type: 'POST',
             success:function(data){
                 if(data){
                     var cronometro = JSON.parse(data);
                     $("#reloj_usuario").text(cronometro.i+':'+cronometro.s);
                     console.log(cronometro.i+':'+cronometro.s);
                     if(parseInt(cronometro.i) <= 0 && parseInt(cronometro.s) <= 0){
-                        //setInterval(cronometro()');
                         clearInterval(contando);
                         //limpiamos pantalla avisamos y procesamos la info para evaluar si
                         //existe una serie mas o es la ultima
@@ -188,14 +186,14 @@
                             //Codigo
                             //consultar num pregunta esta & num pregunta max
                             //actualizar siguiente serie o evaluar si es la ultima serie mandaral gracias 
-                            url: '/testaclic/terman/fin_encuesta_por_cronometro/<?=$codigo ?>',
+                            url: '<?=base_url()?>/terman/fin_encuesta_por_cronometro/<?=$codigo ?>',
                             type: 'POST',
                             error: function() {
                                 alert('Something is wrong');
                             },
                             success: function(data) {
                                 console.log(data);
-                                window.location = "/testaclic/terman/encuesta/<?=$codigo ?>";
+                                window.location = "<?=base_url()?>/terman/encuesta/<?=$codigo ?>";
                             }
                         });
                     }
@@ -245,7 +243,7 @@
             alert("No hay ninguna respuesta para insertar");
         }else{
             $.ajax({
-                url: '/testaclic/terman/encuesta_post/'+codigo+"/"+is_back,
+                url: '<?=base_url()?>/terman/encuesta_post/'+codigo+"/"+is_back,
                 type: 'POST',
                 data: {
                         idReactivo: idReactivo,
@@ -259,12 +257,12 @@
                     if(is_back == 'true'){
                     back = (back*1)+1;
                     if(back == pregunta){
-                        window.location = "/testaclic/terman/encuesta/"+codigo;
+                        window.location = "<?=base_url()?>/terman/encuesta/"+codigo;
                     }else{
-                        window.location = "/testaclic/terman/encuesta/"+codigo+"?back="+back;
+                        window.location = "<?=base_url()?>/terman/encuesta/"+codigo+"?back="+back;
                     }
                     }else{
-                        window.location = "/testaclic/terman/encuesta/"+codigo; 
+                        window.location = "<?=base_url()?>/terman/encuesta/"+codigo; 
                     }
                 }
             });

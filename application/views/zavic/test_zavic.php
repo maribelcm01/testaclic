@@ -72,7 +72,7 @@
         var back = urlparams.get('back');
         var is_back = (back != null) ? 'true' : 'false';
         $.ajax({
-            url: '/testaclic/zavic/guardar/'+codigo+"/"+is_back,
+            url: '<?=base_url()?>/zavic/guardar/'+codigo+"/"+is_back,
             type: 'POST',
             data: {
                     idReactivo: idReactivo,
@@ -87,12 +87,12 @@
                 if(is_back == 'true'){
                     back = (back*1)+1;
                     if(back == pregunta){
-                        window.location = "/testaclic/zavic/encuesta/"+codigo;
+                        window.location = "<?=base_url()?>/zavic/encuesta/"+codigo;
                     }else{
-                        window.location = "/testaclic/zavic/encuesta/"+codigo+"?back="+back;
+                        window.location = "<?=base_url()?>/zavic/encuesta/"+codigo+"?back="+back;
                     }
                 }else{
-                    window.location = "/testaclic/zavic/encuesta/"+codigo; 
+                    window.location = "<?=base_url()?>/zavic/encuesta/"+codigo; 
                 }
             }
         });
