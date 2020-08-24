@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <h5><b>Instrucciones: <?= $instruccion?></b></h5>
                 <h5><?=$ejemplo?></h5>
+                <h5>Tienes <b><?= $duracion_en_segundos/60?>:00 minutos</b> para contestar esta serie.</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="crearCookieSerie();" class="btn btn-primary">Comenzar Serie</button>
@@ -132,7 +133,7 @@
 <script>
     document.title = "Terman merril";
     $( document ).ready(function() {
-        console.log('showInstructions = '+<?= $showInstructions ?>+'\nacabo_tiempo = '+<?= $acabo_tiempo ?>);
+        /* console.log('showInstructions = '+<?= $showInstructions ?>+'\nacabo_tiempo = '+<?= $acabo_tiempo ?>); */
         if(<?=$showInstructions ?> === 1  && <?= $acabo_tiempo ?> != 1){
             $('#modelId').modal({backdrop: 'static', keyboard: false});
             $("#modelId").modal('toggle');
@@ -148,7 +149,7 @@
         var finSesion = d.setTime(d.getTime() + (<?= $duracion_en_segundos ?> * 1000)); // un minuto 
         var expires = "expires=" + d.toUTCString();
         document.cookie = "name=series;"+expires;
-        console.log(<?= $duracion_en_segundos ?>);
+        /* console.log(<?= $duracion_en_segundos ?>); */
         $.ajax({
             // cargamos url a nuestro contralador y método indicado
             url: "<?=base_url()?>/terman/crear_temporizador/<?= $codigo ?>",
@@ -173,7 +174,7 @@
                 if(data){
                     var cronometro = JSON.parse(data);
                     $("#reloj_usuario").text(cronometro.i+':'+cronometro.s);
-                    console.log(cronometro.i+':'+cronometro.s);
+                    /* console.log(cronometro.i+':'+cronometro.s); */
                     if(parseInt(cronometro.i) <= 0 && parseInt(cronometro.s) <= 0){
                         clearInterval(contando);
                         //limpiamos pantalla avisamos y procesamos la info para evaluar si
@@ -230,14 +231,12 @@
             if ($('input[name=respuesta]').val().length > 0) {
                 opcion = $('input[name=respuesta]').val();
             }
-            //console.log(opcion);
         }if(serie == 'X'){
             if ($('input[name=campo1]').val().length > 0 && $('input[name=campo2]').val().length > 0) {
                 c1 = $('input[name=campo1]').val();
                 c2 = $('input[name=campo2]').val();
                 opcion = c1+' - '+c2;
             }
-            //console.log(opcion);
         }
         if(opcion == undefined){
             alert("No hay ninguna respuesta para insertar");
@@ -246,10 +245,10 @@
                 url: '<?=base_url()?>/terman/encuesta_post/'+codigo+"/"+is_back,
                 type: 'POST',
                 data: {
-                        idReactivo: idReactivo,
-                        idAplicacion: idAplicacion,
-                        opcion: opcion
-                    },
+                    idReactivo: idReactivo,
+                    idAplicacion: idAplicacion,
+                    opcion: opcion
+                },
                 error: function() {
                     alert('Something is wrong');
                 },
