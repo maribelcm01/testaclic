@@ -7,8 +7,8 @@
             </div>
             <div class="modal-body">
                 <h5><b>Instrucciones: <?= $instruccion?></b></h5>
-                <h5><?=$ejemplo?></h5>
-                <h5>Tienes <b><?= $duracion_en_segundos/60?>:00 minutos</b> para contestar esta serie.</h5>
+                <h5><?=$ejemplo?></h5><br>
+                <h5 align="center">Tienes <b><font color="red"><?= $duracion_en_segundos/60?>:00 minutos</font></b> para contestar esta serie.</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="crearCookieSerie();" class="btn btn-primary">Comenzar Serie</button>

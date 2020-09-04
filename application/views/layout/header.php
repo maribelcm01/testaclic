@@ -51,12 +51,6 @@
 			/* codigo css zavic */
             input.input:invalid { border-color: red; }
 			input.input:valid { border-color: green; }
-			/* .check-ok { color: green; }
-			.check-ko { color: red; }
-			input:invalid ~ .check-ok { display: none; }
-			input:valid ~ .check-ok { display: inline; }
-			input:invalid ~ .check-ko { display: inline; }
-			input:valid ~ .check-ko { display: none; } */
 
 			/* css gráficas cleaver, zavic e ipv */
 			.highcharts-figure, .highcharts-data-table table {
@@ -89,7 +83,23 @@
             }
             .highcharts-data-table tr:hover {
                 background: #f1f7ff;
-            }       
+            }
+            .circulo {
+                width: 20px;
+                height: 20px;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+                border: 1px solid #555;
+            }
+            .uno{ background: #FF0000; 
+            }.dos{ background: #FF6F00; 
+            }.tres{ background: #FFAC00; 
+            }.cuatro{ background: #FFFF00; 
+            }.cinco{ background: #00FF00; 
+            }.seis{ background: #00A000; 
+            }.siete{ background: #008000;
+            }   
 		</style>
 	</head>
 	<body>

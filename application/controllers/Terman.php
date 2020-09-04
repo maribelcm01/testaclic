@@ -127,7 +127,7 @@
 						$respuesta = str_split($x);
 					}
 					if($serie == 'III'){
-						$datosRespuesta[] = array('opc1' => '0', 'opc2' => '1');
+						$datosRespuesta[] = array('opc1' => 'O', 'opc2' => 'I');
 						$respuesta = $this->terman_model->verSeleccion($codigo,$serie,$pregunta);
 					}
 					if($serie == 'V'){
@@ -150,7 +150,7 @@
 					if($serie == 'I' || $serie == 'II' || $serie == 'IV' || $serie == 'VII' || $serie == 'IX'){
 						$datosRespuesta = $this->terman_model->obtenerRespuesta($codigo,$serie);
 					}
-					if($serie == 'III'){ $datosRespuesta[] = array('opc1' => '0', 'opc2' => '1'); }
+					if($serie == 'III'){ $datosRespuesta[] = array('opc1' => 'O', 'opc2' => 'I'); }
 					if($serie == 'VI'){ $datosRespuesta[] = array('opc1' => 'SI', 'opc2' => 'NO'); }
 					if($serie == 'VIII'){ $datosRespuesta[] = array('opc1' => 'V', 'opc2' => 'F'); }
 				}
@@ -246,30 +246,48 @@
 			$X = (self::comparar($codigo,'X'))*2;
 			$CA = $I+$II+$III+$IV+$V+$VI+$VII+$VIII+$IX+$X;
 			$CI = self::obtenerCI($CA);
-			
-			$res[] = array("serie" => "I","valor" => $I);
-			$res[] = array("serie" => "II","valor" => $II);
-			$res[] = array("serie" => "III","valor" => $III);
-			$res[] = array("serie" => "IV","valor" => $IV);
-			$res[] = array("serie" => "V","valor" => $V);
-			$res[] = array("serie" => "VI","valor" => $VI);
-			$res[] = array("serie" => "VII","valor" => $VII);
-			$res[] = array("serie" => "VIII","valor" => $VIII);
-			$res[] = array("serie" => "IX","valor" => $IX);
-			$res[] = array("serie" => "X","valor" => $X);
-			$res[] = array("serie" => "CI","valor" => $CI);
-			$res[] = array("serie" => "CA","valor" => $CA);
+			$x = $this->terman_model->interpretacion();
+			$res[] = array("serie" => "I", "factor" => "Información","valor" => $I,"interpretacion" => $x[0]['interpretacion']);
+			$res[] = array("serie" => "II", "factor" => "Juicio o Compresión","valor" => $II,"interpretacion" => $x[1]['interpretacion']);
+			$res[] = array("serie" => "III", "factor" => "Vocabulario","valor" => $III,"interpretacion" => $x[2]['interpretacion']);
+			$res[] = array("serie" => "IV", "factor" => "Síntesis","valor" => $IV,"interpretacion" => $x[3]['interpretacion']);
+			$res[] = array("serie" => "V", "factor" => "Concentración","valor" => $V,"interpretacion" => $x[4]['interpretacion']);
+			$res[] = array("serie" => "VI", "factor" => "Análisis","valor" => $VI,"interpretacion" => $x[5]['interpretacion']);
+			$res[] = array("serie" => "VII", "factor" => "Abstracción","valor" => $VII,"interpretacion" => $x[6]['interpretacion']);
+			$res[] = array("serie" => "VIII", "factor" => "Planeación","valor" => $VIII,"interpretacion" => $x[7]['interpretacion']);
+			$res[] = array("serie" => "IX", "factor" => "Organización","valor" => $IX,"interpretacion" => $x[8]['interpretacion']);
+			$res[] = array("serie" => "X", "factor" => "Atención","valor" => $X,"interpretacion" => $x[9]['interpretacion']);
+			$resT[] = array("serie" => "CI","valor" => $CI);
+			$resT[] = array("serie" => "CA","valor" => $CA);
 			
 			for($i = 0; $i < sizeof($res); $i++){
-				$calif[] = array("serie" => $res[$i]['serie'],"calificacion" => self::obtenerCalificacion($res[$i]['serie'],$res[$i]['valor']));
+				$res[$i]["calificacion"] = self::obtenerCalificacion($res[$i]['serie'],$res[$i]['valor']);
 			}
-			print_r($res);
-			print_r('<br>');
-			print_r($calif);
-			
-			$this->load->view('layout/header');
-			$this->load->view('terman/resultados');
-			$this->load->view('layout/footer');
+			for($i = 0; $i < sizeof($resT); $i++){
+				$resT[$i]['calificacion'] = self::obtenerCalificacion($resT[$i]['serie'],$resT[$i]['valor']);
+			}
+			for($i = 0; $i < sizeof($res); $i++){
+				if($res[$i]['calificacion'] == 'Sobresaliente'){ $res[$i]["cl"] = 7; }
+				if($res[$i]['calificacion'] == 'Superior'){ $res[$i]["cl"] = 6; }
+				if($res[$i]['calificacion'] == 'Termino Medio Alto'){ $res[$i]["cl"] = 5; }
+				if($res[$i]['calificacion'] == 'Termino Medio'){ $res[$i]["cl"] = 4; }
+				if($res[$i]['calificacion'] == 'Termino Medio Bajo'){ $res[$i]["cl"] = 3; }
+				if($res[$i]['calificacion'] == 'Inferior'){ $res[$i]["cl"] = 2; }
+				if($res[$i]['calificacion'] == 'Deficiente'){ $res[$i]["cl"] = 1; }
+			}
+			$a = $this->terman_model->obtenerDatos($codigo);
+			$data = array(
+				'nombre' => $a->nombre,
+				'resultados' => $res,
+				'total' => $resT
+			);
+			if ($this->session->userdata('is_logged')) {
+				$this->load->view('layout/header');
+				$this->load->view('terman/resultados',$data);
+				$this->load->view('layout/footer');
+			}else{
+				redirect(base_url('login'));
+			}
 		}
 
 		public function comparar($codigo,$serie){
@@ -288,11 +306,11 @@
 
 		public function obtenerCI($r){
 			if($r >= 67 && $r <= 69){return 80;}
-			if($r >= 70 && $r <= 71){return 81;}
+			if($r == 70 || $r == 71){return 81;}
 			if($r >= 72 && $r <= 74){return 82;}
-			if($r >= 75 && $r <= 76){return 83;}
+			if($r == 75 || $r == 76){return 83;}
 			if($r >= 77 && $r <= 80){return 84;}
-			if($r >= 81 && $r <= 82){return 85;}
+			if($r == 81 || $r == 82){return 85;}
 			if($r >= 83 && $r <= 85){return 86;}
 			if($r == 86){return 87;}
 			if($r >= 87 && $r <= 90){return 88;}
@@ -300,14 +318,14 @@
 			if($r >= 94 && $r <= 96){return 90;}
 			if($r >= 97 && $r <= 99){return 91;}
 			if($r >= 100 && $r <= 102){return 92;}
-			if($r >= 103 && $r <= 104){return 93;}
-			if($r >= 105 && $r <= 106){return 94;}
+			if($r == 103 || $r == 104){return 93;}
+			if($r == 105 || $r == 106){return 94;}
 			if($r >= 107 && $r <= 110){return 95;}
 			if($r >= 111 && $r <= 113){return 96;}
 			if($r >= 114 && $r <= 116){return 97;}
 			if($r >= 117 && $r <= 119){return 98;}
 			if($r >= 120 && $r <= 123){return 99;}
-			if($r >= 124 && $r <= 125){return 100;}
+			if($r == 124 || $r == 125){return 100;}
 			if($r >= 126 && $r <= 129){return 101;}
 			if($r >= 130 && $r <= 133){return 102;}
 			if($r >= 134 && $r <= 137){return 103;}
@@ -316,17 +334,17 @@
 			if($r >= 146 && $r <= 149){return 106;}
 			if($r >= 150 && $r <= 153){return 107;}
 			if($r >= 154 && $r <= 157){return 108;}
-			if($r >= 158 && $r <= 159){return 109;}
+			if($r == 158 || $r == 159){return 109;}
 			if($r >= 160 && $r <= 162){return 110;}
 			if($r >= 163 && $r <= 166){return 111;}
 			if($r == 167){return 112;}
 			if($r >= 168 && $r <= 170){return 113;}
 			if($r >= 171 && $r <= 173){return 114;}
-			if($r >= 174 && $r <= 175){return 115;}
-			if($r >= 176 && $r <= 177){return 116;}
+			if($r == 174 || $r == 175){return 115;}
+			if($r == 176 || $r == 177){return 116;}
 			if($r >= 178 && $r <= 180){return 117;}
 			if($r >= 181 && $r <= 183){return 118;}
-			if($r >= 184 && $r <= 185){return 119;}
+			if($r == 184 || $r == 185){return 119;}
 			if($r == 186){return 120;}
 			if($r == 187){return 121;}
 			if($r == 188){return 122;}
@@ -446,18 +464,18 @@
 				case 'CI';
 				if($valor >= 140){ return 'Sobresaliente'; }
 				if($valor >= 120 && $valor <= 139){ return 'Superior'; }
-				if($valor >= 110 && $valor <= 119){ return 'Termino Medio Alto'; }
+				if($valor >= 110 && $valor <= 119){ return 'Medio Alto'; }
 				if($valor >= 90 && $valor <= 109){ return 'Normal'; }
-				if($valor >= 80 && $valor <= 89){ return 'Termino Medio Bajo'; }
+				if($valor >= 80 && $valor <= 89){ return 'Medio Bajo'; }
 				if($valor >= 70 && $valor <= 79){ return 'Inferior'; }
 				if($valor <= 69){ return 'Deficiente'; }
 			break;
 				case 'CA';
 				if($valor >= 172 && $valor <= 186){ return 'Sobresaliente'; }
 				if($valor >= 151 && $valor <= 171){ return 'Superior'; }
-				if($valor >= 137 && $valor <= 150){ return 'Termino Medio Alto'; }
+				if($valor >= 137 && $valor <= 150){ return 'Medio Alto'; }
 				if($valor >= 123 && $valor <= 136){ return 'Normal'; }
-				if($valor >= 102 && $valor <= 122){ return 'Termino Medio Bajo'; }
+				if($valor >= 102 && $valor <= 122){ return 'Medio Bajo'; }
 				if($valor >= 95 && $valor <= 101){ return 'Inferior'; }
 				if($valor >= 67 && $valor <= 94){ return 'Deficiente'; }
 			break;

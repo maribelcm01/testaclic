@@ -41,11 +41,17 @@
 					row();
 			return $d;
 		}
-		public function datosST($estado){
+		public function datosST($serie){
 			$d = $this->db->select("*")->
-					where("serie",$estado)->
+					where("serie",$serie)->
 					get("info_terman")->
 					row();
+			return $d;
+		}
+		public function interpretacion(){
+			$d = $this->db->select("interpretacion")->
+					get("info_terman")->
+					result_array();
 			return $d;
 		}
 		public function verSerie($codigo){
