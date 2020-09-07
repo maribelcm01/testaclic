@@ -11,8 +11,8 @@ function main_menu(){
 			'url' => base_url('encuesta'),
 		),
 		array(
-			'title' => '<i class="fas fa-address-card"></i>Encuestados',
-			'url' => base_url('encuestado'),
+			'title' => '<i class="fas fa-address-card"></i>Personas',
+			'url' => base_url('persona'),
 		),
 		/* array(
 			'title' => '<i class="fas fa-list-ol"></i> Reactivos',

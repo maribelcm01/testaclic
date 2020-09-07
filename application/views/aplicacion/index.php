@@ -15,7 +15,7 @@
 			    <thead>
 				    <tr>
 						<th>Encuesta</th>
-						<th>Encuestado</th>
+						<th>Persona</th>
 						<th>Codigo</th>
 						<th>Creado</th>
 						<th>Estado</th>
@@ -27,7 +27,7 @@
 		       		<?php foreach($aplicacion as $item): ?>
 		          	<tr>
 						<td> <?= $item->nomEncuesta ?> </td>
-						<td> <?= $item->nomEncuestado ?> </td>
+						<td> <?= $item->nomPersona ?> </td>
 		             	<td> <?= $item->codigo ?> </td>
 						<td> <?= $item->fechaCreacion ?> </td>
 						<td> <?= $item->estado ?> </td>

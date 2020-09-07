@@ -5,10 +5,10 @@
             $this->load->database();
         }
 
-        public function guardar($idEncuesta, $idEncuestado, $id=null){
+        public function guardar($idEncuesta, $idPersona, $id=null){
             $data = array(
                'idEncuesta' => $idEncuesta,
-               'idEncuestado' => $idEncuestado,
+               'idPersona' => $idPersona,
                'codigo' => bin2hex(random_bytes(7)),
                'fechaCreacion' => date('Y-m-d'),
                'estado' => 'Pendiente',
@@ -26,7 +26,7 @@
         }
   
         public function obtener_por_id($id){
-            $this->db->select('idAplicacion, idEncuesta, idEncuestado, codigo,
+            $this->db->select('idAplicacion, idEncuesta, idPersona, codigo,
                         fechaConclusion, fechaCreacion, estado, pregunta');
             $this->db->from('aplicacion');
             $this->db->where('idAplicacion', $id);
@@ -36,13 +36,13 @@
         }
   
         public function obtener_todos(){
-            $this->db->select('encuesta.nombre as nomEncuesta, encuestado.nombre as nomEncuestado,
-                        aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idEncuestado,
+            $this->db->select('encuesta.nombre as nomEncuesta, persona.nombre as nomPersona,
+                        aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idPersona,
                         aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion,
                         aplicacion.estado');
-            $this->db->from('encuesta,encuestado,aplicacion');
+            $this->db->from('encuesta,persona,aplicacion');
             $this->db->where('aplicacion.idEncuesta = encuesta.idEncuesta AND
-                encuestado.idEncuestado = aplicacion.idEncuestado');  
+                persona.idPersona = aplicacion.idPersona');  
 
             //$this->db->order_by('prioridad, titulo', 'asc');
             $consulta = $this->db->get();
@@ -60,10 +60,10 @@
             return $resultado;
          }
 
-        public function obtenerIdEncuestado(){
+        public function obtenerIdPersona(){
             //buscamos los candidatos que no estan aplicando en esa encuesta
             $this->db->select('*');
-            $this->db->from('encuestado');
+            $this->db->from('persona');
             $consulta = $this->db->get();
             $resultado = $consulta->result();
             return $resultado;

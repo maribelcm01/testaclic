@@ -13,11 +13,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Encuestado</label>
-                    <select name="idEncuestado" id="input" class="form-control" required>
+                    <label>Persona</label>
+                    <select name="idPersona" id="input" class="form-control" required>
                             <option value="">--Seleccione un nombre--</option>
-                        <?php foreach($encuestado as $item): ?>
-                            <option value="<?= $item->idEncuestado ?>" <?= ( $item->idEncuestado == $idEncuestado) ? 'selected' : '' ?>> <?= $item->nombre ?></option>
+                        <?php foreach($persona as $item): ?>
+                            <option value="<?= $item->idPersona ?>" <?= ( $item->idPersona == $idPersona) ? 'selected' : '' ?>> <?= $item->nombre ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div> 

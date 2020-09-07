@@ -1,12 +1,12 @@
 <?php 
     if (!defined('BASEPATH'))  exit('No direct script access allowed');
 
-    class Encuestado extends CI_Controller {
+    class Persona extends CI_Controller {
         public function __construct() {
             parent::__construct();
             $this->load->library(array('form_validation','session'));
             $this->load->helper(array('auth/login_rules'));
-            $this->load->model('encuestado_model');
+            $this->load->model('persona_model');
             $this->load->helper(array('getmenu'));
             $this->load->model('Auth');
         }
@@ -14,11 +14,11 @@
         public function index() {
             $data = array();
             $data['menu'] = main_menu();
-            $data['encuestado'] = $this->encuestado_model->obtener_todos();
+            $data['persona'] = $this->persona_model->obtener_todos();
             if ($this->session->userdata('is_logged')) {
                 $this->load->view('layout/header');
                 $this->load->view('layout/navbar',$data);
-                $this->load->view('encuestado/index', $data);
+                $this->load->view('persona/index', $data);
                 $this->load->view('layout/footer');
             }else{
                 redirect(base_url('login'));
@@ -28,13 +28,13 @@
         public function guardar($id=null){
             $data = array(); 
             if($id){
-                $encuestado = $this->encuestado_model->obtener_por_id($id); 
-                $data['idEncuestado'] = $encuestado->idEncuestado;
-                $data['nombre'] = $encuestado->nombre;
-                $data['telefono'] = $encuestado->telefono;
-                $data['email'] = $encuestado->email;
+                $persona = $this->persona_model->obtener_por_id($id); 
+                $data['idPersona'] = $persona->idPersona;
+                $data['nombre'] = $persona->nombre;
+                $data['telefono'] = $persona->telefono;
+                $data['email'] = $persona->email;
             }else{
-                $data['idEncuestado'] = null;
+                $data['idPersona'] = null;
                 $data['nombre'] = null;
                 $data['telefono'] = null;
                 $data['email'] = null;
@@ -43,7 +43,7 @@
             $data['menu'] = main_menu();
             $this->load->view('layout/header');
             $this->load->view('layout/navbar',$data);
-            $this->load->view('encuestado/guardar', $data);
+            $this->load->view('persona/guardar', $data);
             $this->load->view('layout/footer');
         }
 
@@ -80,17 +80,17 @@
                 $this->form_validation->set_rules($config);
 
                 if ($this->form_validation->run() == TRUE){
-                    $this->encuestado_model->guardar($nombre, $telefono, $email, $id);
-                    redirect('encuestado');
+                    $this->persona_model->guardar($nombre, $telefono, $email, $id);
+                    redirect('persona');
                 }else{
                 $data = array();
-                $data['idEncuestado'] = $id;
+                $data['idPersona'] = $id;
                 $data['nombre'] = $nombre;
                 $data['telefono'] = $telefono;
                 $data['email'] = $email;
                 $this->load->view('layout/header');
-                $this->load->view('encuestado/guardar', $data);
-                $this->load->view('encuestado/footer');
+                $this->load->view('persona/guardar', $data);
+                $this->load->view('persona/footer');
                 }          	
             }else{
                 $this->guardar();
@@ -99,17 +99,17 @@
 
 
         /* public function eliminar($id){
-            $this->encuestado_model->eliminar($id);
-            redirect('encuestado');
+            $this->persona_model->eliminar($id);
+            redirect('persona');
         } */
         
         /*public function ver($id){
             $data = array();
-            $encuestado = $this->encuestado_model->obtener_por_id($id);
-            $data['encuestado'] = $encuestado;
+            $persona = $this->persona_model->obtener_por_id($id);
+            $data['persona'] = $persona;
 
             $this->load->view('layout/header');
-            $this->load->view('encuestado/ver', $data);
+            $this->load->view('persona/ver', $data);
             $this->load->view('layout/footer');
         }*/
     }

@@ -2,7 +2,7 @@
     <div class="row m-4 justify-content-center">
         <div class="col-md-4">
             <h4> Guardar Registro </h4>
-            <form method="post" action="<?= base_url() ?>encuestado/guardar_post/<?= $idEncuestado ?>">
+            <form method="post" action="<?= base_url() ?>persona/guardar_post/<?= $idPersona ?>">
                 <div class="form-group">
                     <label> Nombre </label>
                     <input class="form-control" type="text" name="nombre" placeholder="Nombre y apellidos" value="<?= $nombre ?>" required/>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
-                   <a class="btn btn-danger" href="<?= base_url() ?>encuestado"><i class="fas fa-times-circle"></i> Cancelar </a>
+                   <a class="btn btn-danger" href="<?= base_url() ?>persona"><i class="fas fa-times-circle"></i> Cancelar </a>
                 </div>
             </form>
         </div>
