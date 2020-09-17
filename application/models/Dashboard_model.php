@@ -15,7 +15,7 @@
 			return $q;
         }
         public function personas(){
-            $q = $this->db->select('nombre')->
+            $q = $this->db->select('idPersona,nombre')->
                     order_by('idPersona','DESC')->
                     limit(5)->
 					get('persona')->

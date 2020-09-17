@@ -35,7 +35,7 @@
 			return $nombreEncuesta;
         }
         public function obtenerDatos($codigo){
-			$d = $this->db->select('persona.nombre,aplicacion.idAplicacion, aplicacion.codigo,aplicacion.finSesion,aplicacion.acabo,aplicacion.pregunta')->
+			$d = $this->db->select('persona.nombre,persona.idPersona,aplicacion.idAplicacion, aplicacion.codigo,aplicacion.finSesion,aplicacion.acabo,aplicacion.pregunta')->
 					where(array('persona.idPersona = aplicacion.idPersona AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, persona')->
 					row();

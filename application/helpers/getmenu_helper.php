@@ -18,10 +18,10 @@ function main_menu(){
 			'title' => '<i class="fas fa-list-ol"></i> Reactivos',
 			'url' => base_url('reactivo'),
 		), */
-		array(
+		/* array(
 			'title' => '<i class="fas fa-check-square"></i> Aplicaciones',
 			'url' => base_url('aplicacion'),
-		),
+		), */
 	);
 }
 ?>

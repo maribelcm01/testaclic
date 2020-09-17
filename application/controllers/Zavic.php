@@ -166,7 +166,10 @@
 			$IS = $A[1]+$B[2]+$A[5]+$A[7]+$D[10]+$B[11]+$C[14]+$D[16]+$D[18]+$D[20];
 			$IR = $D[1]+$A[2]+$C[5]+$D[7]+$C[10]+$C[11]+$B[14]+$C[16]+$A[18]+$C[20];
 			
+			$us = $this->zavic_model->obtenerDatos($codigo);
 			$data = array(
+				'nombre' => $us->nombre,
+				'idPersona' => $us->idPersona,
 				'Moral' => $VM,
 				'Legal' => $VL,
 				'Indif' => $VI,
@@ -176,7 +179,6 @@
 				'Socia' => $IS,
 				'Relig' => $IR
 			);
-			
 			if ($this->session->userdata('is_logged')) {
                 $this->load->view('layout/header');
 				$this->load->view('zavic/resultados',$data);

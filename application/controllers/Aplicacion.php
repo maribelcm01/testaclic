@@ -11,10 +11,12 @@
             $this->load->model('Auth');
         }
 
-        public function index() {
+        public function index($idPersona) {
             $data = array();
             $data['menu'] = main_menu();
-            $data['aplicacion'] = $this->aplicacion_model->obtener_todos();
+            $x = $this->aplicacion_model->obtener_todos($idPersona);
+            $data['aplicacion'] = $this->aplicacion_model->obtener_todos($idPersona);
+            $data['nomPersona'] = $x[0]->nomPersona;
             
             if ($this->session->userdata('is_logged')) {
                 $this->load->view('layout/header');

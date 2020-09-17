@@ -1,12 +1,28 @@
-<figure class="highcharts-figure">
-    <div id="container1"></div>
-</figure><br>
-<figure class="highcharts-figure">
-   <div id="container2"></div>
-</figure><br>
-<figure class="highcharts-figure">
-   <div id="container3"></div>
-</figure>
+<div class="container">
+    <div class="row justify-content-center m-4">
+        <div class="col-md-1">
+            <a type="button" class="btn btn-primary" style="margin-top:10px;width:100px" href="<?= base_url('aplicacion/index')?>/<?= $idPersona ?>">Regresar</a>
+        </div>   
+        <div class="col-md-10">
+            <figure class="highcharts-figure">
+                <div id="container1"></div>
+            </figure>
+        </div>
+        <div class="col-md-6">
+            <figure class="highcharts-figure">
+                <div id="container2"></div>
+            </figure>
+        </div>
+        <div class="col-md-6">
+            <figure class="highcharts-figure">
+            <div id="container3"></div>
+            </figure>
+        </div>
+    </div>
+</div>
+        
+
+
 
 <script>
     document.title = 'Zavic';

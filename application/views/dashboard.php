@@ -3,8 +3,8 @@
 		<div class="col-md-3" type="datetime" name="fecha"><h5>Fecha: <?= date("d/M/Y");?></h5></div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
-			Ultimas Aplicaciones
+		<div class="col-md-4 bg-warning">
+			<h4>Ultimas Aplicaciones</h4>
 			<?php if (count($aplicacion)): ?>
 			<table id="example" class="table table-bordered">
 			    <thead>
@@ -29,8 +29,8 @@
 		    No hay Registro 
 		    <?php endif; ?>
 		</div>
-		<div class="col-md-4">
-			Personas Nuevas
+		<div class="col-md-4 bg-info">
+			<h4>Personas Nuevas</h4>
 			<?php if (count($aplicacion)): ?>
 			<table id="example" class="table table-bordered">
 			    <thead>
@@ -44,8 +44,8 @@
 		          	<tr>
 		             	<td> <?= $item['nombre'] ?> </td>
 		             	<td> 
-							<a class="btn btn-primary" href="">Info</a>
-							<a class="btn btn-primary" href="">Aplicaciones</a>
+							<a class="btn btn-secondary" href="<?= base_url('persona/ver')?>/<?= $item['idPersona']?>">Info</a>
+							<a class="btn btn-secondary" href="<?= base_url('aplicacion/index')?>/<?= $item['idPersona']?>">Aplicaciones</a>
 						</td>
 		          	</tr>
 		       		<?php endforeach; ?>

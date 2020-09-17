@@ -63,6 +63,7 @@
                     <?php endforeach; ?>
                 </ul> 
             </div>
+            <a type="button" class="btn btn-primary" style="margin-top:10px;width:100px" href="<?= base_url('aplicacion/index')?>/<?= $idPersona ?>">Regresar</a>
         </div>
         <div class="col-md-10" id="exportContent">
             <h4><?= $nombre?></h4>

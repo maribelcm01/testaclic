@@ -243,6 +243,7 @@
 			
 			$data = array(
 				'nombre' => $us->nombre,
+				'idPersona' => $us->idPersona,
 				'datos' => $datos,
 				'resultados' => $resultados_front,
 				'DTotal' => $D1,

@@ -35,14 +35,14 @@
             return $resultado;
         }
   
-        public function obtener_todos(){
+        public function obtener_todos($idPersona){
             $this->db->select('encuesta.nombre as nomEncuesta, persona.nombre as nomPersona,
                         aplicacion.idAplicacion, aplicacion.idEncuesta, aplicacion.idPersona,
                         aplicacion.codigo, aplicacion.fechaConclusion, aplicacion.fechaCreacion,
                         aplicacion.estado');
             $this->db->from('encuesta,persona,aplicacion');
             $this->db->where('aplicacion.idEncuesta = encuesta.idEncuesta AND
-                persona.idPersona = aplicacion.idPersona');  
+                persona.idPersona = aplicacion.idPersona AND aplicacion.idPersona = ',$idPersona);  
 
             //$this->db->order_by('prioridad, titulo', 'asc');
             $consulta = $this->db->get();

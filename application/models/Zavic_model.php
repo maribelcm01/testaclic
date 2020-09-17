@@ -74,7 +74,7 @@
 		}
 
         public function obtenerDatos($codigo){
-			$d = $this->db->select('persona.nombre,aplicacion.idAplicacion, aplicacion.codigo')->
+			$d = $this->db->select('persona.nombre,persona.idPersona,aplicacion.idAplicacion, aplicacion.codigo')->
 					where(array('persona.idPersona = aplicacion.idPersona AND aplicacion.codigo =' => $codigo))->
 					get('aplicacion, persona')->
 					row();

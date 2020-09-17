@@ -275,9 +275,10 @@
 				if($res[$i]['calificacion'] == 'Inferior'){ $res[$i]["cl"] = 2; }
 				if($res[$i]['calificacion'] == 'Deficiente'){ $res[$i]["cl"] = 1; }
 			}
-			$a = $this->terman_model->obtenerDatos($codigo);
+			$us = $this->terman_model->obtenerDatos($codigo);
 			$data = array(
-				'nombre' => $a->nombre,
+				'nombre' => $us->nombre,
+				'idPersona' => $us->idPersona,
 				'resultados' => $res,
 				'total' => $resT
 			);

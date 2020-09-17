@@ -99,7 +99,8 @@
             }.cinco{ background: #00FF00; 
             }.seis{ background: #00A000; 
             }.siete{ background: #008000;
-            }   
+            }
+            span{display:none;}
 		</style>
 	</head>
 	<body>

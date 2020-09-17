@@ -103,14 +103,16 @@
             redirect('persona');
         } */
         
-        /*public function ver($id){
+        public function ver($id){
             $data = array();
             $persona = $this->persona_model->obtener_por_id($id);
             $data['persona'] = $persona;
 
+            $data['menu'] = main_menu();
             $this->load->view('layout/header');
+            $this->load->view('layout/navbar',$data);
             $this->load->view('persona/ver', $data);
             $this->load->view('layout/footer');
-        }*/
+        }
     }
  ?>

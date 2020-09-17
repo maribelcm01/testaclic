@@ -189,9 +189,10 @@
 					"Escala" => $consulta[$i]->escala
 				);
 			}
-			$datos = $this->ipv_model->obtenerDatos($codigo);	
+			$us = $this->ipv_model->obtenerDatos($codigo);	
 			$data = array(
-				'nombre' => $datos->nombre,
+				'nombre' => $us->nombre,
+				'idPersona' => $us->idPersona,
 				'resultado' => $resultado,
 				'consulta' => $consulta
 			);

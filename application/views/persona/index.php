@@ -27,7 +27,8 @@
 		             	<td> <?= $item->telefono ?> </td>
 		             	<td> <?= $item->email ?> </td>
 		             	<td> 
-							<a class="btn btn-primary" href="<?= base_url() ?>persona/guardar/<?= $item->idPersona ?>"><i class="fas fa-edit"></i>Editar </a>
+							<a class="btn btn-primary" href="<?= base_url('persona/guardar') ?>/<?= $item->idPersona ?>"><i class="fas fa-edit"></i>Editar </a>
+							<a class="btn btn-primary" href="<?= base_url('aplicacion/index')?>/<?= $item->idPersona ?>">Aplicaciones</a>
 							<!-- <a class="btn btn-danger eliminar_alert" href="<?= base_url() ?>persona/eliminar/<?= $item->idPersona ?>"><i class="fas fa-times-circle"></i>Borrar </a>  -->
 							<!--<a class="btn btn-info" href="<?= base_url() ?>persona/ver/<?= $item->idPersona ?>"> Ver </a>-->
 		             	</td>

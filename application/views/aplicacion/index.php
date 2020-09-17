@@ -1,21 +1,21 @@
 <div class="container">
 	<div class="row m-4 justify-content-sm-center">
 		<div class="col-md-6">
-            <h2>Lista de Aplicación de Encuestas</h2>
+            <h2>Aplicaciones de <?= $nomPersona ?></h2>
         </div>
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
 			<a class="btn btn-success" href="<?= base_url() ?>aplicacion/guardar"><i class="fas fa-plus"></i> Registro </a>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="row justify-content-center">
-		<div class="col-md-11">
+		<div class="col-md-10">
 			<?php if (count($aplicacion)): ?>
 			<table id="example" class="table table-bordered">
 			    <thead>
 				    <tr>
 						<th>Encuesta</th>
-						<th>Persona</th>
+						<!-- <th>Persona</th> -->
 						<th>Codigo</th>
 						<th>Creado</th>
 						<th>Estado</th>
@@ -27,13 +27,13 @@
 		       		<?php foreach($aplicacion as $item): ?>
 		          	<tr>
 						<td> <?= $item->nomEncuesta ?> </td>
-						<td> <?= $item->nomPersona ?> </td>
+						<!-- <td> <?= $item->nomPersona ?> </td> -->
 		             	<td> <?= $item->codigo ?> </td>
 						<td> <?= $item->fechaCreacion ?> </td>
 						<td> <?= $item->estado ?> </td>
 						<td> <?= $item->fechaConclusion ?> </td>
 		             	<td> 
-							<a class="btn btn-primary" href="<?= base_url() ?>aplicacion/guardar/<?= $item->idAplicacion ?>"><i class="fas fa-edit"></i>Editar</a>
+							<!-- <a class="btn btn-primary" href="<?= base_url() ?>aplicacion/guardar/<?= $item->idAplicacion ?>"><i class="fas fa-edit"></i>Editar</a> -->
 							<?php if($item->nomEncuesta == "Cleaver" && $item->estado == "Finalizado"):?>
 								<a class="btn btn-success" href="<?= base_url() ?>cleaver/resultados/<?= $item->codigo ?>">Resultados</a>
 				   			<?php endif;?>
